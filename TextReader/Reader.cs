@@ -13,9 +13,6 @@ namespace TextFileReader
 	{
 		public string FileExtention => ".txt";
 
-		public string ReadAllText(string filename)
-		{
-			return File.ReadAllText(filename, Encoding.ASCII);
-		}
+		public string ReadAllText(string filename) => File.ReadAllText(filename, Encoding.ASCII);
 	}
 }

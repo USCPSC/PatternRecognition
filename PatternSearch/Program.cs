@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 
 namespace PatternSearch
 {
@@ -68,59 +69,58 @@ namespace PatternSearch
 			string[] files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
 
 			// Process files
-			foreach (string file in files)
+			for (int i = 0; i < files.Length; i++)
 			{
 				try
 				{
 					// Store names of items found 
 					StringCollection foundNames = new StringCollection();
-
-					foreach (var fm in fmgr.FileManagers)
+					foreach (var fm in from fm in fmgr.FileManagers// If there is a file processor for a give file extension, process the file..
+											 where Path.GetExtension(files[i]) == fm.FileExtention
+											 select fm)
 					{
-						// If there is a file processor for a give file extension, process the file..
-						if (Path.GetExtension(file) == fm.FileExtention)
+
+						if (cmdline.Value.Verbosity == OutputLevel.V)
+							Console.WriteLine($"**********Processing file {files[i]} ...**********");
+
+						string filecontents = fm.ReadAllText(files[i]);
+						if (s.Scan(filecontents))
 						{
-							if (cmdline.Value.Verbosity == OutputLevel.V)
-								Console.WriteLine($"**********Processing file {file} ...**********");
+							foundNames.Clear();
 
-							string filecontents = fm.ReadAllText(file);
-							if (s.Scan(filecontents))
+							// Output results
+							foreach (var key in s.Matches)
 							{
-								foundNames.Clear();
-
-								// Output results
-								foreach (var key in s.Matches)
+								switch (cmdline.Value.Verbosity)
 								{
-									switch (cmdline.Value.Verbosity)
-									{
-										case OutputLevel.M:
-											if (foundNames.Contains(key.Name) == false)
-											{
-												Console.WriteLine($"{key.Name} was found in {file}");
-												foundNames.Add(key.Name);
-											}
-											break;
-										case OutputLevel.V:
-											Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
-											break;
-									}
+									case OutputLevel.M:
+										if (foundNames.Contains(key.Name) == false)
+										{
+											Console.WriteLine($"{key.Name} was found in {files[i]}");
+											foundNames.Add(key.Name);
+										}
+										break;
+									case OutputLevel.V:
+										Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
+										break;
 								}
 							}
-							switch (cmdline.Value.Verbosity)
-							{
-								case OutputLevel.B:
-									Console.WriteLine($"Number of possible PII items found: {s.Matches.Count} in {file}\n");
-									break;
-								case OutputLevel.V:
-									Console.WriteLine($"Number of possible PII items found: {s.Matches.Count}\n");
-									break;
-							}
+						}
+
+						switch (cmdline.Value.Verbosity)
+						{
+							case OutputLevel.B:
+								Console.WriteLine($"Number of possible PII items found: {s.Matches.Count} in {files[i]}\n");
+								break;
+							case OutputLevel.V:
+								Console.WriteLine($"Number of possible PII items found: {s.Matches.Count}\n");
+								break;
 						}
 					}
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine("An error occured while processing: {0} => {1}", file, e.Message);
+					Console.WriteLine("An error occured while processing: {0} => {1}", files[i], e.Message);
 				}
 			}
 		}

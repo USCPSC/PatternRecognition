@@ -16,7 +16,7 @@ namespace PdfFileReader
 
 		public string ReadAllText(string filename)
 		{
-			StringBuilder text = new StringBuilder();
+			var text = new StringBuilder();
 			using (var reader = new PdfReader(filename))
 			{
 				for (int page = 1; page <= reader.NumberOfPages; page++)
@@ -24,7 +24,7 @@ namespace PdfFileReader
 					ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
 					string currentText = PdfTextExtractor.GetTextFromPage(reader, page, strategy);
 
-					currentText = Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(currentText)));
+					currentText = Encoding.UTF8.GetString(Encoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(currentText)));
 					text.Append(currentText);
 				}
 			}

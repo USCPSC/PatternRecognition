@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Scanner
 {
@@ -52,8 +53,11 @@ namespace Scanner
 		private string GetPatternName(string data)
 		{
 			for (int i = 0; i < patterns.Count; i++)
+			{
 				if (Regex.IsMatch(data, patterns[i]))
 					return patterns.GetKey(i);
+			}
+
 			return null;
 		}
 
@@ -89,10 +93,8 @@ namespace Scanner
 			if (Matches == null)
 				Matches = new List<Found>();
 			Matches.Clear();
-			foreach (Match match in rgx.Matches(data))
-			{
-				Matches.Add(new Found(GetPatternName(match.Value), match.Value, match.Index));
-			}	
+			Matches.AddRange(from Match match in rgx.Matches(data)
+								  select new Found(GetPatternName(match.Value), match.Value, match.Index));
 			return Matches.Count > 0;
 		}
 	}
