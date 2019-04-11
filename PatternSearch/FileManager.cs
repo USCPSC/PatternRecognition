@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace PatternSearch
 {
@@ -15,6 +16,25 @@ namespace PatternSearch
 		[ImportMany(typeof(IFileManager))]
 		public IEnumerable<IFileManager> FileManagers { get; private set; }
 
+		/// <summary>
+		/// Get all the file extentions
+		/// </summary>
+		/// <returns>Comma separarted collection of file extentions</returns>
+		public string GetFileExtentions()
+		{
+			var sb = new StringBuilder();
+			if (FileManagers != null)
+			{
+				foreach(var fm in FileManagers)
+				{
+					if (sb.Length == 0)
+						sb.Append(fm.FileExtention);
+					else
+						sb.AppendFormat($", {fm.FileExtention}");
+				}
+			}
+			return sb.ToString();
+		}
 		/// <summary>
 		/// Import the MEF-based file managers
 		/// </summary>

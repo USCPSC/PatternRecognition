@@ -56,24 +56,26 @@ namespace PatternSearch
 						 });
 
 			// Load the FileManagers
-			FileManager fmgr = new FileManager();
+			var fmgr = new FileManager();
 			fmgr.ImportFileManagers();
 
 			// Load the Scan engine and the patterns
-			Scanner.ScanEngine s = new Scanner.ScanEngine();
+			var s = new Scanner.ScanEngine();
 			s.LoadPatterns();
 
 			// Load the files to be processed
-			SearchOption so = cmdline.Value.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+			var so = cmdline.Value.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 			string[] files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
 
 			// Print header
-			DateTime starttime = DateTime.Now;
+			var starttime = DateTime.Now;
 			if (files.Length > 0 && cmdline.Value.Verbosity != OutputLevel.B)
 			{
 				Console.WriteLine("*************************************************************************");
 				Console.WriteLine($"({starttime}) Processing files with the following parameters:");
 				Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
+				Console.WriteLine($"Looking for the following patterns: '{s.GetPatternNames()}'");
+				Console.WriteLine($"In the following file types: '{fmgr.GetFileExtentions()}'");
 				Console.WriteLine("*************************************************************************\n");
 			}
 
@@ -84,17 +86,16 @@ namespace PatternSearch
 				try
 				{
 					// Store names of items found 
-					StringCollection foundNames = new StringCollection();
-					foreach (var fm in from fm in fmgr.FileManagers// If there is a file processor for a give file extension, process the file..
-											 where Path.GetExtension(files[i]) == fm.FileExtention
-											 select fm)
+					var foundNames = new StringCollection();
+					
+					// If there is a file processor for a give file extension, process the file..
+					foreach (var fm in from fm in fmgr.FileManagers where Path.GetExtension(files[i]) == fm.FileExtention select fm)
 					{
 						++processedfiles;
 						if (cmdline.Value.Verbosity == OutputLevel.V)
 							Console.WriteLine($"**********Processing file {files[i]} ...**********");
 
-						string filecontents = fm.ReadAllText(files[i]);
-						if (s.Scan(filecontents))
+						if (s.Scan(fm.ReadAllText(files[i])))
 						{
 							foundNames.Clear();
 

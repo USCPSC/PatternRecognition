@@ -17,6 +17,12 @@ namespace Scanner
 		public string Value { get; private set; }
 		public int Index { get; private set; }
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="val"></param>
+		/// <param name="idx"></param>
 		public Found(string name, string val, int idx)
 		{
 			Name = name;
@@ -31,6 +37,26 @@ namespace Scanner
 	public class ScanEngine
 	{
 		public List<Found> Matches { get; private set; }
+
+		/// <summary>
+		/// Get a comma separated string of pattern names
+		/// </summary>
+		/// <returns>comma separated string</returns>
+		public string GetPatternNames()
+		{
+			var sb = new StringBuilder();
+			if (patterns != null)
+			{
+				for (int i = 0; i < patterns.Count; i++)
+				{
+					if (i == 0)
+						sb.Append(patterns.GetKey(i));
+					else
+						sb.AppendFormat($", {patterns.GetKey(i)}");
+				}
+			}
+			return sb.ToString();
+		}
 
 		private NameValueCollection patterns;
 
@@ -68,7 +94,7 @@ namespace Scanner
 		{
 			get
 			{
-				StringBuilder retval = new StringBuilder();
+				var retval = new StringBuilder();
 				for (int i = 0; i < patterns.Count; i++)
 				{
 					if (i == 0)
@@ -89,7 +115,7 @@ namespace Scanner
 		{
 			if (patterns == null || patterns.Count == 0)
 				throw new ApplicationException("No patterns defined");
-			Regex rgx = new Regex(Patterns);
+			var rgx = new Regex(Patterns);
 			if (Matches == null)
 				Matches = new List<Found>();
 			Matches.Clear();
