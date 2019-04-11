@@ -43,27 +43,19 @@ namespace PatternSearch
 			Parsed<Options> cmdline = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args)
 						 .WithParsed<Options>(o =>
 						 {
-							 if (o.Verbosity != OutputLevel.B)
+							 // Make sure it is a valid directory before we do anything
+							 if (Directory.Exists(o.Directory) == false)
 							 {
-								 Console.WriteLine("*************************************************************************");
-								 Console.WriteLine($"({DateTime.Now}) Processing files with the following parameters:");
-								 Console.WriteLine($"Recursive='{o.Recursive}' Directory='{o.Directory}' Verbosity='{o.Verbosity}'");
-								 Console.WriteLine("*************************************************************************\n");
+								 Console.WriteLine($"Invalid directory: '{o.Directory}'");
+								 Environment.Exit(-1);
 							 }
 						 })
 						 .WithNotParsed<Options>(e =>
 						 {
-							 Environment.Exit(-1);
+							 Environment.Exit(-2);
 						 });
 
-			// Make sure it is a valid directory before we do anything
-			if (Directory.Exists(cmdline.Value.Directory) == false)
-			{
-				Console.WriteLine($"Invalid directory {cmdline.Value.Directory}");
-				Environment.Exit(-2);
-			}
-
-			// Load the FileManagers. 
+			// Load the FileManagers
 			FileManager fmgr = new FileManager();
 			fmgr.ImportFileManagers();
 
@@ -75,7 +67,18 @@ namespace PatternSearch
 			SearchOption so = cmdline.Value.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 			string[] files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
 
+			// Print header
+			DateTime starttime = DateTime.Now;
+			if (files.Length > 0 && cmdline.Value.Verbosity != OutputLevel.B)
+			{
+				Console.WriteLine("*************************************************************************");
+				Console.WriteLine($"({starttime}) Processing files with the following parameters:");
+				Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
+				Console.WriteLine("*************************************************************************\n");
+			}
+
 			// Process files
+			int processedfiles = 0;
 			for (int i = 0; i < files.Length; i++)
 			{
 				try
@@ -86,7 +89,7 @@ namespace PatternSearch
 											 where Path.GetExtension(files[i]) == fm.FileExtention
 											 select fm)
 					{
-
+						++processedfiles;
 						if (cmdline.Value.Verbosity == OutputLevel.V)
 							Console.WriteLine($"**********Processing file {files[i]} ...**********");
 
@@ -129,6 +132,13 @@ namespace PatternSearch
 				{
 					Console.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
 				}
+			}
+			if (processedfiles > 0 && cmdline.Value.Verbosity != OutputLevel.B)
+			{
+				Console.WriteLine("*************************************************************************");
+				Console.WriteLine($"({DateTime.Now}) Finished processing files:");
+				Console.WriteLine($"Files Processed='{processedfiles}' Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
+				Console.WriteLine("*************************************************************************\n");
 			}
 		}
 	}
