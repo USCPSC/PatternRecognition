@@ -56,6 +56,13 @@ namespace PatternSearch
 							 Environment.Exit(-1);
 						 });
 
+			// Make sure it is a valid directory before we do anything
+			if (Directory.Exists(cmdline.Value.Directory) == false)
+			{
+				Console.WriteLine($"Invalid directory {cmdline.Value.Directory}");
+				Environment.Exit(-2);
+			}
+
 			// Load the FileManagers. 
 			FileManager fmgr = new FileManager();
 			fmgr.ImportFileManagers();
@@ -120,7 +127,7 @@ namespace PatternSearch
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine("An error occured while processing: {0} => {1}", files[i], e.Message);
+					Console.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
 				}
 			}
 		}
