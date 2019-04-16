@@ -26,6 +26,9 @@ namespace PatternSearch
 			[Option('r', "recursive", Required = false, HelpText = "Recursively process directory")]
 			public bool Recursive { get; set; }
 
+			[Option('c', "csv", Required = false, HelpText = "Output the results in a CSV format")]
+			public bool CSVOuput { get; set; }
+
 			[Option('v', "verbose", Required = false, HelpText = "Verbosity level: B=Basic, M=Moderate, V=Verbose")]
 			public OutputLevel Verbosity { get; set; }
 
@@ -40,8 +43,8 @@ namespace PatternSearch
 		static void Main(string[] args)
 		{
 			// Parse command line
-			Parsed<Options> cmdline = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args)
-						 .WithParsed<Options>(o =>
+			var cmdline = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args)
+						.WithParsed<Options>(o =>
 						 {
 							 // Make sure it is a valid directory before we do anything
 							 if (Directory.Exists(o.Directory) == false)
@@ -65,22 +68,40 @@ namespace PatternSearch
 
 			// Load the files to be processed
 			var so = cmdline.Value.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-			string[] files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
+			var files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
 
 			// Print header
 			var starttime = DateTime.Now;
 			if (files.Length > 0 && cmdline.Value.Verbosity != OutputLevel.B)
 			{
-				Console.WriteLine("*************************************************************************");
-				Console.WriteLine($"({starttime}) Processing files with the following parameters:");
-				Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
-				Console.WriteLine($"Looking for the following patterns: '{s.GetPatternNames()}'");
-				Console.WriteLine($"In the following file types: '{fmgr.GetFileExtentions()}'");
-				Console.WriteLine("*************************************************************************\n");
+				if (cmdline.Value.CSVOuput == false)
+				{
+					Console.WriteLine("*************************************************************************");
+					Console.WriteLine($"({starttime}) Processing files with the following parameters:");
+					Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
+					Console.WriteLine($"Looking for the following patterns: '{s.GetPatternNames()}'");
+					Console.WriteLine($"In the following file types: '{fmgr.GetFileExtentions()}'");
+					Console.WriteLine("*************************************************************************\n");
+				}
+				else
+				{
+					switch (cmdline.Value.Verbosity)
+					{
+						case OutputLevel.B:
+							Console.WriteLine("File Name,Possible Match Count");
+							break;
+						case OutputLevel.M:
+							Console.WriteLine("File Name,Pattern Found");
+							break;
+						case OutputLevel.V:
+							Console.WriteLine("File Name,Pattern Location,Pattern Name,Pattern");
+							break;
+					}
+				}
 			}
 
 			// Process files
-			int processedfiles = 0;
+			var processedfiles = 0;
 			for (int i = 0; i < files.Length; i++)
 			{
 				try
@@ -92,7 +113,7 @@ namespace PatternSearch
 					foreach (var fm in from fm in fmgr.FileManagers where Path.GetExtension(files[i]) == fm.FileExtention select fm)
 					{
 						++processedfiles;
-						if (cmdline.Value.Verbosity == OutputLevel.V)
+						if (cmdline.Value.Verbosity == OutputLevel.V && cmdline.Value.CSVOuput == false)
 							Console.WriteLine($"**********Processing file {files[i]} ...**********");
 
 						if (s.Scan(fm.ReadAllText(files[i])))
@@ -107,12 +128,18 @@ namespace PatternSearch
 									case OutputLevel.M:
 										if (foundNames.Contains(key.Name) == false)
 										{
-											Console.WriteLine($"{key.Name} was found in {files[i]}");
+											if (cmdline.Value.CSVOuput == false)
+												Console.WriteLine($"{key.Name} was found in {files[i]}");
+											else
+												Console.WriteLine($"{files[i]},{key.Name}");
 											foundNames.Add(key.Name);
 										}
 										break;
 									case OutputLevel.V:
-										Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
+										if (cmdline.Value.CSVOuput == false)
+											Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
+										else
+											Console.WriteLine($"{files[i]},{key.Index},{key.Name},{key.Value}");
 										break;
 								}
 							}
@@ -121,10 +148,14 @@ namespace PatternSearch
 						switch (cmdline.Value.Verbosity)
 						{
 							case OutputLevel.B:
-								Console.WriteLine($"Number of possible PII items found: {s.Matches.Count} in {files[i]}\n");
+								if (cmdline.Value.CSVOuput == false)
+									Console.WriteLine($"Number of possible PII items found: {s.Matches.Count} in {files[i]}\n");
+								else
+									Console.WriteLine($"{files[i]},{s.Matches.Count}");
 								break;
 							case OutputLevel.V:
-								Console.WriteLine($"Number of possible PII items found: {s.Matches.Count}\n");
+								if (cmdline.Value.CSVOuput == false)
+									Console.WriteLine($"Number of possible PII items found: {s.Matches.Count}\n");
 								break;
 						}
 					}
@@ -134,7 +165,7 @@ namespace PatternSearch
 					Console.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
 				}
 			}
-			if (processedfiles > 0 && cmdline.Value.Verbosity != OutputLevel.B)
+			if (processedfiles > 0 && cmdline.Value.Verbosity != OutputLevel.B && cmdline.Value.CSVOuput == false)
 			{
 				Console.WriteLine("*************************************************************************");
 				Console.WriteLine($"({DateTime.Now}) Finished processing files:");
