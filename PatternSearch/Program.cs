@@ -149,13 +149,13 @@ namespace PatternSearch
 						{
 							case OutputLevel.B:
 								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Number of possible PII items found: {s.Matches.Count} in {files[i]}\n");
+									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count} in {files[i]}\n");
 								else
 									Console.WriteLine($"{files[i]},{s.Matches.Count}");
 								break;
 							case OutputLevel.V:
 								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Number of possible PII items found: {s.Matches.Count}\n");
+									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count}\n");
 								break;
 						}
 					}
