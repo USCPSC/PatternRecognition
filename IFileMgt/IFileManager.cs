@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FileManagement
+﻿namespace FileManagement
 {
+	public class FileContents
+	{
+		public string Text { get; private set; }
+		public bool HasImages { get; private set; }
+		public FileContents(string txt, bool imgs) { Text = txt; HasImages = imgs; }
+	}
 	public interface IFileManager
 	{
-		string FileExtention { get; }
-		string ReadAllText(string filename);
+		string[] FileExtention { get; }
+		FileContents ReadAllText(string filename);
     }
 }

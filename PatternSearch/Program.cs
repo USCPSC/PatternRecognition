@@ -88,10 +88,10 @@ namespace PatternSearch
 					switch (cmdline.Value.Verbosity)
 					{
 						case OutputLevel.B:
-							Console.WriteLine("File Name,Possible Match Count");
+							Console.WriteLine("File Name,Possible Match Count,Has Images");
 							break;
 						case OutputLevel.M:
-							Console.WriteLine("File Name,Pattern Found");
+							Console.WriteLine("File Name,Pattern(s) Found,Total Found,Has Images");
 							break;
 						case OutputLevel.V:
 							Console.WriteLine("File Name,Pattern Location,Pattern Name,Pattern");
@@ -110,13 +110,14 @@ namespace PatternSearch
 					var foundNames = new StringCollection();
 					
 					// If there is a file processor for a give file extension, process the file..
-					foreach (var fm in from fm in fmgr.FileManagers where Path.GetExtension(files[i]) == fm.FileExtention select fm)
+					foreach (var fm in from fm in fmgr.FileManagers where fmgr.SupportFileExtension(fm, Path.GetExtension(files[i])) select fm)
 					{
 						++processedfiles;
 						if (cmdline.Value.Verbosity == OutputLevel.V && cmdline.Value.CSVOuput == false)
 							Console.WriteLine($"**********Processing file {files[i]} ...**********");
 
-						if (s.Scan(fm.ReadAllText(files[i])))
+						var fc = fm.ReadAllText(files[i]);
+						if (s.Scan(fc.Text))
 						{
 							foundNames.Clear();
 
@@ -127,13 +128,7 @@ namespace PatternSearch
 								{
 									case OutputLevel.M:
 										if (foundNames.Contains(key.Name) == false)
-										{
-											if (cmdline.Value.CSVOuput == false)
-												Console.WriteLine($"{key.Name} was found in {files[i]}");
-											else
-												Console.WriteLine($"{files[i]},{key.Name}");
 											foundNames.Add(key.Name);
-										}
 										break;
 									case OutputLevel.V:
 										if (cmdline.Value.CSVOuput == false)
@@ -149,9 +144,15 @@ namespace PatternSearch
 						{
 							case OutputLevel.B:
 								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count} in {files[i]}\n");
+									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count} in {files[i]}");
 								else
-									Console.WriteLine($"{files[i]},{s.Matches.Count}");
+									Console.WriteLine($"{files[i]},{s.Matches.Count},{fc.HasImages}");
+								break;
+							case OutputLevel.M:
+								if (cmdline.Value.CSVOuput == false)
+									Console.WriteLine($"Found {s.GetMatchNames()} in {files[i]}");
+								else
+									Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count},{fc.HasImages}");
 								break;
 							case OutputLevel.V:
 								if (cmdline.Value.CSVOuput == false)

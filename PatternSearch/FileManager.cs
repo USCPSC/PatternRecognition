@@ -25,15 +25,26 @@ namespace PatternSearch
 			var sb = new StringBuilder();
 			if (FileManagers != null)
 			{
-				foreach(var fm in FileManagers)
+				foreach (var fm in FileManagers)
 				{
-					if (sb.Length == 0)
-						sb.Append(fm.FileExtention);
-					else
-						sb.AppendFormat($", {fm.FileExtention}");
+					for (int i = 0; i < fm.FileExtention.Length; i++)
+					{
+						if (i == 0 && sb.Length == 0)
+							sb.Append(fm.FileExtention[i]);
+						else
+							sb.AppendFormat($", {fm.FileExtention[i]}");
+					}
 				}
 			}
 			return sb.ToString();
+		}
+
+		public bool SupportFileExtension(IFileManager fm, string extension)
+		{
+			for (int i = 0; i < fm.FileExtention.Length; i++)
+				if (string.Compare(fm.FileExtention[i], extension, true) == 0)
+					return true;
+			return false;
 		}
 		/// <summary>
 		/// Import the MEF-based file managers

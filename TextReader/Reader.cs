@@ -11,8 +11,8 @@ namespace TextFileReader
 	[Export(typeof(IFileManager))]
 	public class Reader : IFileManager
 	{
-		public string FileExtention => ".txt";
+		public string[] FileExtention => new string[] { ".txt", ".csv" };
 
-		public string ReadAllText(string filename) => File.ReadAllText(filename, Encoding.ASCII);
+		public FileContents ReadAllText(string filename) => new FileContents(File.ReadAllText(filename, Encoding.ASCII), false);
 	}
 }

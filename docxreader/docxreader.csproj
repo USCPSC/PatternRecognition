@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2391CEDD-6C06-478C-8D3E-C4D5E3DF268C}</ProjectGuid>
+    <ProjectGuid>{85D49755-A5E5-4DA5-904B-E7888E9B7929}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IFileMgt</RootNamespace>
-    <AssemblyName>IFileMgt</AssemblyName>
+    <RootNamespace>docxreader</RootNamespace>
+    <AssemblyName>docxreader</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -40,10 +40,25 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xceed.Words.NET, Version=1.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.1.3.0\lib\net40\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IFileManager.cs" />
+    <Compile Include="reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IFileMgt\IFileMgt.csproj">
+      <Project>{2391cedd-6c06-478c-8d3e-c4d5e3df268c}</Project>
+      <Name>IFileMgt</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)\*.* $(SolutionDir)PatternSearch\$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
