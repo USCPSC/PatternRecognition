@@ -39,6 +39,26 @@ namespace Scanner
 		public List<Found> Matches { get; private set; }
 
 		/// <summary>
+		/// Get a comma separated string of matches 
+		/// </summary>
+		/// <returns>comma separated string</returns>
+		public string GetMatchNames()
+		{
+			var sb = new StringBuilder();
+			if (Matches != null)
+			{
+				foreach(var f in Matches.Select(x => x.Name).Distinct())
+				{
+					if (sb.Length == 0)
+						sb.Append(f);
+					else
+						sb.AppendFormat($" & {f}");
+				}
+			}
+			return sb.ToString();
+		}
+
+		/// <summary>
 		/// Get a comma separated string of pattern names
 		/// </summary>
 		/// <returns>comma separated string</returns>
