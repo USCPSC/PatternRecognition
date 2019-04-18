@@ -9,11 +9,11 @@ namespace DocxFileReader
 	{
 		public string[] FileExtention => new string[] { ".docx" };
 
-		public FileContents ReadAllText(string filename)
+		public FileContents ReadAllText(string filename, bool imageScan)
 		{
 			using (DocX document = DocX.Load(filename))
 			{
-				return new FileContents(document.Text, false);
+				return new FileContents(document.Text, imageScan? "None": "N/A");
 			}
 		}
 	}

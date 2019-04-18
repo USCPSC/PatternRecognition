@@ -3,9 +3,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.ComponentModel.Composition;
 using System.Text;
-using System.IO;
 using System.Collections.Generic;
-using System;
 
 namespace PdfFileReader
 {
@@ -17,9 +15,10 @@ namespace PdfFileReader
 	{
 		public string[] FileExtention => new string[] { ".pdf" };
 
-		public FileContents ReadAllText(string filename)
+		public FileContents ReadAllText(string filename, bool imageScan)
 		{
-			bool hasImages = false;
+			Dictionary<string, int> docimages =  new Dictionary<string, int>();
+			Dictionary<string, int> pageimages = new Dictionary<string, int>();
 			var text = new StringBuilder();
 			using (var reader = new PdfReader(filename))
 			{
@@ -31,12 +30,30 @@ namespace PdfFileReader
 					currentText = Encoding.UTF8.GetString(Encoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(currentText)));
 					text.Append(currentText);
 
-					if (hasImages == false)
-						hasImages = PdfUtils.PdfImageExtractor.PageContainsImages(reader, page);
+					if (imageScan)
+					{
+						pageimages = PdfUtils.PdfImageChecker.PageContainsImages(reader, page);
+						foreach (var k in pageimages.Keys)
+						{
+							if (docimages.ContainsKey(k))
+								docimages[k] += pageimages[k];
+							else
+								docimages.Add(k, pageimages[k]);
+						}
+					}
 				}
 			}
-
-			return new FileContents(text.ToString(), hasImages);
+			StringBuilder sb = new StringBuilder();
+			if (imageScan == false)
+				sb.Append("N/A");
+			else if (docimages.Count == 0)
+				sb.Append("None");
+			else
+			{
+				foreach (var k in docimages.Keys)
+					sb.AppendFormat($"{k}: {docimages[k]} ");
+			}
+			return new FileContents(text.ToString(), sb.ToString());
 		}
 	}
 

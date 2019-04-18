@@ -3,6 +3,7 @@ using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PatternSearch
 {
@@ -34,6 +35,9 @@ namespace PatternSearch
 
 			[Option('d', "directory", Required = true, HelpText = "Input directory to be processed.")]
 			public string Directory { get; set; }
+
+			[Option('i', "imagescan", Required = false, HelpText = "Scan file to determine if images exists.")]
+			public bool ImageScan { get; set; }
 		}
 
 		/// <summary>
@@ -88,10 +92,16 @@ namespace PatternSearch
 					switch (cmdline.Value.Verbosity)
 					{
 						case OutputLevel.B:
-							Console.WriteLine("File Name,Possible Match Count,Has Images");
+							if ( cmdline.Value.ImageScan == true )
+								Console.WriteLine("File Name,Possible Match Count,Has Images");
+							else
+								Console.WriteLine("File Name,Possible Match Count");
 							break;
 						case OutputLevel.M:
-							Console.WriteLine("File Name,Pattern(s) Found,Total Found,Has Images");
+							if (cmdline.Value.ImageScan == true)
+								Console.WriteLine("File Name,Pattern(s) Found,Total Found,Has Images");
+							else
+								Console.WriteLine("File Name,Pattern(s) Found,Total Found");
 							break;
 						case OutputLevel.V:
 							Console.WriteLine("File Name,Pattern Location,Pattern Name,Pattern");
@@ -110,13 +120,13 @@ namespace PatternSearch
 					var foundNames = new StringCollection();
 					
 					// If there is a file processor for a give file extension, process the file..
-					foreach (var fm in from fm in fmgr.FileManagers where fmgr.SupportFileExtension(fm, Path.GetExtension(files[i])) select fm)
+					foreach(var fm in from fm in fmgr.FileManagers where fmgr.SupportFileExtension(fm, Path.GetExtension(files[i])) select fm)
 					{
 						++processedfiles;
 						if (cmdline.Value.Verbosity == OutputLevel.V && cmdline.Value.CSVOuput == false)
 							Console.WriteLine($"**********Processing file {files[i]} ...**********");
 
-						var fc = fm.ReadAllText(files[i]);
+						var fc = fm.ReadAllText(files[i], cmdline.Value.ImageScan);
 						if (s.Scan(fc.Text))
 						{
 							foundNames.Clear();
@@ -139,20 +149,23 @@ namespace PatternSearch
 								}
 							}
 						}
-
 						switch (cmdline.Value.Verbosity)
 						{
 							case OutputLevel.B:
 								if (cmdline.Value.CSVOuput == false)
 									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count} in {files[i]}");
-								else
+								else if (cmdline.Value.ImageScan == true)
 									Console.WriteLine($"{files[i]},{s.Matches.Count},{fc.HasImages}");
+								else
+									Console.WriteLine($"{files[i]},{s.Matches.Count}");
 								break;
 							case OutputLevel.M:
 								if (cmdline.Value.CSVOuput == false)
 									Console.WriteLine($"Found {s.GetMatchNames()} in {files[i]}");
-								else
+								else if (cmdline.Value.ImageScan == true)
 									Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count},{fc.HasImages}");
+								else
+									Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count}");
 								break;
 							case OutputLevel.V:
 								if (cmdline.Value.CSVOuput == false)
@@ -163,7 +176,7 @@ namespace PatternSearch
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
+					Console.Error.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
 				}
 			}
 			if (processedfiles > 0 && cmdline.Value.Verbosity != OutputLevel.B && cmdline.Value.CSVOuput == false)

@@ -3,12 +3,12 @@
 	public class FileContents
 	{
 		public string Text { get; private set; }
-		public bool HasImages { get; private set; }
-		public FileContents(string txt, bool imgs) { Text = txt; HasImages = imgs; }
+		public string HasImages { get; private set; }
+		public FileContents(string txt, string imgs) { Text = txt; HasImages = imgs; }
 	}
 	public interface IFileManager
 	{
 		string[] FileExtention { get; }
-		FileContents ReadAllText(string filename);
+		FileContents ReadAllText(string filename, bool imageScan);
     }
 }

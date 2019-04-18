@@ -80,7 +80,7 @@ namespace XlsxReader
 
 			return content.ToString();
 		}
-		public FileContents ReadAllText(string filename)
+		public FileContents ReadAllText(string filename, bool imageScan)
 		{
 			using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
 			{
@@ -100,11 +100,11 @@ namespace XlsxReader
 					using (reader)
 					{
 						DataSet ds = reader.AsDataSet();
-						return new FileContents(JsonConvert.SerializeObject(ds), false);
+						return new FileContents(JsonConvert.SerializeObject(ds), imageScan? "None": "N/A");
 					}
 				}
 			}
-			return new FileContents("", false);
+			return new FileContents("", "none");
 		}
 	}
 }
