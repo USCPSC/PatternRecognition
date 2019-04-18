@@ -1,5 +1,8 @@
 ﻿using FileManagement;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.IO;
+using System.Text;
 using Xceed.Words.NET;
 
 namespace DocxFileReader
@@ -13,7 +16,28 @@ namespace DocxFileReader
 		{
 			using (DocX document = DocX.Load(filename))
 			{
-				return new FileContents(document.Text, imageScan? "None": "N/A");
+				StringBuilder sb = new StringBuilder("N/A");
+				if (imageScan)
+				{
+					Dictionary<string, int> docimages = new Dictionary<string, int>();
+					foreach (var i in document.Images)
+					{
+						string fileType = Path.GetExtension(i.FileName).TrimStart('.');
+						if (docimages.ContainsKey(fileType))
+							++docimages[fileType];
+						else
+							docimages.Add(fileType, 1);
+					}
+					sb.Clear();
+					if (docimages.Count == 0)
+						sb.Append("None");
+					else
+					{
+						foreach (var k in docimages.Keys)
+							sb.AppendFormat($"{k}: {docimages[k]} ");
+					}
+				}
+				return new FileContents(document.Text, sb.ToString());
 			}
 		}
 	}
