@@ -1,8 +1,10 @@
 ﻿using CommandLine;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PatternSearch
 {
@@ -125,80 +127,84 @@ namespace PatternSearch
 
 			// Process files
 			var processedfiles = 0;
-			for (int i = 0; i < files.Length; i++)
+			var rangePartitioner = Partitioner.Create(0, files.Length);
+			Parallel.ForEach(rangePartitioner, (range, loopState) => 
 			{
-				try
+				for (int i = range.Item1; i < range.Item2; i++)
 				{
-					// Store names of items found 
-					var foundNames = new StringCollection();
-					var VmodeSep = cmdline.Value.ImageScan ? ",,," : ",,";
-					// If there is a file processor for a give file extension, process the file..
-					foreach(var fm in from fm in fmgr.FileManagers where fmgr.SupportFileExtension(fm, Path.GetExtension(files[i])) select fm)
+					try
 					{
-						++processedfiles;
-
-						var fc = fm.ReadAllText(files[i], cmdline.Value.ImageScan);
-						if (s.Scan(fc.Text))
+						// Store names of items found 
+						var foundNames = new StringCollection();
+						var VmodeSep = cmdline.Value.ImageScan ? ",,," : ",,";
+						// If there is a file processor for a give file extension, process the file..
+						foreach (var fm in from fm in fmgr.FileManagers where fmgr.SupportFileExtension(fm, Path.GetExtension(files[i])) select fm)
 						{
-							if (cmdline.Value.Verbosity == OutputLevel.V)
-							{
-								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"**********Processing file {files[i]} ...**********");
-								else if (cmdline.Value.ImageScan == true)
-									Console.WriteLine($"{files[i]},{fc.HasImages},{s.Matches.Count}");
-								else
-									Console.WriteLine($"{files[i]},{s.Matches.Count}");
-							}
+							++processedfiles;
 
-							foundNames.Clear();
-
-							// Output results
-							foreach (var key in s.Matches)
+							var fc = fm.ReadAllText(files[i], cmdline.Value.ImageScan);
+							if (s.Scan(fc.Text))
 							{
-								switch (cmdline.Value.Verbosity)
+								if (cmdline.Value.Verbosity == OutputLevel.V)
 								{
-									case OutputLevel.M:
-										if (foundNames.Contains(key.Name) == false)
-											foundNames.Add(key.Name);
-										break;
-									case OutputLevel.V:
-										if (cmdline.Value.CSVOuput == false)
-											Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
-										Console.WriteLine($"{VmodeSep}{key.Name},{key.Value}");
-										break;
+									if (cmdline.Value.CSVOuput == false)
+										Console.WriteLine($"**********Processing file {files[i]} ...**********");
+									else if (cmdline.Value.ImageScan == true)
+										Console.WriteLine($"{files[i]},{fc.HasImages},{s.Matches.Count}");
+									else
+										Console.WriteLine($"{files[i]},{s.Matches.Count}");
+								}
+
+								foundNames.Clear();
+
+								// Output results
+								foreach (var key in s.Matches)
+								{
+									switch (cmdline.Value.Verbosity)
+									{
+										case OutputLevel.M:
+											if (foundNames.Contains(key.Name) == false)
+												foundNames.Add(key.Name);
+											break;
+										case OutputLevel.V:
+											if (cmdline.Value.CSVOuput == false)
+												Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
+											Console.WriteLine($"{VmodeSep}{key.Name},{key.Value.Replace(',', '.')}");
+											break;
+									}
 								}
 							}
-						}
-						switch (cmdline.Value.Verbosity)
-						{
-							case OutputLevel.B:
-								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count} in {files[i]}");
-								else if (cmdline.Value.ImageScan == true)
-									Console.WriteLine($"{files[i]},{s.Matches.Count},{fc.HasImages}");
-								else
-									Console.WriteLine($"{files[i]},{s.Matches.Count}");
-								break;
-							case OutputLevel.M:
-								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Found {s.GetMatchNames()} in {files[i]}");
-								else if (cmdline.Value.ImageScan == true)
-									Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count},{fc.HasImages}");
-								else
-									Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count}");
-								break;
-							case OutputLevel.V:
-								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count}\n");
-								break;
+							switch (cmdline.Value.Verbosity)
+							{
+								case OutputLevel.B:
+									if (cmdline.Value.CSVOuput == false)
+										Console.WriteLine($"Number of possible patterns found: {s.Matches.Count} in {files[i]}");
+									else if (cmdline.Value.ImageScan == true)
+										Console.WriteLine($"{files[i]},{s.Matches.Count},{fc.HasImages}");
+									else
+										Console.WriteLine($"{files[i]},{s.Matches.Count}");
+									break;
+								case OutputLevel.M:
+									if (cmdline.Value.CSVOuput == false)
+										Console.WriteLine($"Found {s.GetMatchNames()} in {files[i]}");
+									else if (cmdline.Value.ImageScan == true)
+										Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count},{fc.HasImages}");
+									else
+										Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count}");
+									break;
+								case OutputLevel.V:
+									if (cmdline.Value.CSVOuput == false)
+										Console.WriteLine($"Number of possible patterns found: {s.Matches.Count}\n");
+									break;
+							}
 						}
 					}
+					catch (Exception e)
+					{
+						Console.Error.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
+					}
 				}
-				catch (Exception e)
-				{
-					Console.Error.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
-				}
-			}
+			});
 			if (processedfiles > 0)
 			{
 				if (cmdline.Value.CSVOuput == false)
@@ -210,7 +216,7 @@ namespace PatternSearch
 				}
 				else
 				{
-					Console.WriteLine($"Scan Started at: {starttime}, Finished at: {DateTime.Now}");
+					Console.WriteLine($"\nScan Started at: {starttime}, Finished at: {DateTime.Now}");
 					Console.WriteLine($"Files Processed='{processedfiles}', Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
 				}
 			}
