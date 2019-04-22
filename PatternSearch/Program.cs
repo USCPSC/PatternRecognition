@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PatternSearch
@@ -126,6 +127,7 @@ namespace PatternSearch
 			}
 
 			// Process files
+			var rnd = new Random();
 			var processedfiles = 0;
 			var rangePartitioner = Partitioner.Create(0, files.Length);
 			Parallel.ForEach(rangePartitioner, (range, loopState) => 
@@ -143,8 +145,11 @@ namespace PatternSearch
 							++processedfiles;
 
 							var fc = fm.ReadAllText(files[i], cmdline.Value.ImageScan);
+							foundNames.Clear();
+
 							if (s.Scan(fc.Text))
 							{
+								Monitor.Enter(rnd);
 								if (cmdline.Value.Verbosity == OutputLevel.V)
 								{
 									if (cmdline.Value.CSVOuput == false)
@@ -154,8 +159,6 @@ namespace PatternSearch
 									else
 										Console.WriteLine($"{files[i]},{s.Matches.Count}");
 								}
-
-								foundNames.Clear();
 
 								// Output results
 								foreach (var key in s.Matches)
@@ -179,6 +182,7 @@ namespace PatternSearch
 											break;
 									}
 								}
+								Monitor.Exit(rnd);
 							}
 							switch (cmdline.Value.Verbosity)
 							{
