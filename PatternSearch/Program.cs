@@ -169,7 +169,13 @@ namespace PatternSearch
 										case OutputLevel.V:
 											if (cmdline.Value.CSVOuput == false)
 												Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
-											Console.WriteLine($"{VmodeSep}{key.Name},{key.Value.Replace(',', '.')}");
+											else
+											{
+												string str = key.Value.Replace(',', '.');
+												if (str.All(char.IsDigit))
+													str = string.Format($"'{str}'");
+												Console.WriteLine($"{VmodeSep}{key.Name},{str}");
+											}
 											break;
 									}
 								}
