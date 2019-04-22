@@ -150,39 +150,45 @@ namespace PatternSearch
 							if (s.Scan(fc.Text))
 							{
 								Monitor.Enter(rnd);
-								if (cmdline.Value.Verbosity == OutputLevel.V)
+								try
 								{
-									if (cmdline.Value.CSVOuput == false)
-										Console.WriteLine($"**********Processing file {files[i]} ...**********");
-									else if (cmdline.Value.ImageScan == true)
-										Console.WriteLine($"{files[i]},{fc.HasImages},{s.Matches.Count}");
-									else
-										Console.WriteLine($"{files[i]},{s.Matches.Count}");
-								}
-
-								// Output results
-								foreach (var key in s.Matches)
-								{
-									switch (cmdline.Value.Verbosity)
+									if (cmdline.Value.Verbosity == OutputLevel.V)
 									{
-										case OutputLevel.M:
-											if (foundNames.Contains(key.Name) == false)
-												foundNames.Add(key.Name);
-											break;
-										case OutputLevel.V:
-											if (cmdline.Value.CSVOuput == false)
-												Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
-											else
-											{
-												string str = key.Value.Replace(',', '.');
-												if (str.All(char.IsDigit))
-													str = string.Format($"'{str}'");
-												Console.WriteLine($"{VmodeSep}{key.Name},{str}");
-											}
-											break;
+										if (cmdline.Value.CSVOuput == false)
+											Console.WriteLine($"**********Processing file {files[i]} ...**********");
+										else if (cmdline.Value.ImageScan == true)
+											Console.WriteLine($"{files[i]},{fc.HasImages},{s.Matches.Count}");
+										else
+											Console.WriteLine($"{files[i]},{s.Matches.Count}");
+									}
+
+									// Output results
+									foreach (var key in s.Matches)
+									{
+										switch (cmdline.Value.Verbosity)
+										{
+											case OutputLevel.M:
+												if (foundNames.Contains(key.Name) == false)
+													foundNames.Add(key.Name);
+												break;
+											case OutputLevel.V:
+												if (cmdline.Value.CSVOuput == false)
+													Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
+												else
+												{
+													string str = key.Value.Replace(',', '.');
+													if (str.All(char.IsDigit))
+														str = string.Format($"'{str}'");
+													Console.WriteLine($"{VmodeSep}{key.Name},{str}");
+												}
+												break;
+										}
 									}
 								}
-								Monitor.Exit(rnd);
+								finally
+								{
+									Monitor.Exit(rnd);
+								}
 							}
 							switch (cmdline.Value.Verbosity)
 							{
