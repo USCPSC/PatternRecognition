@@ -52,7 +52,7 @@ namespace PatternSearch
 							 // Make sure it is a valid directory before we do anything
 							 if (Directory.Exists(o.Directory) == false)
 							 {
-								 Console.WriteLine($"Invalid directory: '{o.Directory}'");
+								 Console.Error.WriteLine($"Invalid directory: '{o.Directory}'");
 								 Environment.Exit(-1);
 							 }
 						 })
@@ -64,51 +64,62 @@ namespace PatternSearch
 			// Load the FileManagers
 			var fmgr = new FileManager();
 			fmgr.ImportFileManagers();
+			if (fmgr.FileManagers.Count() == 0)
+			{
+				Console.Error.WriteLine("No file readers found");
+				Environment.Exit(-3);
+			}
 
 			// Load the Scan engine and the patterns
 			var s = new Scanner.ScanEngine();
-			s.LoadPatterns();
+			if ( s.LoadPatterns() == 0 )
+			{
+				Console.Error.WriteLine("No patterns found");
+				Environment.Exit(-4);
+			}
 
 			// Load the files to be processed
 			var so = cmdline.Value.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 			var files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
+			if (files.Length == 0)
+			{
+				Console.Error.WriteLine("No files found");
+				Environment.Exit(-5);
+			}
 
 			// Print header
 			var starttime = DateTime.Now;
-			if (files.Length > 0 && cmdline.Value.Verbosity != OutputLevel.B)
+			if (cmdline.Value.CSVOuput == false)
 			{
-				if (cmdline.Value.CSVOuput == false)
+				Console.WriteLine("*************************************************************************");
+				Console.WriteLine($"({starttime}) Processing files with the following parameters:");
+				Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
+				Console.WriteLine($"Looking for the following patterns: '{s.GetPatternNames()}'");
+				Console.WriteLine($"In the following file types: '{fmgr.GetFileExtentions()}'");
+				Console.WriteLine("*************************************************************************\n");
+			}
+			else
+			{
+				switch (cmdline.Value.Verbosity)
 				{
-					Console.WriteLine("*************************************************************************");
-					Console.WriteLine($"({starttime}) Processing files with the following parameters:");
-					Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
-					Console.WriteLine($"Looking for the following patterns: '{s.GetPatternNames()}'");
-					Console.WriteLine($"In the following file types: '{fmgr.GetFileExtentions()}'");
-					Console.WriteLine("*************************************************************************\n");
-				}
-				else
-				{
-					switch (cmdline.Value.Verbosity)
-					{
-						case OutputLevel.B:
-							if ( cmdline.Value.ImageScan == true )
-								Console.WriteLine("File Name,Possible Match Count,Has Images");
-							else
-								Console.WriteLine("File Name,Possible Match Count");
-							break;
-						case OutputLevel.M:
-							if (cmdline.Value.ImageScan == true)
-								Console.WriteLine("File Name,Pattern(s) Found,Total Found,Has Images");
-							else
-								Console.WriteLine("File Name,Pattern(s) Found,Total Found");
-							break;
-						case OutputLevel.V:
-							if (cmdline.Value.ImageScan == true)
-								Console.WriteLine("File Name,Has Images,Patterns Found,Pattern Name,Pattern");
-							else
-								Console.WriteLine("File Name,Patterns Found,Pattern Name,Pattern");
-							break;
-					}
+					case OutputLevel.B:
+						if (cmdline.Value.ImageScan == true)
+							Console.WriteLine("File Name,Possible Match Count,Has Images");
+						else
+							Console.WriteLine("File Name,Possible Match Count");
+						break;
+					case OutputLevel.M:
+						if (cmdline.Value.ImageScan == true)
+							Console.WriteLine("File Name,Pattern(s) Found,Total Found,Has Images");
+						else
+							Console.WriteLine("File Name,Pattern(s) Found,Total Found");
+						break;
+					case OutputLevel.V:
+						if (cmdline.Value.ImageScan == true)
+							Console.WriteLine("File Name,Has Images,Patterns Found,Pattern Name,Pattern");
+						else
+							Console.WriteLine("File Name,Patterns Found,Pattern Name,Pattern");
+						break;
 				}
 			}
 
@@ -188,7 +199,7 @@ namespace PatternSearch
 					Console.Error.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
 				}
 			}
-			if (processedfiles > 0 && cmdline.Value.Verbosity != OutputLevel.B)
+			if (processedfiles > 0)
 			{
 				if (cmdline.Value.CSVOuput == false)
 				{
