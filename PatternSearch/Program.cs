@@ -1,11 +1,8 @@
 ﻿using CommandLine;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace PatternSearch
 {
