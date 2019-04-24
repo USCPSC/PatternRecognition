@@ -131,7 +131,10 @@ namespace PatternSearch
 				{
 					// Store names of items found 
 					var foundNames = new StringCollection();
-					var VmodeSep = cmdline.Value.ImageScan ? ",,," : ",,";
+
+					// Comma offset variable to align output in CSV output
+					var commaOffset = cmdline.Value.ImageScan ? ",,," : ",,";
+
 					// If there is a file processor for a give file extension, process the file..
 					foreach (var fm in from fm in fmgr.FileManagers where fmgr.SupportFileExtension(fm, Path.GetExtension(files[i])) select fm)
 					{
@@ -166,10 +169,14 @@ namespace PatternSearch
 											Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
 										else
 										{
+											// Replace comma with a period for comma separated output
 											string str = key.Value.Replace(',', '.');
+
+											// Quote numeric value so excel won't try to convert it to a number
 											if (str.All(char.IsDigit))
 												str = string.Format($"'{str}'");
-											Console.WriteLine($"{VmodeSep}{key.Name},{str}");
+
+											Console.WriteLine($"{commaOffset}{key.Name},{str}");
 										}
 										break;
 								}

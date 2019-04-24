@@ -16,7 +16,7 @@ namespace DocxFileReader
 		{
 			using (DocX document = DocX.Load(filename))
 			{
-				StringBuilder sb = new StringBuilder("N/A");
+				StringBuilder sb = new StringBuilder(FileContents.NotApplicable);
 				if (imageScan)
 				{
 					Dictionary<string, int> docimages = new Dictionary<string, int>();
@@ -30,7 +30,7 @@ namespace DocxFileReader
 					}
 					sb.Clear();
 					if (docimages.Count == 0)
-						sb.Append("None");
+						sb.Append(FileContents.None);
 					else
 					{
 						foreach (var k in docimages.Keys)

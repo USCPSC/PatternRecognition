@@ -45,9 +45,9 @@ namespace PdfFileReader
 			}
 			StringBuilder sb = new StringBuilder();
 			if (imageScan == false)
-				sb.Append("N/A");
+				sb.Append(FileContents.NotApplicable);
 			else if (docimages.Count == 0)
-				sb.Append("None");
+				sb.Append(FileContents.None);
 			else
 			{
 				foreach (var k in docimages.Keys)

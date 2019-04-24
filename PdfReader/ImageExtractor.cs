@@ -2,7 +2,6 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.Collections.Generic;
 
-
 namespace PdfUtils
 {
 	public static class PdfImageChecker
@@ -31,24 +30,12 @@ namespace PdfUtils
 
 	internal class ImageCheckListener : IRenderListener
 	{
-		#region Fields
-
 		private Dictionary<string, int> images = new Dictionary<string, int>();
-
-		#endregion Fields
-
-		#region Properties
 
 		public Dictionary<string, int> Images
 		{
 			get { return images; }
 		}
-
-		#endregion Properties
-
-		#region Methods
-
-		#region Public Methods
 
 		public void BeginTextBlock() { }
 
@@ -65,9 +52,5 @@ namespace PdfUtils
 		}
 
 		public void RenderText(TextRenderInfo renderInfo) { }
-
-		#endregion Public Methods
-
-		#endregion Methods
 	}
 }

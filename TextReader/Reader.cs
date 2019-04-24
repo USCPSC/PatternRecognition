@@ -13,6 +13,6 @@ namespace TextFileReader
 	{
 		public string[] FileExtention => new string[] { ".txt", ".csv" };
 
-		public FileContents ReadAllText(string filename, bool imageScan) => new FileContents(File.ReadAllText(filename, Encoding.ASCII), imageScan? "None": "N/A");
+		public FileContents ReadAllText(string filename, bool imageScan) => new FileContents(File.ReadAllText(filename, Encoding.ASCII), imageScan? FileContents.None: FileContents.NotApplicable);
 	}
 }
