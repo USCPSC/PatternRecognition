@@ -14,30 +14,6 @@ namespace XlsxReader
 	{
 		public string[] FileExtention => new string[] { ".xlsx", ".xls" };
 
-		private static IList<string> GetTablenames(DataTableCollection tables)
-		{
-			var tableList = new List<string>();
-			foreach (var table in tables)
-			{
-				tableList.Add(table.ToString());
-			}
-
-			return tableList;
-		}
-
-		private string GetValues(DataSet dataset, string sheetName)
-		{
-			StringBuilder sb = new StringBuilder();
-			foreach (DataRow row in dataset.Tables[sheetName].Rows)
-			{
-				foreach (var value in row.ItemArray)
-				{
-					sb.AppendFormat(@"{value}");
-				}
-			}
-			return sb.ToString();
-		}
-
 		public FileContents ReadAllText(string filename, bool imageScan)
 		{
 			using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
