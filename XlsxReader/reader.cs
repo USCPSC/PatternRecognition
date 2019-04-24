@@ -1,11 +1,9 @@
 ﻿using ExcelDataReader;
 using FileManagement;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data;
 using System.IO;
-using System.Text;
 
 namespace XlsxReader
 {
