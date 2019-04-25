@@ -139,49 +139,53 @@ namespace PatternSearch
 					foreach (var fm in from fm in fmgr.FileManagers where fmgr.SupportFileExtension(fm, Path.GetExtension(files[i])) select fm)
 					{
 						++processedfiles;
-
-						var fc = fm.ReadAllText(files[i], cmdline.Value.ImageScan);
 						foundNames.Clear();
 
-						if (s.Scan(fc.Text))
+						// Read the text
+						var fc = fm.ReadAllText(files[i], cmdline.Value.ImageScan);
+
+						// Scan the text for patterns
+						s.Scan(fc.Text);
+
+						// Output start
+						if (cmdline.Value.Verbosity == OutputLevel.V)
 						{
-							if (cmdline.Value.Verbosity == OutputLevel.V)
+							if (cmdline.Value.CSVOuput == false)
+								Console.WriteLine($"**********Processing file {files[i]} ...**********");
+							else if (cmdline.Value.ImageScan == true)
+								Console.WriteLine($"{files[i]},{fc.HasImages},{s.Matches.Count}");
+							else
+								Console.WriteLine($"{files[i]},{s.Matches.Count}");
+						}
+
+						// Process details
+						foreach (var key in s.Matches)
+						{
+							switch (cmdline.Value.Verbosity)
 							{
-								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"**********Processing file {files[i]} ...**********");
-								else if (cmdline.Value.ImageScan == true)
-									Console.WriteLine($"{files[i]},{fc.HasImages},{s.Matches.Count}");
-								else
-									Console.WriteLine($"{files[i]},{s.Matches.Count}");
-							}
+								case OutputLevel.M:
+									if (foundNames.Contains(key.Name) == false)
+										foundNames.Add(key.Name);
+									break;
+								case OutputLevel.V:
+									if (cmdline.Value.CSVOuput == false)
+										Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
+									else
+									{
+										// Replace comma with a period for comma separated output
+										string str = key.Value.Replace(',', '.');
 
-							// Output results
-							foreach (var key in s.Matches)
-							{
-								switch (cmdline.Value.Verbosity)
-								{
-									case OutputLevel.M:
-										if (foundNames.Contains(key.Name) == false)
-											foundNames.Add(key.Name);
-										break;
-									case OutputLevel.V:
-										if (cmdline.Value.CSVOuput == false)
-											Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
-										else
-										{
-											// Replace comma with a period for comma separated output
-											string str = key.Value.Replace(',', '.');
+										// Quote numeric value so excel won't try to convert it to a number
+										if (str.All(char.IsDigit))
+											str = string.Format($"'{str}'");
 
-											// Quote numeric value so excel won't try to convert it to a number
-											if (str.All(char.IsDigit))
-												str = string.Format($"'{str}'");
-
-											Console.WriteLine($"{commaOffset}{key.Name},{str}");
-										}
-										break;
-								}
+										Console.WriteLine($"{commaOffset}{key.Name},{str}");
+									}
+									break;
 							}
 						}
+
+						// Output Results
 						switch (cmdline.Value.Verbosity)
 						{
 							case OutputLevel.B:
