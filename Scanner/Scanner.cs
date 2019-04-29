@@ -11,7 +11,7 @@ namespace Scanner
 	/// <summary>
 	/// Items found in the text that match the pattern
 	/// </summary>
-	public class Found
+	public class PatternFound
 	{
 		public string Name { get; private set; }
 		public string Value { get; private set; }
@@ -23,7 +23,7 @@ namespace Scanner
 		/// <param name="name"></param>
 		/// <param name="val"></param>
 		/// <param name="idx"></param>
-		public Found(string name, string val, int idx)
+		public PatternFound(string name, string val, int idx)
 		{
 			Name = name;
 			Value = val;
@@ -36,18 +36,18 @@ namespace Scanner
 	/// </summary>
 	public class ScanEngine
 	{
-		public List<Found> Matches { get; private set; }
+		public List<PatternFound> PatternsFound { get; private set; }
 
 		/// <summary>
 		/// Get a comma separated string of matches 
 		/// </summary>
 		/// <returns>comma separated string</returns>
-		public string GetMatchNames()
+		public string GetPatternsFound()
 		{
 			var sb = new StringBuilder();
-			if (Matches != null)
+			if (PatternsFound != null)
 			{
-				foreach(var f in Matches.Select(x => x.Name).Distinct())
+				foreach(var f in PatternsFound.Select(x => x.Name).Distinct())
 				{
 					if (sb.Length == 0)
 						sb.Append(f);
@@ -98,7 +98,7 @@ namespace Scanner
 		/// <returns>name of pattern</returns>
 		private string GetPatternName(string data)
 		{
-			for (int i = 0; i < patterns.Count; i++)
+			for (var i = 0; i < patterns.Count; i++)
 			{
 				if (Regex.IsMatch(data, patterns[i]))
 					return patterns.GetKey(i);
@@ -115,7 +115,7 @@ namespace Scanner
 			get
 			{
 				var retval = new StringBuilder();
-				for (int i = 0; i < patterns.Count; i++)
+				for (var i = 0; i < patterns.Count; i++)
 				{
 					if (i == 0)
 						retval.Append(patterns[i]);
@@ -135,13 +135,15 @@ namespace Scanner
 		{
 			if (patterns == null || patterns.Count == 0)
 				throw new ApplicationException("No patterns defined");
-			var rgx = new Regex(Patterns);
-			if (Matches == null)
-				Matches = new List<Found>();
-			Matches.Clear();
-			Matches.AddRange(from Match match in rgx.Matches(data)
-								  select new Found(GetPatternName(match.Value), match.Value, match.Index));
-			return Matches.Count > 0;
+			if (PatternsFound == null)
+				PatternsFound = new List<PatternFound>();
+			PatternsFound.Clear();
+			foreach (string p in patterns)
+			{
+				PatternsFound.AddRange(from Match match in Regex.Matches(data, p)
+									  select new PatternFound(GetPatternName(match.Value), match.Value, match.Index));
+			}
+			return PatternsFound.Count > 0;
 		}
 	}
 }

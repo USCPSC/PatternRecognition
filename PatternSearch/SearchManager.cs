@@ -1,4 +1,4 @@
-﻿using FileManagement;
+﻿using FileManager;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -11,10 +11,10 @@ namespace PatternSearch
 	/// <summary>
 	/// File Manager
 	/// </summary>
-	public class FileManager
+	public class SearchManager
 	{
-		[ImportMany(typeof(IFileManager))]
-		public IEnumerable<IFileManager> FileManagers { get; private set; }
+		[ImportMany(typeof(IFileReader))]
+		public IEnumerable<IFileReader> FileReaders { get; private set; }
 
 		/// <summary>
 		/// Get all the file extentions
@@ -23,9 +23,9 @@ namespace PatternSearch
 		public string GetFileExtentions()
 		{
 			var sb = new StringBuilder();
-			if (FileManagers != null)
+			if (FileReaders != null)
 			{
-				foreach (var fm in FileManagers)
+				foreach (var fm in FileReaders)
 				{
 					for (int i = 0; i < fm.FileExtention.Length; i++)
 					{
@@ -39,7 +39,7 @@ namespace PatternSearch
 			return sb.ToString();
 		}
 
-		public bool SupportFileExtension(IFileManager fm, string extension)
+		public bool SupportFileExtension(IFileReader fm, string extension)
 		{
 			for (int i = 0; i < fm.FileExtention.Length; i++)
 				if (string.Compare(fm.FileExtention[i], extension, true) == 0)
@@ -49,7 +49,7 @@ namespace PatternSearch
 		/// <summary>
 		/// Import the MEF-based file managers
 		/// </summary>
-		public void ImportFileManagers()
+		public void ImportFileReaders()
 		{
 			//An aggregate catalog that combines multiple catalogs
 			var catalog = new AggregateCatalog();

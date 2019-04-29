@@ -1,4 +1,4 @@
-﻿using FileManagement;
+﻿using FileManager;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Text;
@@ -8,8 +8,8 @@ namespace TextFileReader
 	/// <summary>
 	/// Implement file manager for text files
 	/// </summary>
-	[Export(typeof(IFileManager))]
-	public class Reader : IFileManager
+	[Export(typeof(IFileReader))]
+	public class Reader : IFileReader
 	{
 		public string[] FileExtention => new string[] { ".txt", ".csv" };
 

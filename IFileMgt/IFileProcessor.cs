@@ -1,4 +1,4 @@
-﻿namespace FileManagement
+﻿namespace FileManager
 {
 	public class FileContents
 	{
@@ -15,7 +15,7 @@
 		// Constructor
 		public FileContents(string txt, string imgs) { Text = txt; HasImages = imgs; }
 	}
-	public interface IFileManager
+	public interface IFileReader
 	{
 		// File Extentions supported
 		string[] FileExtention { get; }

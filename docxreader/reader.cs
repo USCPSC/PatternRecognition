@@ -1,4 +1,4 @@
-﻿using FileManagement;
+﻿using FileManager;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
@@ -7,8 +7,8 @@ using Xceed.Words.NET;
 
 namespace DocxFileReader
 {
-	[Export(typeof(IFileManager))]
-	public class Reader : IFileManager
+	[Export(typeof(IFileReader))]
+	public class Reader : IFileReader
 	{
 		public string[] FileExtention => new string[] { ".docx" };
 

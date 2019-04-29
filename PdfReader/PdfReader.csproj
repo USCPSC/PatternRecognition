@@ -46,14 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageExtractor.cs" />
+    <Compile Include="PdfUtil.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IFileMgt\IFileMgt.csproj">
+    <ProjectReference Include="..\IFileMgt\IFileManager.csproj">
       <Project>{2391cedd-6c06-478c-8d3e-c4d5e3df268c}</Project>
-      <Name>IFileMgt</Name>
+      <Name>IFileManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

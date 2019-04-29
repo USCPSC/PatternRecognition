@@ -1,4 +1,4 @@
-﻿using FileManagement;
+﻿using FileManager;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.ComponentModel.Composition;
@@ -10,8 +10,8 @@ namespace PdfFileReader
 	/// <summary>
 	/// Implement IFileManager for PDF files
 	/// </summary>
-	[Export(typeof(IFileManager))]
-	public class Reader : IFileManager
+	[Export(typeof(IFileReader))]
+	public class Reader : IFileReader
 	{
 		public string[] FileExtention => new string[] { ".pdf" };
 

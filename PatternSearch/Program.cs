@@ -48,23 +48,23 @@ namespace PatternSearch
 			// Parse command line
 			var cmdline = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args)
 						.WithParsed<Options>(o =>
-						 {
-							 // Make sure it is a valid directory before we do anything
-							 if (Directory.Exists(o.Directory) == false)
-							 {
-								 Console.Error.WriteLine($"Invalid directory: '{o.Directory}'");
-								 Environment.Exit(-1);
-							 }
-						 })
+						{
+							// Make sure it is a valid directory before we do anything
+							if (Directory.Exists(o.Directory) == false)
+							{
+								Console.Error.WriteLine($"Invalid directory: '{o.Directory}'");
+								Environment.Exit(-1);
+							}
+						})
 						 .WithNotParsed<Options>(e =>
 						 {
 							 Environment.Exit(-2);
 						 });
 
 			// Load the FileManagers
-			var fmgr = new FileManager();
-			fmgr.ImportFileManagers();
-			if (fmgr.FileManagers.Count() == 0)
+			var smgr = new SearchManager();
+			smgr.ImportFileReaders();
+			if (smgr.FileReaders.Count() == 0)
 			{
 				Console.Error.WriteLine("No file readers found");
 				Environment.Exit(-3);
@@ -72,7 +72,7 @@ namespace PatternSearch
 
 			// Load the Scan engine and the patterns
 			var s = new Scanner.ScanEngine();
-			if ( s.LoadPatterns() == 0 )
+			if (s.LoadPatterns() == 0)
 			{
 				Console.Error.WriteLine("No patterns found");
 				Environment.Exit(-4);
@@ -87,8 +87,140 @@ namespace PatternSearch
 				Environment.Exit(-5);
 			}
 
-			// Print header
 			var starttime = DateTime.Now;
+
+			// Print header
+			PrintHeader(cmdline, smgr, s, starttime);
+
+			// Store names of items found 
+			var foundNames = new StringCollection();
+
+			// Process files
+			var processedfiles = 0;
+			foreach (var file in files)
+			{
+				try
+				{
+					// If there is a file processor for a give file extension, process the file..
+					foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
+					{
+						// Only count if we have a file processor
+						++processedfiles;
+
+						// Read the text
+						var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
+
+						// Scan the text for patterns
+						s.Scan(fc.Text);
+
+						// Output start
+						PrintProcessingStart(cmdline, s, file, fc);
+
+						// Process details
+						foundNames.Clear();
+						foreach (var match in s.PatternsFound)
+							ProcessMatches(cmdline, foundNames, match);
+
+						// Output Results
+						PrintProcessingResults(cmdline, s, file, fc);
+					}
+				}
+				catch (Exception e)
+				{
+					Console.Error.WriteLine($"An error occured while processing: {file} => {e.Message}");
+				}
+			}
+			if (processedfiles > 0)
+				PrintFooter(cmdline, starttime, processedfiles);
+		}
+
+		private static void ProcessMatches(Parsed<Options> cmdline, StringCollection foundNames, Scanner.PatternFound match)
+		{
+			// Comma offset variable to align output in CSV output
+			var commaOffset = cmdline.Value.ImageScan ? ",,," : ",,";
+
+			switch (cmdline.Value.Verbosity)
+			{
+				case OutputLevel.M:
+					if (foundNames.Contains(match.Name) == false)
+						foundNames.Add(match.Name);
+					break;
+				case OutputLevel.V:
+					if (cmdline.Value.CSVOuput == false)
+						Console.WriteLine($"{match.Name} was found at {match.Index} with a value of {match.Value}");
+					else
+					{
+						// Replace comma with a period for comma separated output
+						string str = match.Value.Replace(',', '.');
+
+						// Quote numeric value so excel won't try to convert it to a number
+						if (str.All(char.IsDigit))
+							str = string.Format($"'{str}'");
+
+						Console.WriteLine($"{commaOffset}{match.Name},{str}");
+					}
+					break;
+			}
+		}
+
+		private static void PrintProcessingResults(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
+		{
+			switch (cmdline.Value.Verbosity)
+			{
+				case OutputLevel.B:
+					if (cmdline.Value.CSVOuput == false)
+						Console.WriteLine($"Number of possible patterns found: {s.PatternsFound.Count} in {file}");
+					else if (cmdline.Value.ImageScan == true)
+						Console.WriteLine($"{file},{s.PatternsFound.Count},{fc.HasImages}");
+					else
+						Console.WriteLine($"{file},{s.PatternsFound.Count}");
+					break;
+				case OutputLevel.M:
+					if (cmdline.Value.CSVOuput == false)
+						Console.WriteLine($"Found {s.GetPatternsFound()} in {file}");
+					else if (cmdline.Value.ImageScan == true)
+						Console.WriteLine($"{file},{s.GetPatternsFound()},{s.PatternsFound.Count},{fc.HasImages}");
+					else
+						Console.WriteLine($"{file},{s.GetPatternsFound()},{s.PatternsFound.Count}");
+					break;
+				case OutputLevel.V:
+					if (cmdline.Value.CSVOuput == false)
+						Console.WriteLine($"Number of possible patterns found: {s.PatternsFound.Count}\n");
+					break;
+			}
+		}
+
+		private static void PrintProcessingStart(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
+		{
+			if (cmdline.Value.Verbosity == OutputLevel.V)
+			{
+				if (cmdline.Value.CSVOuput == false)
+					Console.WriteLine($"**********Processing file {file} ...**********");
+				else if (cmdline.Value.ImageScan == true)
+					Console.WriteLine($"{file},{fc.HasImages},{s.PatternsFound.Count}");
+				else
+					Console.WriteLine($"{file},{s.PatternsFound.Count}");
+			}
+		}
+
+		private static void PrintFooter(Parsed<Options> cmdline, DateTime starttime, int processedfiles)
+		{
+			if (cmdline.Value.CSVOuput == false)
+			{
+				Console.WriteLine("*************************************************************************");
+				Console.WriteLine($"({DateTime.Now}) Finished processing files:");
+				Console.WriteLine($"Files Processed='{processedfiles}' Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
+				Console.WriteLine("*************************************************************************\n");
+			}
+			else
+			{
+				Console.WriteLine($"\nScan Started at: {starttime}, Finished at: {DateTime.Now}");
+				Console.WriteLine($"Files Processed='{processedfiles}', Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
+			}
+		}
+
+		private static void PrintHeader(Parsed<Options> cmdline, SearchManager fmgr, Scanner.ScanEngine s, DateTime starttime)
+		{
 			if (cmdline.Value.CSVOuput == false)
 			{
 				Console.WriteLine("*************************************************************************");
@@ -120,115 +252,6 @@ namespace PatternSearch
 						else
 							Console.WriteLine("File Name,Patterns Found,Pattern Name,Pattern");
 						break;
-				}
-			}
-
-			// Process files
-			var processedfiles = 0;
-			for (int i = 0; i < files.Length; i++)
-			{
-				try
-				{
-					// Store names of items found 
-					var foundNames = new StringCollection();
-
-					// Comma offset variable to align output in CSV output
-					var commaOffset = cmdline.Value.ImageScan ? ",,," : ",,";
-
-					// If there is a file processor for a give file extension, process the file..
-					foreach (var fm in from fm in fmgr.FileManagers where fmgr.SupportFileExtension(fm, Path.GetExtension(files[i])) select fm)
-					{
-						++processedfiles;
-						foundNames.Clear();
-
-						// Read the text
-						var fc = fm.ReadAllText(files[i], cmdline.Value.ImageScan);
-
-						// Scan the text for patterns
-						s.Scan(fc.Text);
-
-						// Output start
-						if (cmdline.Value.Verbosity == OutputLevel.V)
-						{
-							if (cmdline.Value.CSVOuput == false)
-								Console.WriteLine($"**********Processing file {files[i]} ...**********");
-							else if (cmdline.Value.ImageScan == true)
-								Console.WriteLine($"{files[i]},{fc.HasImages},{s.Matches.Count}");
-							else
-								Console.WriteLine($"{files[i]},{s.Matches.Count}");
-						}
-
-						// Process details
-						foreach (var key in s.Matches)
-						{
-							switch (cmdline.Value.Verbosity)
-							{
-								case OutputLevel.M:
-									if (foundNames.Contains(key.Name) == false)
-										foundNames.Add(key.Name);
-									break;
-								case OutputLevel.V:
-									if (cmdline.Value.CSVOuput == false)
-										Console.WriteLine($"{key.Name} was found at {key.Index} with a value of {key.Value}");
-									else
-									{
-										// Replace comma with a period for comma separated output
-										string str = key.Value.Replace(',', '.');
-
-										// Quote numeric value so excel won't try to convert it to a number
-										if (str.All(char.IsDigit))
-											str = string.Format($"'{str}'");
-
-										Console.WriteLine($"{commaOffset}{key.Name},{str}");
-									}
-									break;
-							}
-						}
-
-						// Output Results
-						switch (cmdline.Value.Verbosity)
-						{
-							case OutputLevel.B:
-								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count} in {files[i]}");
-								else if (cmdline.Value.ImageScan == true)
-									Console.WriteLine($"{files[i]},{s.Matches.Count},{fc.HasImages}");
-								else
-									Console.WriteLine($"{files[i]},{s.Matches.Count}");
-								break;
-							case OutputLevel.M:
-								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Found {s.GetMatchNames()} in {files[i]}");
-								else if (cmdline.Value.ImageScan == true)
-									Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count},{fc.HasImages}");
-								else
-									Console.WriteLine($"{files[i]},{s.GetMatchNames()},{s.Matches.Count}");
-								break;
-							case OutputLevel.V:
-								if (cmdline.Value.CSVOuput == false)
-									Console.WriteLine($"Number of possible patterns found: {s.Matches.Count}\n");
-								break;
-						}
-					}
-				}
-				catch (Exception e)
-				{
-					Console.Error.WriteLine($"An error occured while processing: {files[i]} => {e.Message}");
-				}
-			}
-			if (processedfiles > 0)
-			{
-				if (cmdline.Value.CSVOuput == false)
-				{
-					Console.WriteLine("*************************************************************************");
-					Console.WriteLine($"({DateTime.Now}) Finished processing files:");
-					Console.WriteLine($"Files Processed='{processedfiles}' Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
-					Console.WriteLine("*************************************************************************\n");
-				}
-				else
-				{
-					Console.WriteLine($"\nScan Started at: {starttime}, Finished at: {DateTime.Now}");
-					Console.WriteLine($"Files Processed='{processedfiles}', Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
 				}
 			}
 		}

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scanner", "Scanner\Scanner.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternSearch", "PatternSearch\PatternSearch.csproj", "{206082E3-415C-4577-B5F6-AEB1DB9EB8C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IFileMgt", "IFileMgt\IFileMgt.csproj", "{2391CEDD-6C06-478C-8D3E-C4D5E3DF268C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IFileManager", "IFileMgt\IFileManager.csproj", "{2391CEDD-6C06-478C-8D3E-C4D5E3DF268C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfReader", "PdfReader\PdfReader.csproj", "{70DF9EB7-5DF8-4B25-A6C3-DFF9C9B308FB}"
 EndProject

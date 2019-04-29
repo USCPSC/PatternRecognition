@@ -1,5 +1,5 @@
 ﻿using ExcelDataReader;
-using FileManagement;
+using FileManager;
 using Newtonsoft.Json;
 using System.ComponentModel.Composition;
 using System.Data;
@@ -7,8 +7,8 @@ using System.IO;
 
 namespace XlsxReader
 {
-	[Export(typeof(IFileManager))]
-	public class Reader : IFileManager
+	[Export(typeof(IFileReader))]
+	public class Reader : IFileReader
 	{
 		public string[] FileExtention => new string[] { ".xlsx", ".xls" };
 

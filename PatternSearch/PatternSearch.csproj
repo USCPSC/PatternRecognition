@@ -47,18 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IFileMgt\IFileMgt.csproj">
+    <ProjectReference Include="..\IFileMgt\IFileManager.csproj">
       <Project>{2391cedd-6c06-478c-8d3e-c4d5e3df268c}</Project>
-      <Name>IFileMgt</Name>
+      <Name>IFileManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\Scanner\Scanner.csproj">
       <Project>{3661b072-5395-488e-982a-26637e2158e7}</Project>
