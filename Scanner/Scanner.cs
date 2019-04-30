@@ -140,7 +140,7 @@ namespace Scanner
 			PatternsFound.Clear();
 			foreach (string p in patterns)
 			{
-				PatternsFound.AddRange(from Match match in Regex.Matches(data, p)
+				PatternsFound.AddRange(from Match match in Regex.Matches(data, patterns[p])
 									  select new PatternFound(GetPatternName(match.Value), match.Value, match.Index));
 			}
 			return PatternsFound.Count > 0;
