@@ -67,7 +67,7 @@ namespace XlsxReader
 						else
 							content.Append("\r\n");
 						index++;
-						if ( colFilter != null && colFilter.Length > 0)
+						if ( colFilter?.Length > 0)
 						{
 							if (Regex.IsMatch(item.ColumnName, colFilter))
 								cols.Add(item.Ordinal);
@@ -81,7 +81,7 @@ namespace XlsxReader
 						for (int y = 0; y <= intColumnCount - 1; y++)
 						{
 							bool addCol = true;
-							if (cols.Count > 0 && cols.Contains(y) == false)
+							if (cols.Contains(y) == true)
 								addCol = false;
 
 							if (addCol)

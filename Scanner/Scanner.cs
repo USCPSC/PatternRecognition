@@ -140,10 +140,15 @@ namespace Scanner
 			PatternsFound.Clear();
 			foreach (string p in patterns)
 			{
-				PatternsFound.AddRange(from Match match in Regex.Matches(data, patterns[p])
-									  select new PatternFound(GetPatternName(match.Value), match.Value, match.Index));
+				foreach (Match m in Regex.Matches(data, patterns[p]))
+				{
+					string name = GetPatternName(m.Value);
+					if (FilterMatch(name, m.Value) == false)
+						PatternsFound.Add(new PatternFound(name, m.Value, m.Index));
+				}
 			}
 			return PatternsFound.Count > 0;
 		}
+		private bool FilterMatch(string name, string value) => (ConfigurationManager.AppSettings[name] != null) ? Regex.IsMatch(value, ConfigurationManager.AppSettings[name]) : false;
 	}
 }
