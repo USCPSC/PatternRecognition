@@ -72,7 +72,7 @@ namespace Scanner
 					if (i == 0)
 						sb.Append(patterns.GetKey(i));
 					else
-						sb.AppendFormat($", {patterns.GetKey(i)}");
+						sb.AppendFormat($"; {patterns.GetKey(i)}");
 				}
 			}
 			return sb.ToString();

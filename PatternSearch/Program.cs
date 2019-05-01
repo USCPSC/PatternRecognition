@@ -92,7 +92,7 @@ namespace PatternSearch
 			var starttime = DateTime.Now;
 
 			// Print header
-			PrintHeader(cmdline, smgr, s, starttime);
+			PrintHeader(cmdline, smgr, starttime);
 
 			// Store names of items found 
 			var foundNames = new StringCollection();
@@ -133,17 +133,16 @@ namespace PatternSearch
 				}
 			}
 			if (processedfiles > 0)
-				PrintFooter(cmdline, starttime, processedfiles);
+				PrintFooter(cmdline, starttime, processedfiles, s.GetPatternNames());
 		}
 
-		private static void PrintHeader(Parsed<Options> cmdline, SearchManager fmgr, Scanner.ScanEngine s, DateTime starttime)
+		private static void PrintHeader(Parsed<Options> cmdline, SearchManager fmgr, DateTime starttime)
 		{
 			if (cmdline.Value.CSVOuput == false)
 			{
 				Console.WriteLine("*************************************************************************");
 				Console.WriteLine($"({starttime}) Processing files with the following parameters:");
 				Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
-				Console.WriteLine($"Looking for the following patterns: '{s.GetPatternNames()}'");
 				Console.WriteLine($"In the following file types: '{fmgr.GetFileExtentions()}'");
 				Console.WriteLine("*************************************************************************\n");
 			}
@@ -242,19 +241,21 @@ namespace PatternSearch
 			}
 		}
 
-		private static void PrintFooter(Parsed<Options> cmdline, DateTime starttime, int processedfiles)
+		private static void PrintFooter(Parsed<Options> cmdline, DateTime starttime, int processedfiles, string patterns)
 		{
 			if (cmdline.Value.CSVOuput == false)
 			{
 				Console.WriteLine("*************************************************************************");
 				Console.WriteLine($"({DateTime.Now}) Finished processing files:");
 				Console.WriteLine($"Files Processed='{processedfiles}' Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
+				Console.WriteLine($"Searched for the following patterns: '{patterns}'");
 				Console.WriteLine("*************************************************************************\n");
 			}
 			else
 			{
 				Console.WriteLine($"\nScan Started at: {starttime}, Finished at: {DateTime.Now}");
 				Console.WriteLine($"Files Processed='{processedfiles}', Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
+				Console.WriteLine($"Patterns searched {patterns}");
 			}
 		}
 
