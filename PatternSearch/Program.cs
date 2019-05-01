@@ -174,14 +174,15 @@ namespace PatternSearch
 
 		private static void PrintProcessingStart(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
 		{
+			string fileprefix = ConfigurationManager.AppSettings["FilePrefix"] ?? "";
 			if (cmdline.Value.Verbosity == OutputLevel.V)
 			{
 				if (cmdline.Value.CSVOuput == false)
 					Console.WriteLine($"**********Processing file {file} ...**********");
 				else if (cmdline.Value.ImageScan == true)
-					Console.WriteLine($"{file},{fc.Text?.Length},{fc.HasImages},{s.PatternsFound.Count}");
+					Console.WriteLine($"{fileprefix}{file},{fc.Text?.Length},{fc.HasImages},{s.PatternsFound.Count}");
 				else
-					Console.WriteLine($"{file},{fc.Text?.Length},{s.PatternsFound.Count}");
+					Console.WriteLine($"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFound.Count}");
 			}
 		}
 
@@ -216,23 +217,24 @@ namespace PatternSearch
 
 		private static void PrintProcessingResults(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
 		{
+			string fileprefix = ConfigurationManager.AppSettings["FilePrefix"] ?? "";
 			switch (cmdline.Value.Verbosity)
 			{
 				case OutputLevel.B:
 					if (cmdline.Value.CSVOuput == false)
 						Console.WriteLine($"Number of possible patterns found: {s.PatternsFound.Count} in {file}");
 					else if (cmdline.Value.ImageScan == true)
-						Console.WriteLine($"{file},{fc.Text?.Length},{s.PatternsFound.Count},{fc.HasImages}");
+						Console.WriteLine($"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFound.Count},{fc.HasImages}");
 					else
-						Console.WriteLine($"{file},{fc.Text?.Length},{s.PatternsFound.Count}");
+						Console.WriteLine($"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFound.Count}");
 					break;
 				case OutputLevel.M:
 					if (cmdline.Value.CSVOuput == false)
 						Console.WriteLine($"Found {s.GetPatternsFound()} in {file}");
 					else if (cmdline.Value.ImageScan == true)
-						Console.WriteLine($"{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count},{fc.HasImages}");
+						Console.WriteLine($"{fileprefix}{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count},{fc.HasImages}");
 					else
-						Console.WriteLine($"{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count}");
+						Console.WriteLine($"{fileprefix}{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count}");
 					break;
 				case OutputLevel.V:
 					if (cmdline.Value.CSVOuput == false)
