@@ -136,10 +136,60 @@ namespace PatternSearch
 				PrintFooter(cmdline, starttime, processedfiles);
 		}
 
+		private static void PrintHeader(Parsed<Options> cmdline, SearchManager fmgr, Scanner.ScanEngine s, DateTime starttime)
+		{
+			if (cmdline.Value.CSVOuput == false)
+			{
+				Console.WriteLine("*************************************************************************");
+				Console.WriteLine($"({starttime}) Processing files with the following parameters:");
+				Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
+				Console.WriteLine($"Looking for the following patterns: '{s.GetPatternNames()}'");
+				Console.WriteLine($"In the following file types: '{fmgr.GetFileExtentions()}'");
+				Console.WriteLine("*************************************************************************\n");
+			}
+			else
+			{
+				switch (cmdline.Value.Verbosity)
+				{
+					case OutputLevel.B:
+						if (cmdline.Value.ImageScan == true)
+							Console.WriteLine("File Name,Text Size,Possible Match Count,Has Images");
+						else
+							Console.WriteLine("File Name,Text Size,Possible Match Count");
+						break;
+					case OutputLevel.M:
+						if (cmdline.Value.ImageScan == true)
+							Console.WriteLine("File Name,Text Size,Pattern(s) Found,Total Found,Has Images");
+						else
+							Console.WriteLine("File Name,Text Size,Pattern(s) Found,Total Found");
+						break;
+					case OutputLevel.V:
+						if (cmdline.Value.ImageScan == true)
+							Console.WriteLine("File Name,Text Size,Has Images,Patterns Found,Pattern Name,Pattern");
+						else
+							Console.WriteLine("File Name,Text Size,Patterns Found,Pattern Name,Pattern");
+						break;
+				}
+			}
+		}
+
+		private static void PrintProcessingStart(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
+		{
+			if (cmdline.Value.Verbosity == OutputLevel.V)
+			{
+				if (cmdline.Value.CSVOuput == false)
+					Console.WriteLine($"**********Processing file {file} ...**********");
+				else if (cmdline.Value.ImageScan == true)
+					Console.WriteLine($"{file},{fc.Text?.Length},{fc.HasImages},{s.PatternsFound.Count}");
+				else
+					Console.WriteLine($"{file},{fc.Text?.Length},{s.PatternsFound.Count}");
+			}
+		}
+
 		private static void ProcessMatches(Parsed<Options> cmdline, StringCollection foundNames, Scanner.PatternFound match)
 		{
 			// Comma offset variable to align output in CSV output
-			var commaOffset = cmdline.Value.ImageScan ? ",,," : ",,";
+			var commaOffset = cmdline.Value.ImageScan ? ",,,," : ",,,";
 
 			switch (cmdline.Value.Verbosity)
 			{
@@ -173,35 +223,22 @@ namespace PatternSearch
 					if (cmdline.Value.CSVOuput == false)
 						Console.WriteLine($"Number of possible patterns found: {s.PatternsFound.Count} in {file}");
 					else if (cmdline.Value.ImageScan == true)
-						Console.WriteLine($"{file},{s.PatternsFound.Count},{fc.HasImages}");
+						Console.WriteLine($"{file},{fc.Text?.Length},{s.PatternsFound.Count},{fc.HasImages}");
 					else
-						Console.WriteLine($"{file},{s.PatternsFound.Count}");
+						Console.WriteLine($"{file},{fc.Text?.Length},{s.PatternsFound.Count}");
 					break;
 				case OutputLevel.M:
 					if (cmdline.Value.CSVOuput == false)
 						Console.WriteLine($"Found {s.GetPatternsFound()} in {file}");
 					else if (cmdline.Value.ImageScan == true)
-						Console.WriteLine($"{file},{s.GetPatternsFound()},{s.PatternsFound.Count},{fc.HasImages}");
+						Console.WriteLine($"{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count},{fc.HasImages}");
 					else
-						Console.WriteLine($"{file},{s.GetPatternsFound()},{s.PatternsFound.Count}");
+						Console.WriteLine($"{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count}");
 					break;
 				case OutputLevel.V:
 					if (cmdline.Value.CSVOuput == false)
 						Console.WriteLine($"Number of possible patterns found: {s.PatternsFound.Count}\n");
 					break;
-			}
-		}
-
-		private static void PrintProcessingStart(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
-		{
-			if (cmdline.Value.Verbosity == OutputLevel.V)
-			{
-				if (cmdline.Value.CSVOuput == false)
-					Console.WriteLine($"**********Processing file {file} ...**********");
-				else if (cmdline.Value.ImageScan == true)
-					Console.WriteLine($"{file},{fc.HasImages},{s.PatternsFound.Count}");
-				else
-					Console.WriteLine($"{file},{s.PatternsFound.Count}");
 			}
 		}
 
@@ -221,41 +258,5 @@ namespace PatternSearch
 			}
 		}
 
-		private static void PrintHeader(Parsed<Options> cmdline, SearchManager fmgr, Scanner.ScanEngine s, DateTime starttime)
-		{
-			if (cmdline.Value.CSVOuput == false)
-			{
-				Console.WriteLine("*************************************************************************");
-				Console.WriteLine($"({starttime}) Processing files with the following parameters:");
-				Console.WriteLine($"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
-				Console.WriteLine($"Looking for the following patterns: '{s.GetPatternNames()}'");
-				Console.WriteLine($"In the following file types: '{fmgr.GetFileExtentions()}'");
-				Console.WriteLine("*************************************************************************\n");
-			}
-			else
-			{
-				switch (cmdline.Value.Verbosity)
-				{
-					case OutputLevel.B:
-						if (cmdline.Value.ImageScan == true)
-							Console.WriteLine("File Name,Possible Match Count,Has Images");
-						else
-							Console.WriteLine("File Name,Possible Match Count");
-						break;
-					case OutputLevel.M:
-						if (cmdline.Value.ImageScan == true)
-							Console.WriteLine("File Name,Pattern(s) Found,Total Found,Has Images");
-						else
-							Console.WriteLine("File Name,Pattern(s) Found,Total Found");
-						break;
-					case OutputLevel.V:
-						if (cmdline.Value.ImageScan == true)
-							Console.WriteLine("File Name,Has Images,Patterns Found,Pattern Name,Pattern");
-						else
-							Console.WriteLine("File Name,Patterns Found,Pattern Name,Pattern");
-						break;
-				}
-			}
-		}
 	}
 }
