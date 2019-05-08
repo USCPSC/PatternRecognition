@@ -25,17 +25,17 @@ namespace PatternSearch
 		/// </summary>
 		internal class Options
 		{
-			[Option('r', "recursive", Required = false, HelpText = "Recursively process directory")]
-			public bool Recursive { get; set; }
-
-			[Option('c', "csv", Required = false, HelpText = "Output the results in a CSV format")]
-			public bool CSVOuput { get; set; }
-
-			[Option('v', "verbose", Required = false, HelpText = "Verbosity level: B=Basic, M=Moderate, V=Verbose")]
-			public OutputLevel Verbosity { get; set; }
-
 			[Option('d', "directory", Required = true, HelpText = "Input directory to be processed.")]
 			public string Directory { get; set; }
+
+			[Option('r', "recursive", Required = false, HelpText = "Recursively process directory.")]
+			public bool Recursive { get; set; }
+
+			[Option('c', "csv", Required = false, HelpText = "Output the results in a CSV format.")]
+			public bool CSVOuput { get; set; }
+
+			[Option('v', "verbosity", Required = false, HelpText = "Verbosity level: B=Basic, M=Moderate, V=Verbose.")]
+			public OutputLevel Verbosity { get; set; }
 
 			[Option('i', "imagescan", Required = false, HelpText = "Scan file to determine if images exists.")]
 			public bool ImageScan { get; set; }
@@ -245,19 +245,23 @@ namespace PatternSearch
 
 		private static void PrintFooter(Parsed<Options> cmdline, DateTime starttime, int processedfiles, string patterns)
 		{
+			var procduration = DateTime.Now - starttime;
+			var proctime = (procduration.TotalSeconds > 60) ? procduration.TotalMinutes: procduration.TotalSeconds;
+			string increment = (procduration.TotalSeconds > 60) ? "minutes" : "seconds";
+
 			if (cmdline.Value.CSVOuput == false)
 			{
 				Console.WriteLine("*************************************************************************");
 				Console.WriteLine($"({DateTime.Now}) Finished processing files:");
-				Console.WriteLine($"Files Processed='{processedfiles}' Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
+				Console.WriteLine($"Files Processed='{processedfiles}' Processing Time ({increment}) ='{proctime}'");
 				Console.WriteLine($"Searched for the following patterns: '{patterns}'");
 				Console.WriteLine("*************************************************************************\n");
 			}
 			else
 			{
 				Console.WriteLine($"\nScan Started at: {starttime}, Finished at: {DateTime.Now}");
-				Console.WriteLine($"Files Processed='{processedfiles}', Processing Time (seconds) ='{(DateTime.Now - starttime).TotalSeconds}'");
-				Console.WriteLine($"Patterns searched {patterns}");
+				Console.WriteLine($"Files Processed='{processedfiles}', Processing Time ({increment}) ='{proctime}'");
+				Console.WriteLine($"Patterns searched: {patterns}");
 			}
 		}
 

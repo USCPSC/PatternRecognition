@@ -36,7 +36,21 @@ namespace Scanner
 	/// </summary>
 	public class ScanEngine
 	{
+		private NameValueCollection patterns;
+		private NameValueCollection filters;
+
+		/// <summary>
+		/// Patterns found
+		/// </summary>
 		public List<PatternFound> PatternsFound { get; private set; }
+
+		/// <summary>
+		/// Contructor
+		/// </summary>
+		public ScanEngine()
+		{
+			LoadFilters();
+		}
 
 		/// <summary>
 		/// Get a comma separated string of matches 
@@ -78,8 +92,6 @@ namespace Scanner
 			return sb.ToString();
 		}
 
-		private NameValueCollection patterns;
-
 		/// <summary>
 		/// Load the patterns to scan
 		/// </summary>
@@ -91,6 +103,16 @@ namespace Scanner
 			return patterns.Count;
 		}
 
+		/// <summary>
+		/// Load the filters
+		/// </summary>
+		/// <returns>Number of filters</returns>
+		private int LoadFilters()
+		{
+			if (filters == null)
+				filters = ConfigurationManager.GetSection("FilterGroup/Filters") as NameValueCollection;
+			return filters.Count;
+		}
 		/// <summary>
 		/// Get the pattern name for a given item
 		/// </summary>
@@ -149,6 +171,12 @@ namespace Scanner
 			}
 			return PatternsFound.Count > 0;
 		}
-		private bool FilterMatch(string name, string value) => (ConfigurationManager.AppSettings[name] != null) ? Regex.IsMatch(value, ConfigurationManager.AppSettings[name]) : false;
+		/// <summary>
+		/// If there a match for a filter
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		private bool FilterMatch(string name, string value) => (filters[name] != null) ? Regex.IsMatch(value, filters[name]) : false;
 	}
 }
