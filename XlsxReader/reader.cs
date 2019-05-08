@@ -46,7 +46,7 @@ namespace XlsxReader
 		private string ConvertToCSV(DataSet objDataSet)
 		{
 			StringBuilder content = new StringBuilder();
-			string colFilter = ConfigurationManager.AppSettings["ColumnFilter"];
+			string colFilter = ConfigurationManager.AppSettings["Columns2Search"];
 			List<int> cols = new List<int>();
 			if (objDataSet.Tables.Count >= 1)
 			{
