@@ -1,12 +1,12 @@
-﻿using ExcelDataReader;
-using FileManager;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using ExcelDataReader;
+using FileManager;
 
 namespace XlsxReader
 {

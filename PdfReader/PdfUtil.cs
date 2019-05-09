@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
-using System.Collections.Generic;
 
 namespace PdfUtils
 {

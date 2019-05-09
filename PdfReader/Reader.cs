@@ -1,9 +1,9 @@
-﻿using FileManager;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Text;
-using System.Collections.Generic;
+using FileManager;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 
 namespace PdfFileReader
 {
