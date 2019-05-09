@@ -93,9 +93,6 @@ namespace PatternSearch
 			// Print header
 			PrintHeader(cmdline, smgr, starttime);
 
-			// Store names of items found 
-			var foundNames = new StringCollection();
-
 			// Process files
 			var processedfiles = 0;
 			foreach (var file in files)
@@ -117,10 +114,12 @@ namespace PatternSearch
 						// Output start
 						PrintProcessingStart(cmdline, s, file, fc);
 
-						// Process details
-						foundNames.Clear();
-						foreach (var match in s.PatternsFound)
-							ProcessMatches(cmdline, foundNames, match);
+						// If verbose enabled, print more details for each match
+						if (cmdline.Value.Verbosity == OutputLevel.V)
+						{
+							foreach (var match in s.PatternsFound)
+								PrintMatch(cmdline, match);
+						}
 
 						// Output Results
 						PrintProcessingResults(cmdline, s, file, fc);
@@ -185,32 +184,23 @@ namespace PatternSearch
 			}
 		}
 
-		private static void ProcessMatches(Parsed<Options> cmdline, StringCollection foundNames, Scanner.PatternFound match)
+		private static void PrintMatch(Parsed<Options> cmdline, Scanner.PatternFound match)
 		{
 			// Comma offset variable to align output in CSV output
 			var commaOffset = cmdline.Value.ImageScan ? ",,,," : ",,,";
 
-			switch (cmdline.Value.Verbosity)
+			if (cmdline.Value.CSVOuput == false)
+				Console.WriteLine($"{match.Name} was found at {match.Index} with a value of {match.Value}");
+			else
 			{
-				case OutputLevel.M:
-					if (foundNames.Contains(match.Name) == false)
-						foundNames.Add(match.Name);
-					break;
-				case OutputLevel.V:
-					if (cmdline.Value.CSVOuput == false)
-						Console.WriteLine($"{match.Name} was found at {match.Index} with a value of {match.Value}");
-					else
-					{
-						// Replace comma with a period for comma separated output
-						string str = match.Value.Replace(',', '.');
+				// Replace comma with a period for comma separated output
+				string str = match.Value.Replace(',', '.');
 
-						// Quote numeric value so excel won't try to convert it to a number
-						if (str.All(char.IsDigit))
-							str = string.Format($"'{str}'");
+				// Quote numeric value so excel won't try to convert it to a number
+				if (str.All(char.IsDigit))
+					str = string.Format($"'{str}'");
 
-						Console.WriteLine($"{commaOffset}{match.Name},{str}");
-					}
-					break;
+				Console.WriteLine($"{commaOffset}{match.Name},{str}");
 			}
 		}
 
