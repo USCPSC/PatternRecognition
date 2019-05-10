@@ -7,7 +7,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("docxreader")]
 [assembly: AssemblyDescription("Implement IFileMgt to read DOCX files")]
-[assembly: AssemblyConfiguration("")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
+ [assembly: AssemblyConfiguration("Release")]
+#endif
 [assembly: AssemblyCompany("CPSC")]
 [assembly: AssemblyProduct("docxreader")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
