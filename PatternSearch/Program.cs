@@ -116,7 +116,7 @@ namespace PatternSearch
 						// If verbose enabled, print more details for each match
 						if (cmdline.Value.Verbosity == OutputLevel.V)
 						{
-							foreach (var match in s.PatternsFound)
+							foreach (var match in s.PatternsFound.OrderBy(i => i.Index))
 								PrintMatch(cmdline, match);
 						}
 
