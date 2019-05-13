@@ -50,51 +50,51 @@ namespace XlsxReader
 			List<int> cols = new List<int>();
 			if (objDataSet.Tables.Count >= 1)
 			{
-				DataTable table = objDataSet.Tables[0];
-
-				if (table.Rows.Count > 0)
+				foreach (DataTable table in objDataSet.Tables)
 				{
-					DataRow dr1 = (DataRow)table.Rows[0];
-					int intColumnCount = dr1.Table.Columns.Count;
-					int index = 1;
-
-					//add column names
-					foreach (DataColumn item in dr1.Table.Columns)
+					if (table.Rows.Count > 0)
 					{
-						content.Append(string.Format("\"{0}\"", item.ColumnName));
-						if (index < intColumnCount)
-							content.Append(",");
-						else
-							content.Append("\r\n");
-						index++;
-						if ( colFilter?.Length > 0)
+						DataRow dr1 = (DataRow)table.Rows[0];
+						int intColumnCount = dr1.Table.Columns.Count;
+						int index = 1;
+
+						//add column names
+						foreach (DataColumn item in dr1.Table.Columns)
 						{
-							if (Regex.IsMatch(item.ColumnName, colFilter))
-								cols.Add(item.Ordinal);
+							content.Append(string.Format("\"{0}\"", item.ColumnName));
+							if (index < intColumnCount)
+								content.Append(",");
+							else
+								content.Append("\r\n");
+							index++;
+							if (colFilter?.Length > 0)
+							{
+								if (Regex.IsMatch(item.ColumnName, colFilter))
+									cols.Add(item.Ordinal);
+							}
 						}
-					}
 
-					//add column data
-					foreach (DataRow currentRow in table.Rows)
-					{
-						string strRow = string.Empty;
-						for (int y = 0; y <= intColumnCount - 1; y++)
+						//add column data
+						foreach (DataRow currentRow in table.Rows)
 						{
-							bool addCol = true;
-							if (cols.Contains(y) == true)
-								addCol = false;
+							string strRow = string.Empty;
+							for (int y = 0; y <= intColumnCount - 1; y++)
+							{
+								bool addCol = true;
+								if (cols.Contains(y) == true)
+									addCol = false;
 
-							if (addCol)
-								strRow += "\"" + currentRow[y].ToString() + "\"";
+								if (addCol)
+									strRow += "\"" + currentRow[y].ToString() + "\"";
 
-							if (y < intColumnCount - 1 && y >= 0)
-								strRow += ",";
+								if (y < intColumnCount - 1 && y >= 0)
+									strRow += ",";
+							}
+							content.Append(strRow + "\r\n");
 						}
-						content.Append(strRow + "\r\n");
 					}
 				}
 			}
-
 			return content.ToString();
 		}
 	}
