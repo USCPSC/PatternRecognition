@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Configuration;
+﻿using System.ComponentModel.Composition;
 using System.Data;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using ExcelDataReader;
 using FileManager;
 
@@ -46,8 +43,7 @@ namespace XlsxReader
 		private string ConvertToCSV(DataSet objDataSet)
 		{
 			StringBuilder content = new StringBuilder();
-			string colFilter = ConfigurationManager.AppSettings["Columns2Search"];
-			List<int> cols = new List<int>();
+
 			if (objDataSet.Tables.Count >= 1)
 			{
 				foreach (DataTable table in objDataSet.Tables)
@@ -67,11 +63,6 @@ namespace XlsxReader
 							else
 								content.Append("\r\n");
 							index++;
-							if (colFilter?.Length > 0)
-							{
-								if (Regex.IsMatch(item.ColumnName, colFilter))
-									cols.Add(item.Ordinal);
-							}
 						}
 
 						//add column data
@@ -80,14 +71,10 @@ namespace XlsxReader
 							string strRow = string.Empty;
 							for (int y = 0; y <= intColumnCount - 1; y++)
 							{
-								bool addCol = true;
-								if (cols.Contains(y) == true)
-									addCol = false;
 
-								if (addCol)
-									strRow += "\"" + currentRow[y].ToString() + "\"";
-
-								if (y < intColumnCount - 1 && y >= 0)
+								strRow += "\"" + currentRow[y].ToString() + "\"";
+								
+								if (y >= 0 && y < intColumnCount - 1)
 									strRow += ",";
 							}
 							content.Append(strRow + "\r\n");
