@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XlsxReader", "XlsxReader\Xl
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{8ACB624F-3ACC-4E6E-A82C-7B316887E17C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternSearchUI", "PatternSearchUI\PatternSearchUI.csproj", "{B0116834-FC13-4406-8982-94E2F8F0E579}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,12 +86,19 @@ Global
 		{3A6FFA2B-69FB-4333-8237-2CA739286955}.Release|x64.ActiveCfg = Release|x64
 		{3A6FFA2B-69FB-4333-8237-2CA739286955}.Release|x64.Build.0 = Release|x64
 		{8ACB624F-3ACC-4E6E-A82C-7B316887E17C}.Debug|Any CPU.ActiveCfg = Debug
-		{8ACB624F-3ACC-4E6E-A82C-7B316887E17C}.Debug|Any CPU.Build.0 = Debug
 		{8ACB624F-3ACC-4E6E-A82C-7B316887E17C}.Debug|x64.ActiveCfg = Debug
 		{8ACB624F-3ACC-4E6E-A82C-7B316887E17C}.Debug|x64.Build.0 = Debug
 		{8ACB624F-3ACC-4E6E-A82C-7B316887E17C}.Release|Any CPU.ActiveCfg = Release
 		{8ACB624F-3ACC-4E6E-A82C-7B316887E17C}.Release|x64.ActiveCfg = Release
 		{8ACB624F-3ACC-4E6E-A82C-7B316887E17C}.Release|x64.Build.0 = Release
+		{B0116834-FC13-4406-8982-94E2F8F0E579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0116834-FC13-4406-8982-94E2F8F0E579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0116834-FC13-4406-8982-94E2F8F0E579}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B0116834-FC13-4406-8982-94E2F8F0E579}.Debug|x64.Build.0 = Debug|Any CPU
+		{B0116834-FC13-4406-8982-94E2F8F0E579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0116834-FC13-4406-8982-94E2F8F0E579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0116834-FC13-4406-8982-94E2F8F0E579}.Release|x64.ActiveCfg = Release|Any CPU
+		{B0116834-FC13-4406-8982-94E2F8F0E579}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
