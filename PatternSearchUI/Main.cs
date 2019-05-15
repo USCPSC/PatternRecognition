@@ -25,20 +25,23 @@ namespace PatternSearchUI
 
 		private void btnBrowse_Click(object sender, EventArgs e)
 		{
-			FolderBrowserDialog fld = new FolderBrowserDialog();
-			fld.SelectedPath = lastDir;
-			if (fld.ShowDialog() == DialogResult.OK)
+			using (FolderBrowserDialog fld = new FolderBrowserDialog
 			{
-				txtFolder.Text = fld.SelectedPath;
-				lastDir = fld.SelectedPath;
+				SelectedPath = lastDir
+			})
+			{
+				if (fld.ShowDialog() == DialogResult.OK)
+				{
+					txtFolder.Text = fld.SelectedPath;
+					lastDir = fld.SelectedPath;
+				}
 			}
 			btnAdd.Enabled = true;
 		}
 
 		private void BtnAdd_Click(object sender, EventArgs e)
 		{
-			string[] listItems = { txtFolder.Text, cbImageScan.Checked ? "True" : "False", Waiting };
-			var lvi = new ListViewItem(listItems);
+			var lvi = new ListViewItem(new string[] { txtFolder.Text, cbImageScan.Checked ? "True" : "False", Waiting });
 			lvi.SubItems[ListItemIdxImageScan].Tag = cbImageScan.Checked;
 			lstBatch.Items.Add(lvi);
 			txtFolder.Text = "";
