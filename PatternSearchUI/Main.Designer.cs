@@ -39,6 +39,7 @@
 			this.cbImageScan = new System.Windows.Forms.CheckBox();
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnClear = new System.Windows.Forms.Button();
+			this.label2 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// btnStart
@@ -69,7 +70,7 @@
 			// 
 			// source
 			// 
-			this.source.Text = "Source";
+			this.source.Text = "Directory";
 			this.source.Width = 300;
 			// 
 			// imageScan
@@ -139,11 +140,21 @@
 			this.btnClear.UseVisualStyleBackColor = true;
 			this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
 			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(13, 94);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(44, 17);
+			this.label2.TabIndex = 13;
+			this.label2.Text = "Batch";
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(558, 377);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.btnClear);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.cbImageScan);
@@ -173,6 +184,7 @@
 		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.Button btnClear;
 		private System.Windows.Forms.ColumnHeader status;
+		private System.Windows.Forms.Label label2;
 	}
 }
 
