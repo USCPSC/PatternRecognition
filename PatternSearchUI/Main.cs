@@ -112,7 +112,6 @@ namespace PatternSearchUI
 
 		private void ProcessDirectories(SearchManager smgr, Scanner.ScanEngine s, string outFile, string errFile, bool imageScan, string[] files)
 		{
-			Cursor.Current = Cursors.WaitCursor;
 			var starttime = DateTime.Now;
 
 			// Print header
@@ -150,7 +149,6 @@ namespace PatternSearchUI
 			}
 			if (processedfiles > 0)
 				PrintFooter(outFile, starttime, processedfiles, s.GetPatternNames());
-			Cursor.Current = Cursors.Default;
 		}
 
 		private void PrintHeader(string outFile, bool imageScan)
