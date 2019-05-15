@@ -87,24 +87,25 @@ namespace PatternSearchUI
 			btnClear.Enabled = false;
 			foreach (ListViewItem i in lstBatch.Items)
 			{
-				string dir = i.SubItems[ListItemIdxDirectory].Text;
-
-				string outFile = dir + ".csv";
-				if (File.Exists(outFile))
-					File.Delete(outFile);
-
-				string errFile = dir + ".err";
-				if (File.Exists(errFile))
-					File.Delete(errFile);
-
-				bool imageScan = (bool)i.SubItems[ListItemIdxImageScan].Tag;
-
-				// Load the files to be processed
-				var files = Directory.GetFiles(dir);
-				if (files.Length == 0)
-					File.AppendAllText(errFile, "No files found\n");
-				else if (i.SubItems[ListItemIdxStatus].Text == Waiting)
+				if (i.SubItems[ListItemIdxStatus].Text == Waiting)
 				{
+					string dir = i.SubItems[ListItemIdxDirectory].Text;
+
+					string outFile = dir + ".csv";
+					if (File.Exists(outFile))
+						File.Delete(outFile);
+
+					string errFile = dir + ".err";
+					if (File.Exists(errFile))
+						File.Delete(errFile);
+
+					bool imageScan = (bool)i.SubItems[ListItemIdxImageScan].Tag;
+
+					// Load the files to be processed
+					var files = Directory.GetFiles(dir);
+					if (files.Length == 0)
+						File.AppendAllText(errFile, "No files found\n");
+
 					i.SubItems[ListItemIdxStatus].Text = "Processing";
 					await Task.Run(() => { ProcessDirectories(smgr, s, outFile, errFile, imageScan, files); });
 					i.SubItems[ListItemIdxStatus].Text = "Processed";
