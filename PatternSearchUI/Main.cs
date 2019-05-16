@@ -96,12 +96,25 @@ namespace PatternSearchUI
 					string dir = i.SubItems[ListItemIdxDirectory].Text;
 
 					string outFile = dir + ".csv";
-					if (File.Exists(outFile))
-						File.Delete(outFile);
-
+					try
+					{
+						if (File.Exists(outFile))
+							File.Delete(outFile);
+					}
+					catch (Exception)
+					{
+						outFile = string.Format($"{dir} {DateTime.Now.Ticks}.csv");
+					}
 					string errFile = dir + ".err";
-					if (File.Exists(errFile))
-						File.Delete(errFile);
+					try
+					{
+						if (File.Exists(errFile))
+							File.Delete(errFile);
+					}
+					catch (Exception)
+					{
+						errFile = string.Format($"{dir} {DateTime.Now.Ticks}.err");
+					}
 
 					bool imageScan = (bool)i.SubItems[ListItemIdxImageScan].Tag;
 
