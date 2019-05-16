@@ -61,6 +61,7 @@
             this.source,
             this.imageScan,
             this.status});
+			this.lstBatch.FullRowSelect = true;
 			this.lstBatch.Location = new System.Drawing.Point(13, 117);
 			this.lstBatch.MultiSelect = false;
 			this.lstBatch.Name = "lstBatch";
@@ -68,6 +69,8 @@
 			this.lstBatch.TabIndex = 1;
 			this.lstBatch.UseCompatibleStateImageBehavior = false;
 			this.lstBatch.View = System.Windows.Forms.View.Details;
+			this.lstBatch.SelectedIndexChanged += new System.EventHandler(this.LstBatch_SelectedIndexChanged);
+			this.lstBatch.DoubleClick += new System.EventHandler(this.LstBatch_DoubleClick);
 			this.lstBatch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstBatch_KeyDown);
 			// 
 			// source

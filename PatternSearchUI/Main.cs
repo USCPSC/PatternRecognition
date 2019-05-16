@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace PatternSearchUI
 	public partial class Main : Form
 	{
 		const string Waiting = "Waiting";
+		const string Processed = "Processed";
 		const int ListItemIdxDirectory = 0;
 		const int ListItemIdxImageScan = 1;
 		const int ListItemIdxStatus = 2;
@@ -110,10 +112,36 @@ namespace PatternSearchUI
 
 					i.SubItems[ListItemIdxStatus].Text = "Processing";
 					await Task.Run(() => { ProcessDirectories(smgr, s, outFile, errFile, imageScan, files); });
-					i.SubItems[ListItemIdxStatus].Text = "Processed";
+					i.SubItems[ListItemIdxStatus].Text = Processed;
+					i.Tag = outFile;
 				}
 			}
 			btnClear.Enabled = true;
+		}
+		private void BtnConfig_Click(object sender, EventArgs e)
+		{
+			PatternCfg pcfg = new PatternCfg();
+			pcfg.ShowDialog();
+		}
+
+		private void LstBatch_DoubleClick(object sender, EventArgs e)
+		{
+			if (lstBatch.SelectedItems.Count == 1)
+			{
+				if (lstBatch.SelectedItems[0].SubItems[ListItemIdxStatus].Text == Processed)
+					Process.Start((string)lstBatch.SelectedItems[0].Tag);
+				else
+					lstBatch.SelectedItems[0].Selected = false;
+			}
+		}
+
+		private void LstBatch_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (lstBatch.SelectedItems.Count == 1)
+			{
+				if (lstBatch.SelectedItems[0].SubItems[ListItemIdxStatus].Text != Processed)
+					lstBatch.SelectedItems[0].Selected = false;
+			}
 		}
 
 		private void ProcessDirectories(SearchManager smgr, Scanner.ScanEngine s, string outFile, string errFile, bool imageScan, string[] files)
@@ -195,12 +223,6 @@ namespace PatternSearchUI
 			File.AppendAllText(outFile, $"\nScan Started at: {starttime}, Finished at: {DateTime.Now}\n");
 			File.AppendAllText(outFile, $"Files Processed='{processedfiles}', Processing Time ({increment}) ='{proctime}'\n");
 			File.AppendAllText(outFile, $"Patterns searched: {patterns}\n");
-		}
-
-		private void BtnConfig_Click(object sender, EventArgs e)
-		{
-			PatternCfg pcfg = new PatternCfg();
-			pcfg.ShowDialog();
 		}
 	}
 }
