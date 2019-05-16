@@ -25,7 +25,7 @@ namespace PatternSearchUI
 
 		private void btnBrowse_Click(object sender, EventArgs e)
 		{
-			using (FolderBrowserDialog fld = new FolderBrowserDialog
+			using (FolderBrowserDialogEx fld = new FolderBrowserDialogEx
 			{
 				Description = "Select folder to scan.",
 				ShowNewFolderButton = false,
