@@ -41,6 +41,7 @@
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnClear = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
+			this.btnConfig = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnStart
@@ -150,11 +151,22 @@
 			this.label2.TabIndex = 13;
 			this.label2.Text = "Batch";
 			// 
+			// btnConfig
+			// 
+			this.btnConfig.Image = global::PatternSearchUI.Properties.Resources.perm_group_system_tools;
+			this.btnConfig.Location = new System.Drawing.Point(61, 88);
+			this.btnConfig.Name = "btnConfig";
+			this.btnConfig.Size = new System.Drawing.Size(38, 29);
+			this.btnConfig.TabIndex = 14;
+			this.btnConfig.UseVisualStyleBackColor = true;
+			this.btnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(558, 377);
+			this.Controls.Add(this.btnConfig);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.btnClear);
 			this.Controls.Add(this.btnAdd);
@@ -167,6 +179,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Main";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Pattern Search";
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -187,6 +200,7 @@
 		private System.Windows.Forms.Button btnClear;
 		private System.Windows.Forms.ColumnHeader status;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button btnConfig;
 	}
 }
 

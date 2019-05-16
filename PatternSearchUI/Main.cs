@@ -27,6 +27,8 @@ namespace PatternSearchUI
 		{
 			using (FolderBrowserDialog fld = new FolderBrowserDialog
 			{
+				Description = "Select folder to scan.",
+				ShowNewFolderButton = false,
 				SelectedPath = lastDir
 			})
 			{
@@ -193,6 +195,12 @@ namespace PatternSearchUI
 			File.AppendAllText(outFile, $"\nScan Started at: {starttime}, Finished at: {DateTime.Now}\n");
 			File.AppendAllText(outFile, $"Files Processed='{processedfiles}', Processing Time ({increment}) ='{proctime}'\n");
 			File.AppendAllText(outFile, $"Patterns searched: {patterns}\n");
+		}
+
+		private void BtnConfig_Click(object sender, EventArgs e)
+		{
+			PatternCfg pcfg = new PatternCfg();
+			pcfg.ShowDialog();
 		}
 	}
 }

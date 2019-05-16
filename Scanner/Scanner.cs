@@ -36,7 +36,7 @@ namespace Scanner
 	/// </summary>
 	public class ScanEngine
 	{
-		private NameValueCollection patterns;
+		private PatternCollection patterns;
 		private NameValueCollection filters;
 
 		/// <summary>
@@ -81,12 +81,15 @@ namespace Scanner
 			var sb = new StringBuilder();
 			if (patterns != null)
 			{
-				for (int i = 0; i < patterns.Count; i++)
+				foreach (Pattern p in patterns)
 				{
-					if (i == 0)
-						sb.Append(patterns.GetKey(i));
-					else
-						sb.AppendFormat($"; {patterns.GetKey(i)}");
+					if (p.enabled == true)
+					{
+						if (sb.Length == 0)
+							sb.Append(p.name);
+						else
+							sb.AppendFormat($"; {p.name}");
+					}
 				}
 			}
 			return sb.ToString();
@@ -99,8 +102,18 @@ namespace Scanner
 		public int LoadPatterns()
 		{
 			if (patterns == null)
-				patterns = ConfigurationManager.GetSection("PatternGroup/Patterns") as NameValueCollection;
+			{
+				PatternSection sec = (PatternSection)ConfigurationManager.GetSection("PatternGroup");
+				patterns = sec.Patterns;
+			}
 			return patterns.Count;
+		}
+		public void SavePatterns()
+		{
+			var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+			PatternSection sec = (PatternSection)config.GetSection("PatternGroup");
+			sec.Patterns = patterns;
+			config.Save(ConfigurationSaveMode.Modified);
 		}
 
 		/// <summary>
@@ -120,33 +133,19 @@ namespace Scanner
 		/// <returns>name of pattern</returns>
 		private string GetPatternName(string data)
 		{
-			for (var i = 0; i < patterns.Count; i++)
-			{
-				if (Regex.IsMatch(data, patterns[i]))
-					return patterns.GetKey(i);
+			foreach ( Pattern p in patterns)
+			{ 
+				if (p.enabled == true && Regex.IsMatch(data, p.name))
+					return p.name;
 			}
 
 			return null;
 		}
 
 		/// <summary>
-		/// All patterns combined separated by an '|' 
+		/// All patterns 
 		/// </summary>
-		private string Patterns
-		{
-			get
-			{
-				var retval = new StringBuilder();
-				for (var i = 0; i < patterns.Count; i++)
-				{
-					if (i == 0)
-						retval.Append(patterns[i]);
-					else
-						retval.AppendFormat("|{0}", patterns[i]);
-				}
-				return retval.ToString();
-			}
-		}
+		public PatternCollection Patterns => patterns;
 
 		/// <summary>
 		/// Scan memory for matches to the patterns provided
@@ -157,16 +156,21 @@ namespace Scanner
 		{
 			if (patterns == null || patterns.Count == 0)
 				throw new ApplicationException("No patterns defined");
+
 			if (PatternsFound == null)
 				PatternsFound = new List<PatternFound>();
+
 			PatternsFound.Clear();
-			foreach (string p in patterns)
+			foreach (Pattern p in patterns)
 			{
-				foreach (Match m in Regex.Matches(data, patterns[p]))
+				if (p.enabled == true)
 				{
-					string name = GetPatternName(m.Value);
-					if (FilterMatch(name, m.Value) == false)
-						PatternsFound.Add(new PatternFound(name, m.Value, m.Index));
+					foreach (Match m in Regex.Matches(data, p.pattern))
+					{
+						string name = GetPatternName(m.Value);
+						if (FilterMatch(name, m.Value) == false)
+							PatternsFound.Add(new PatternFound(name, m.Value, m.Index));
+					}
 				}
 			}
 			return PatternsFound.Count > 0;
