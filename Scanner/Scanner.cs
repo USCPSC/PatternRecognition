@@ -135,7 +135,7 @@ namespace Scanner
 		{
 			foreach ( Pattern p in patterns)
 			{ 
-				if (p.enabled == true && Regex.IsMatch(data, p.name))
+				if (p.enabled == true && Regex.IsMatch(data, p.pattern))
 					return p.name;
 			}
 

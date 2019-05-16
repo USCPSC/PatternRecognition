@@ -117,7 +117,7 @@
 			// cbImageScan
 			// 
 			this.cbImageScan.AutoSize = true;
-			this.cbImageScan.Location = new System.Drawing.Point(102, 65);
+			this.cbImageScan.Location = new System.Drawing.Point(102, 62);
 			this.cbImageScan.Name = "cbImageScan";
 			this.cbImageScan.Size = new System.Drawing.Size(104, 21);
 			this.cbImageScan.TabIndex = 6;
@@ -150,14 +150,14 @@
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(13, 94);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(44, 17);
+			this.label2.Size = new System.Drawing.Size(48, 17);
 			this.label2.TabIndex = 13;
-			this.label2.Text = "Batch";
+			this.label2.Text = "Batch:";
 			// 
 			// btnConfig
 			// 
 			this.btnConfig.Image = global::PatternSearchUI.Properties.Resources.perm_group_system_tools;
-			this.btnConfig.Location = new System.Drawing.Point(61, 88);
+			this.btnConfig.Location = new System.Drawing.Point(58, 87);
 			this.btnConfig.Name = "btnConfig";
 			this.btnConfig.Size = new System.Drawing.Size(38, 29);
 			this.btnConfig.TabIndex = 14;
