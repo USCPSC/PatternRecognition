@@ -60,7 +60,7 @@
 			this.btnSave.UseVisualStyleBackColor = true;
 			this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
 			// 
-			// patterncfg
+			// PatternCfg
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,7 +69,8 @@
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.chklbPatterns);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-			this.Name = "patterncfg";
+			this.Name = "PatternCfg";
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Configure Patterns";
 			this.Load += new System.EventHandler(this.Patterncfg_Load);
