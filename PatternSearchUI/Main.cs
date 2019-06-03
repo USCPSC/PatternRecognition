@@ -38,9 +38,9 @@ namespace PatternSearchUI
 				{
 					txtFolder.Text = fld.SelectedPath;
 					lastDir = fld.SelectedPath;
+					btnAdd.Enabled = true;
 				}
 			}
-			btnAdd.Enabled = true;
 		}
 
 		private void BtnAdd_Click(object sender, EventArgs e)
