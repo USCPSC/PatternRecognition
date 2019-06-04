@@ -57,6 +57,7 @@
 			// 
 			// lstBatch
 			// 
+			this.lstBatch.AllowDrop = true;
 			this.lstBatch.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.source,
             this.imageScan,
@@ -70,6 +71,8 @@
 			this.lstBatch.UseCompatibleStateImageBehavior = false;
 			this.lstBatch.View = System.Windows.Forms.View.Details;
 			this.lstBatch.SelectedIndexChanged += new System.EventHandler(this.LstBatch_SelectedIndexChanged);
+			this.lstBatch.DragDrop += new System.Windows.Forms.DragEventHandler(this.LstBatch_DragDrop);
+			this.lstBatch.DragEnter += new System.Windows.Forms.DragEventHandler(this.LstBatch_DragEnter);
 			this.lstBatch.DoubleClick += new System.EventHandler(this.LstBatch_DoubleClick);
 			this.lstBatch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstBatch_KeyDown);
 			// 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
@@ -45,12 +46,9 @@ namespace PatternSearchUI
 
 		private void BtnAdd_Click(object sender, EventArgs e)
 		{
-			var lvi = new ListViewItem(new string[] { txtFolder.Text, cbImageScan.Checked ? "True" : "False", Waiting });
-			lvi.SubItems[ListItemIdxImageScan].Tag = cbImageScan.Checked;
-			lstBatch.Items.Add(lvi);
+			AddListItem(txtFolder.Text, cbImageScan.Checked);
 			txtFolder.Text = "";
 			btnAdd.Enabled = false;
-			btnStart.Enabled = true;
 		}
 
 		private void LstBatch_KeyDown(object sender, KeyEventArgs e)
@@ -236,6 +234,41 @@ namespace PatternSearchUI
 			File.AppendAllText(outFile, $"\nScan Started at: {starttime}, Finished at: {DateTime.Now}\n");
 			File.AppendAllText(outFile, $"Files Processed='{processedfiles}', Processing Time ({increment}) ='{proctime}'\n");
 			File.AppendAllText(outFile, $"Patterns searched: {patterns}\n");
+		}
+
+		private void LstBatch_DragEnter(object sender, DragEventArgs e)
+		{
+			foreach (var s in (string[])e.Data.GetData(DataFormats.FileDrop, false))
+			{
+				if (Directory.Exists(s))
+					e.Effect = DragDropEffects.All;
+				else
+				{
+					e.Effect = DragDropEffects.None;
+					return;
+				}
+			}
+		}
+
+		private void LstBatch_DragDrop(object sender, DragEventArgs e)
+		{
+			foreach (var s in (string[])e.Data.GetData(DataFormats.FileDrop, false))
+			{
+				if (Directory.Exists(s))
+					AddListItem(s, cbImageScan.Checked);
+			}
+		}
+
+		private void AddListItem(string s, bool ImageScan)
+		{
+			var items = from ListViewItem l in lstBatch.Items where l.Text == s select l;
+			if (items?.Count() == 0)
+			{
+				var lvi = new ListViewItem(new string[] { s, ImageScan ? "True" : "False", Waiting });
+				lvi.SubItems[ListItemIdxImageScan].Tag = ImageScan;
+				lstBatch.Items.Add(lvi);
+				btnStart.Enabled = true;
+			}
 		}
 	}
 }
