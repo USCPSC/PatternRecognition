@@ -42,7 +42,7 @@ namespace XlsxReader
 		}
 		private string ConvertToCSV(DataSet objDataSet)
 		{
-			StringBuilder content = new StringBuilder();
+			var content = new StringBuilder();
 
 			if (objDataSet.Tables.Count >= 1)
 			{

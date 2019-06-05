@@ -17,8 +17,8 @@ namespace PdfFileReader
 
 		public FileContents ReadAllText(string filename, bool imageScan)
 		{
-			Dictionary<string, int> docimages =  new Dictionary<string, int>();
-			Dictionary<string, int> pageimages = new Dictionary<string, int>();
+			var docimages =  new Dictionary<string, int>();
+			var pageimages = new Dictionary<string, int>();
 			var text = new StringBuilder();
 			using (var reader = new PdfReader(filename))
 			{
@@ -43,7 +43,7 @@ namespace PdfFileReader
 					}
 				}
 			}
-			StringBuilder sb = new StringBuilder();
+			var sb = new StringBuilder();
 			if (imageScan == false)
 				sb.Append(FileContents.NotApplicable);
 			else if (docimages.Count == 0)

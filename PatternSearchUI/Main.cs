@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
@@ -91,9 +90,9 @@ namespace PatternSearchUI
 			{
 				if (i.SubItems[ListItemIdxStatus].Text == Waiting)
 				{
-					string dir = i.SubItems[ListItemIdxDirectory].Text;
+					var dir = i.SubItems[ListItemIdxDirectory].Text;
 
-					string outFile = dir + ".csv";
+					var outFile = dir + ".csv";
 					try
 					{
 						if (File.Exists(outFile))
@@ -205,7 +204,7 @@ namespace PatternSearchUI
 		}
 		private static void PrintProcessingStart(string outFile, Scanner.ScanEngine s, string file, FileContents fc, bool imageScan)
 		{
-			string fileprefix = ConfigurationManager.AppSettings["FilePrefix"] ?? "";
+			var fileprefix = ConfigurationManager.AppSettings["FilePrefix"] ?? "";
 			if (imageScan == true)
 				File.AppendAllText(outFile, $"{fileprefix}{file},{fc.Text?.Length},{fc.HasImages},{s.PatternsFound.Count}\n");
 			else
@@ -217,7 +216,7 @@ namespace PatternSearchUI
 			var commaOffset = imageScan ? ",,,," : ",,,";
 
 			// Replace comma with a period for comma separated output
-			string str = match.Value.Replace(',', '.');
+			var str = match.Value.Replace(',', '.');
 
 			// Quote numeric value so excel won't try to convert it to a number
 			if (str.All(char.IsDigit))

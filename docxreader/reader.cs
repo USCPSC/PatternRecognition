@@ -16,10 +16,10 @@ namespace DocxFileReader
 		{
 			using (DocX document = DocX.Load(filename))
 			{
-				StringBuilder sb = new StringBuilder(FileContents.NotApplicable);
+				var sb = new StringBuilder(FileContents.NotApplicable);
 				if (imageScan)
 				{
-					Dictionary<string, int> docimages = new Dictionary<string, int>();
+					var docimages = new Dictionary<string, int>();
 					foreach (var i in document.Images)
 					{
 						string fileType = Path.GetExtension(i.FileName).TrimStart('.');

@@ -6,7 +6,7 @@ namespace PatternSearchUI
 {
 	public partial class PatternCfg : Form
 	{
-		ScanEngine se;
+		private ScanEngine se;
 
 		public PatternCfg()
 		{
@@ -17,9 +17,8 @@ namespace PatternSearchUI
 		{
 			se = new Scanner.ScanEngine();
 			if (se.LoadPatterns() == 0)
-			{
 				MessageBox.Show("No patterns found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+
 			foreach (Pattern p in se.Patterns)
 				chklbPatterns.Items.Add(p, p.enabled);
 		}
