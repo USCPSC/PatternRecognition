@@ -7,47 +7,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FileManager;
+using Scanner;
 
 namespace PatternSearchUI
 {
-	public partial class Main : Form
+	public partial class FileProcessing : Form
 	{
 		const string Waiting = "Waiting";
 		const string Processed = "Processed";
-		const int ListItemIdxDirectory = 0;
+		const int ListItemIdxFile = 0;
 		const int ListItemIdxImageScan = 1;
 		const int ListItemIdxStatus = 2;
-		private string lastDir;
+		private readonly SearchManager smgr = new SearchManager();
+		private readonly ScanEngine scanEngine = new ScanEngine();
 
-		public Main()
+		public FileProcessing()
 		{
 			InitializeComponent();
-			lastDir = Environment.CurrentDirectory;
 		}
-
-		private void btnBrowse_Click(object sender, EventArgs e)
+		private void FileProcessing_Load(object sender, EventArgs e)
 		{
-			using (FolderBrowserDialogEx fld = new FolderBrowserDialogEx
+			// Load the FileManagers
+			smgr.ImportFileReaders();
+			if (smgr.FileReaders.Count() == 0)
 			{
-				Description = "Select folder to scan.",
-				ShowNewFolderButton = false,
-				SelectedPath = lastDir
-			})
-			{
-				if (fld.ShowDialog() == DialogResult.OK)
-				{
-					txtFolder.Text = fld.SelectedPath;
-					lastDir = fld.SelectedPath;
-					btnAdd.Enabled = true;
-				}
+				MessageBox.Show("No file readers found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
 			}
-		}
 
-		private void BtnAdd_Click(object sender, EventArgs e)
-		{
-			AddListItem(txtFolder.Text, cbImageScan.Checked);
-			txtFolder.Text = "";
-			btnAdd.Enabled = false;
+			// Load the Scan engine and the patterns
+			if (scanEngine.LoadPatterns() == 0)
+			{
+				MessageBox.Show("No patterns found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 		}
 
 		private void LstBatch_KeyDown(object sender, KeyEventArgs e)
@@ -68,64 +61,35 @@ namespace PatternSearchUI
 
 		private async void BtnStart_Click(object sender, EventArgs e)
 		{
-			// Load the FileManagers
-			var smgr = new SearchManager();
-			smgr.ImportFileReaders();
-			if (smgr.FileReaders.Count() == 0)
-			{
-				MessageBox.Show("No file readers found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
-
-			// Load the Scan engine and the patterns
-			var s = new Scanner.ScanEngine();
-			if (s.LoadPatterns() == 0)
-			{
-				MessageBox.Show("No patterns found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
 			btnStart.Enabled = false;
 			btnClear.Enabled = false;
+
+			if (Directory.Exists("Results") == false)
+				Directory.CreateDirectory("Results");
+			var csvFile = string.Format($"Results\\SearchResults {DateTime.Now.Ticks}.csv");
+			string errFile = Path.ChangeExtension(csvFile, ".err");
+
+			var starttime = DateTime.Now;
+
+			// Print header
+			PrintHeader(csvFile);
+
+			// Load the files to be processed
 			foreach (ListViewItem i in lstBatch.Items)
 			{
 				if (i.SubItems[ListItemIdxStatus].Text == Waiting)
 				{
-					var dir = i.SubItems[ListItemIdxDirectory].Text;
-
-					var outFile = dir + ".csv";
-					try
-					{
-						if (File.Exists(outFile))
-							File.Delete(outFile);
-					}
-					catch (Exception)
-					{
-						outFile = string.Format($"{dir} {DateTime.Now.Ticks}.csv");
-					}
-					string errFile = dir + ".err";
-					try
-					{
-						if (File.Exists(errFile))
-							File.Delete(errFile);
-					}
-					catch (Exception)
-					{
-						errFile = string.Format($"{dir} {DateTime.Now.Ticks}.err");
-					}
-
+					var filename = i.SubItems[ListItemIdxFile].Text;
 					bool imageScan = (bool)i.SubItems[ListItemIdxImageScan].Tag;
 
-					// Load the files to be processed
-					var files = Directory.GetFiles(dir);
-					if (files.Length == 0)
-						File.AppendAllText(errFile, "No files found\n");
-
 					i.SubItems[ListItemIdxStatus].Text = "Processing";
-					await Task.Run(() => { ProcessDirectories(smgr, s, outFile, errFile, imageScan, files); });
+					await Task.Run(() => { ProcessFile(csvFile, errFile, imageScan, filename); });
 					i.SubItems[ListItemIdxStatus].Text = Processed;
-					i.Tag = outFile;
+					i.Tag = csvFile;
 				}
 			}
+			PrintFooter(csvFile, starttime, lstBatch.Items.Count, scanEngine.GetPatternNames());
+
 			btnClear.Enabled = true;
 		}
 		private void BtnConfig_Click(object sender, EventArgs e)
@@ -154,66 +118,49 @@ namespace PatternSearchUI
 			}
 		}
 
-		private void ProcessDirectories(SearchManager smgr, Scanner.ScanEngine s, string outFile, string errFile, bool imageScan, string[] files)
+		private void ProcessFile(string outFile, string errFile, bool imageScan, string file)
 		{
-			var starttime = DateTime.Now;
-
-			// Print header
-			PrintHeader(outFile, imageScan);
-
 			// Process files
-			var processedfiles = 0;
-			foreach (var file in files)
+			try
 			{
-				try
+				// If there is a file processor for a give file extension, process the file..
+				foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
 				{
-					// If there is a file processor for a give file extension, process the file..
-					foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
-					{
-						// Only count if we have a file processor
-						++processedfiles;
+					// Read the text
+					var fc = fm.ReadAllText(file, imageScan);
 
-						// Read the text
-						var fc = fm.ReadAllText(file, imageScan);
+					// Scan the text for patterns
+					scanEngine.Scan(fc.Text);
 
-						// Scan the text for patterns
-						s.Scan(fc.Text);
+					// Output start
+					PrintProcessingStart(outFile, file, fc, imageScan);
 
-						// Output start
-						PrintProcessingStart(outFile, s, file, fc, imageScan);
-
-						foreach (var match in s.PatternsFound.OrderBy(idx => idx.Index))
-							PrintMatch(outFile, match, imageScan);
-					}
-				}
-				catch (Exception err)
-				{
-					File.AppendAllText(errFile, $"An error occured while processing: {file} => {err.Message}\n");
+					foreach (var match in scanEngine.PatternsFound.OrderBy(idx => idx.Index))
+						PrintMatch(outFile, match, imageScan);
 				}
 			}
-			if (processedfiles > 0)
-				PrintFooter(outFile, starttime, processedfiles, s.GetPatternNames());
+			catch (Exception err)
+			{
+				File.AppendAllText(errFile, $"An error occured while processing: {file} => {err.Message}\n");
+			}
 		}
 
-		private void PrintHeader(string outFile, bool imageScan)
+		private void PrintHeader(string outFile)
 		{
-			if (imageScan == true)
-				File.AppendAllText(outFile, "File Name,Text Size,Has Images,Patterns Found,Pattern Name,Pattern\n");
-			else
-				File.AppendAllText(outFile, "File Name,Text Size,Patterns Found,Pattern Name,Pattern\n");
+			File.AppendAllText(outFile, "File Name,Text Size,Has Images,Patterns Found,Pattern Name,Pattern\n");
 		}
-		private static void PrintProcessingStart(string outFile, Scanner.ScanEngine s, string file, FileContents fc, bool imageScan)
+		private void PrintProcessingStart(string outFile, string file, FileContents fc, bool imageScan)
 		{
 			var fileprefix = ConfigurationManager.AppSettings["FilePrefix"] ?? "";
 			if (imageScan == true)
-				File.AppendAllText(outFile, $"{fileprefix}{file},{fc.Text?.Length},{fc.HasImages},{s.PatternsFound.Count}\n");
+				File.AppendAllText(outFile, $"{fileprefix}{file},{fc.Text?.Length},{fc.HasImages},{scanEngine.PatternsFound.Count}\n");
 			else
-				File.AppendAllText(outFile, $"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFound.Count}\n");
+				File.AppendAllText(outFile, $"{fileprefix}{file},{fc.Text?.Length},NA,{scanEngine.PatternsFound.Count}\n");
 		}
 		private static void PrintMatch(string outFile, Scanner.PatternFound match, bool imageScan)
 		{
 			// Comma offset variable to align output in CSV output
-			var commaOffset = imageScan ? ",,,," : ",,,";
+			var commaOffset = ",,,,";
 
 			// Replace comma with a period for comma separated output
 			var str = match.Value.Replace(',', '.');
@@ -239,7 +186,7 @@ namespace PatternSearchUI
 		{
 			foreach (var s in (string[])e.Data.GetData(DataFormats.FileDrop, false))
 			{
-				if (Directory.Exists(s))
+				if ( smgr.SupportFileExtension(Path.GetExtension(s)) )
 					e.Effect = DragDropEffects.All;
 				else
 				{
@@ -253,7 +200,7 @@ namespace PatternSearchUI
 		{
 			foreach (var s in (string[])e.Data.GetData(DataFormats.FileDrop, false))
 			{
-				if (Directory.Exists(s))
+				if (smgr.SupportFileExtension(Path.GetExtension(s)))
 					AddListItem(s, cbImageScan.Checked);
 			}
 		}
@@ -268,6 +215,15 @@ namespace PatternSearchUI
 				lstBatch.Items.Add(lvi);
 				btnStart.Enabled = true;
 			}
+		}
+
+		private void BatchToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			this.Hide();
+			var frm = new BatchProcessing();
+			Program.UpdateLastDialog(LastDialog.Batch);
+			frm.ShowDialog();
+			this.Close();
 		}
 	}
 }

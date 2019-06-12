@@ -28,6 +28,7 @@ namespace PatternSearchUI
 			for (int i = 0; i < chklbPatterns.Items.Count; i++)
 				((Pattern)chklbPatterns.Items[i]).enabled = chklbPatterns.GetItemChecked(i);
 			se.SavePatterns();
+			this.Close();
 		}
 	}
 }

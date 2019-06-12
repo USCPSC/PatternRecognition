@@ -46,6 +46,16 @@ namespace PatternSearchUI
 					return true;
 			return false;
 		}
+		public bool SupportFileExtension(string extension)
+		{
+			foreach (var fm in FileReaders)
+			{
+				for (int i = 0; i < fm.FileExtention.Length; i++)
+					if (string.Compare(fm.FileExtention[i], extension, true) == 0)
+						return true;
+			}
+			return false;
+		}
 		/// <summary>
 		/// Import the MEF-based file managers
 		/// </summary>
