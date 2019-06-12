@@ -54,11 +54,11 @@
     <Compile Include="File.Designer.cs">
       <DependentUpon>File.cs</DependentUpon>
     </Compile>
-    <Compile Include="Batch.cs">
+    <Compile Include="Directory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Batch.Designer.cs">
-      <DependentUpon>Batch.cs</DependentUpon>
+    <Compile Include="Directory.Designer.cs">
+      <DependentUpon>Directory.cs</DependentUpon>
     </Compile>
     <Compile Include="PatternCfg.cs">
       <SubType>Form</SubType>
@@ -72,8 +72,8 @@
     <EmbeddedResource Include="File.resx">
       <DependentUpon>File.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Batch.resx">
-      <DependentUpon>Batch.cs</DependentUpon>
+    <EmbeddedResource Include="Directory.resx">
+      <DependentUpon>Directory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PatternCfg.resx">
       <DependentUpon>PatternCfg.cs</DependentUpon>

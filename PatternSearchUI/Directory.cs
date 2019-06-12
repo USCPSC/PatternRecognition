@@ -10,7 +10,7 @@ using FileManager;
 
 namespace PatternSearchUI
 {
-	public partial class BatchProcessing : Form
+	public partial class DirectoryProcessing : Form
 	{
 		const string Waiting = "Waiting";
 		const string Processed = "Processed";
@@ -18,7 +18,7 @@ namespace PatternSearchUI
 		const int ListItemIdxImageScan = 1;
 		const int ListItemIdxStatus = 2;
 
-		public BatchProcessing()
+		public DirectoryProcessing()
 		{
 			InitializeComponent();
 		}
@@ -30,13 +30,17 @@ namespace PatternSearchUI
 				lstBatch.Items.Remove(lstBatch.SelectedItems[0]);
 			}
 			if (lstBatch.Items.Count == 0)
+			{
 				btnStart.Enabled = false;
+				btnClear.Enabled = false;
+			}
 		}
 
 		private void BtnClear_Click(object sender, EventArgs e)
 		{
 			lstBatch.Items.Clear();
 			btnStart.Enabled = false;
+			btnClear.Enabled = false;
 		}
 
 		private async void BtnStart_Click(object sender, EventArgs e)
@@ -240,6 +244,7 @@ namespace PatternSearchUI
 				lvi.SubItems[ListItemIdxImageScan].Tag = ImageScan;
 				lstBatch.Items.Add(lvi);
 				btnStart.Enabled = true;
+				btnClear.Enabled = true;
 			}
 		}
 

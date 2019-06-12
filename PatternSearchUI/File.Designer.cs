@@ -102,6 +102,7 @@
 			// 
 			// btnClear
 			// 
+			this.btnClear.Enabled = false;
 			this.btnClear.Location = new System.Drawing.Point(389, 259);
 			this.btnClear.Name = "btnClear";
 			this.btnClear.Size = new System.Drawing.Size(75, 23);
@@ -126,12 +127,12 @@
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.batchToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(151, 28);
 			// 
 			// batchToolStripMenuItem
 			// 
 			this.batchToolStripMenuItem.Name = "batchToolStripMenuItem";
-			this.batchToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+			this.batchToolStripMenuItem.Size = new System.Drawing.Size(150, 24);
 			this.batchToolStripMenuItem.Text = "Directories";
 			this.batchToolStripMenuItem.Click += new System.EventHandler(this.BatchToolStripMenuItem_Click);
 			// 

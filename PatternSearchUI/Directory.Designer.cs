@@ -1,6 +1,6 @@
 ﻿namespace PatternSearchUI
 {
-	partial class BatchProcessing
+	partial class DirectoryProcessing
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BatchProcessing));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectoryProcessing));
 			this.btnStart = new System.Windows.Forms.Button();
 			this.lstBatch = new System.Windows.Forms.ListView();
 			this.source = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -102,6 +102,7 @@
 			// 
 			// btnClear
 			// 
+			this.btnClear.Enabled = false;
 			this.btnClear.Location = new System.Drawing.Point(389, 262);
 			this.btnClear.Name = "btnClear";
 			this.btnClear.Size = new System.Drawing.Size(75, 23);
@@ -145,7 +146,7 @@
 			this.btnConfig.UseVisualStyleBackColor = true;
 			this.btnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
 			// 
-			// BatchProcessing
+			// DirectoryProcessing
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -158,7 +159,7 @@
 			this.Controls.Add(this.btnStart);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Name = "BatchProcessing";
+			this.Name = "DirectoryProcessing";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Pattern Search";
 			this.contextMenuStrip1.ResumeLayout(false);

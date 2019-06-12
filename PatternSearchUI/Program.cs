@@ -8,7 +8,7 @@ namespace PatternSearchUI
 
 	static class Program
 	{
-		const string key = "LastDialog";
+		const string LDkey = "LastDialog";
 
 		/// <summary>
 		/// The main entry point for the application.
@@ -19,14 +19,14 @@ namespace PatternSearchUI
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			string val = ConfigurationManager.AppSettings[key];
+			string val = ConfigurationManager.AppSettings[LDkey];
 			LastDialog ld;
 			if (Enum.TryParse(val, out ld) == false)
 				ld = LastDialog.Batch;
 			switch(ld)
 			{
 				case LastDialog.Batch:
-					Application.Run(new BatchProcessing());
+					Application.Run(new DirectoryProcessing());
 					break;
 				case LastDialog.File:
 					Application.Run(new FileProcessing());
@@ -39,14 +39,10 @@ namespace PatternSearchUI
 			{
 				var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 				var settings = configFile.AppSettings.Settings;
-				if (settings[key] == null)
-				{
-					settings.Add(key, lastDiag.ToString());
-				}
+				if (settings[LDkey] == null)
+					settings.Add(LDkey, lastDiag.ToString());
 				else
-				{
-					settings[key].Value = lastDiag.ToString();
-				}
+					settings[LDkey].Value = lastDiag.ToString();
 				configFile.Save(ConfigurationSaveMode.Modified);
 				ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
 			}

@@ -46,17 +46,20 @@ namespace PatternSearchUI
 		private void LstBatch_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Delete && lstBatch.SelectedItems?.Count > 0)
-			{
 				lstBatch.Items.Remove(lstBatch.SelectedItems[0]);
-			}
+
 			if (lstBatch.Items.Count == 0)
+			{
 				btnStart.Enabled = false;
+				btnClear.Enabled = false;
+			}
 		}
 
 		private void BtnClear_Click(object sender, EventArgs e)
 		{
 			lstBatch.Items.Clear();
 			btnStart.Enabled = false;
+			btnClear.Enabled = false;
 		}
 
 		private async void BtnStart_Click(object sender, EventArgs e)
@@ -214,13 +217,14 @@ namespace PatternSearchUI
 				lvi.SubItems[ListItemIdxImageScan].Tag = ImageScan;
 				lstBatch.Items.Add(lvi);
 				btnStart.Enabled = true;
+				btnClear.Enabled = true;
 			}
 		}
 
 		private void BatchToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			this.Hide();
-			var frm = new BatchProcessing();
+			var frm = new DirectoryProcessing();
 			Program.UpdateLastDialog(LastDialog.Batch);
 			frm.ShowDialog();
 			this.Close();
