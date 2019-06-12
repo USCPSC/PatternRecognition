@@ -15,6 +15,7 @@ namespace PatternSearchUI
 	{
 		const string Waiting = "Waiting";
 		const string Processed = "Processed";
+		const string Processing = "Processing";
 		const int ListItemIdxFile = 0;
 		const int ListItemIdxImageScan = 1;
 		const int ListItemIdxStatus = 2;
@@ -45,7 +46,7 @@ namespace PatternSearchUI
 
 		private void LstBatch_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Delete && lstBatch.SelectedItems?.Count > 0)
+			if (e.KeyCode == Keys.Delete && lstBatch.SelectedItems?.Count > 0 && lstBatch.SelectedItems?[0].SubItems[ListItemIdxStatus]?.Text != Processing)
 				lstBatch.Items.Remove(lstBatch.SelectedItems[0]);
 
 			if (lstBatch.Items.Count == 0)
@@ -85,7 +86,7 @@ namespace PatternSearchUI
 					var filename = i.SubItems[ListItemIdxFile].Text;
 					bool imageScan = (bool)i.SubItems[ListItemIdxImageScan].Tag;
 
-					i.SubItems[ListItemIdxStatus].Text = "Processing";
+					i.SubItems[ListItemIdxStatus].Text = Processing;
 					await Task.Run(() => { ProcessFile(csvFile, errFile, imageScan, filename); });
 					i.SubItems[ListItemIdxStatus].Text = Processed;
 					i.Tag = csvFile;
@@ -99,26 +100,6 @@ namespace PatternSearchUI
 		{
 			PatternCfg pcfg = new PatternCfg();
 			pcfg.ShowDialog();
-		}
-
-		private void LstBatch_DoubleClick(object sender, EventArgs e)
-		{
-			if (lstBatch.SelectedItems.Count == 1)
-			{
-				if (lstBatch.SelectedItems[0].SubItems[ListItemIdxStatus].Text == Processed)
-					Process.Start((string)lstBatch.SelectedItems[0].Tag);
-				else
-					lstBatch.SelectedItems[0].Selected = false;
-			}
-		}
-
-		private void LstBatch_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (lstBatch.SelectedItems.Count == 1)
-			{
-				if (lstBatch.SelectedItems[0].SubItems[ListItemIdxStatus].Text != Processed)
-					lstBatch.SelectedItems[0].Selected = false;
-			}
 		}
 
 		private void ProcessFile(string outFile, string errFile, bool imageScan, string file)
@@ -228,6 +209,41 @@ namespace PatternSearchUI
 			Program.UpdateLastDialog(LastDialog.Batch);
 			frm.ShowDialog();
 			this.Close();
+		}
+
+		private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (lstBatch.SelectedItems.Count == 1)
+				Process.Start((string)lstBatch.SelectedItems[0].Text);
+		}
+
+		private void OpenResultsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (lstBatch.SelectedItems.Count == 1)
+			{
+				if (lstBatch.SelectedItems[0].SubItems[ListItemIdxStatus].Text == Processed)
+					Process.Start((string)lstBatch.SelectedItems[0].Tag);
+				else
+					lstBatch.SelectedItems[0].Selected = false;
+			}
+		}
+
+		private void ContextMenuStrip2_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (lstBatch.SelectedItems.Count == 1)
+			{
+				foreach (ListViewItem i in lstBatch.Items)
+				{
+					if (i.SubItems[ListItemIdxStatus].Text != Processed)
+					{
+						contextMenuStrip2.Items[1].Enabled = false;
+						return;
+					}
+				}
+				contextMenuStrip2.Items[1].Enabled = true;
+			}
+			else
+				e.Cancel = true;
 		}
 	}
 }

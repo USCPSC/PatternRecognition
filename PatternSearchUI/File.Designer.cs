@@ -41,7 +41,11 @@
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.batchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnConfig = new System.Windows.Forms.Button();
+			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1.SuspendLayout();
+			this.contextMenuStrip2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnStart
@@ -62,6 +66,7 @@
             this.source,
             this.imageScan,
             this.status});
+			this.lstBatch.ContextMenuStrip = this.contextMenuStrip2;
 			this.lstBatch.FullRowSelect = true;
 			this.lstBatch.Location = new System.Drawing.Point(13, 38);
 			this.lstBatch.MultiSelect = false;
@@ -70,10 +75,8 @@
 			this.lstBatch.TabIndex = 1;
 			this.lstBatch.UseCompatibleStateImageBehavior = false;
 			this.lstBatch.View = System.Windows.Forms.View.Details;
-			this.lstBatch.SelectedIndexChanged += new System.EventHandler(this.LstBatch_SelectedIndexChanged);
 			this.lstBatch.DragDrop += new System.Windows.Forms.DragEventHandler(this.LstBatch_DragDrop);
 			this.lstBatch.DragEnter += new System.Windows.Forms.DragEventHandler(this.LstBatch_DragEnter);
-			this.lstBatch.DoubleClick += new System.EventHandler(this.LstBatch_DoubleClick);
 			this.lstBatch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstBatch_KeyDown);
 			// 
 			// source
@@ -146,6 +149,30 @@
 			this.btnConfig.UseVisualStyleBackColor = true;
 			this.btnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
 			// 
+			// contextMenuStrip2
+			// 
+			this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFileToolStripMenuItem,
+            this.openResultsToolStripMenuItem});
+			this.contextMenuStrip2.Name = "contextMenuStrip2";
+			this.contextMenuStrip2.Size = new System.Drawing.Size(165, 52);
+			this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip2_Opening);
+			// 
+			// openFileToolStripMenuItem
+			// 
+			this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+			this.openFileToolStripMenuItem.Size = new System.Drawing.Size(164, 24);
+			this.openFileToolStripMenuItem.Text = "Open File";
+			this.openFileToolStripMenuItem.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
+			// 
+			// openResultsToolStripMenuItem
+			// 
+			this.openResultsToolStripMenuItem.Name = "openResultsToolStripMenuItem";
+			this.openResultsToolStripMenuItem.Size = new System.Drawing.Size(164, 24);
+			this.openResultsToolStripMenuItem.Text = "Open Results";
+			this.openResultsToolStripMenuItem.Click += new System.EventHandler(this.OpenResultsToolStripMenuItem_Click);
+			// 
 			// FileProcessing
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -164,6 +191,7 @@
 			this.Text = "Pattern Search";
 			this.Load += new System.EventHandler(this.FileProcessing_Load);
 			this.contextMenuStrip1.ResumeLayout(false);
+			this.contextMenuStrip2.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -182,6 +210,9 @@
 		private System.Windows.Forms.Button btnConfig;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem batchToolStripMenuItem;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+		private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem openResultsToolStripMenuItem;
 	}
 }
 
