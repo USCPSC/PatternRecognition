@@ -38,9 +38,9 @@
 			this.cbImageScan = new System.Windows.Forms.CheckBox();
 			this.btnClear = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
-			this.btnConfig = new System.Windows.Forms.Button();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnConfig = new System.Windows.Forms.Button();
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -116,9 +116,24 @@
 			this.label2.ContextMenuStrip = this.contextMenuStrip1;
 			this.label2.Location = new System.Drawing.Point(13, 18);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(222, 17);
+			this.label2.Size = new System.Drawing.Size(254, 17);
 			this.label2.TabIndex = 13;
-			this.label2.Text = "Batch (drag and drop directories):";
+			this.label2.Text = "Directories (drag and drop directories):";
+			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(108, 28);
+			// 
+			// fileToolStripMenuItem
+			// 
+			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
+			this.fileToolStripMenuItem.Text = "Files";
+			this.fileToolStripMenuItem.Click += new System.EventHandler(this.FileToolStripMenuItem_Click);
 			// 
 			// btnConfig
 			// 
@@ -129,21 +144,6 @@
 			this.btnConfig.TabIndex = 14;
 			this.btnConfig.UseVisualStyleBackColor = true;
 			this.btnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
-			// 
-			// contextMenuStrip1
-			// 
-			this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(102, 28);
-			// 
-			// fileToolStripMenuItem
-			// 
-			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(101, 24);
-			this.fileToolStripMenuItem.Text = "File";
-			this.fileToolStripMenuItem.Click += new System.EventHandler(this.FileToolStripMenuItem_Click);
 			// 
 			// BatchProcessing
 			// 

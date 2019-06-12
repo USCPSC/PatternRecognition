@@ -38,9 +38,9 @@
 			this.cbImageScan = new System.Windows.Forms.CheckBox();
 			this.btnClear = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
-			this.btnConfig = new System.Windows.Forms.Button();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.batchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnConfig = new System.Windows.Forms.Button();
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -120,6 +120,21 @@
 			this.label2.TabIndex = 13;
 			this.label2.Text = "Files (drag and drop files):";
 			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.batchToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
+			// 
+			// batchToolStripMenuItem
+			// 
+			this.batchToolStripMenuItem.Name = "batchToolStripMenuItem";
+			this.batchToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+			this.batchToolStripMenuItem.Text = "Directories";
+			this.batchToolStripMenuItem.Click += new System.EventHandler(this.BatchToolStripMenuItem_Click);
+			// 
 			// btnConfig
 			// 
 			this.btnConfig.Image = global::PatternSearchUI.Properties.Resources.perm_group_system_tools;
@@ -129,21 +144,6 @@
 			this.btnConfig.TabIndex = 14;
 			this.btnConfig.UseVisualStyleBackColor = true;
 			this.btnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
-			// 
-			// contextMenuStrip1
-			// 
-			this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.batchToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(116, 28);
-			// 
-			// batchToolStripMenuItem
-			// 
-			this.batchToolStripMenuItem.Name = "batchToolStripMenuItem";
-			this.batchToolStripMenuItem.Size = new System.Drawing.Size(115, 24);
-			this.batchToolStripMenuItem.Text = "Batch";
-			this.batchToolStripMenuItem.Click += new System.EventHandler(this.BatchToolStripMenuItem_Click);
 			// 
 			// FileProcessing
 			// 
