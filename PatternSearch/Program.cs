@@ -54,9 +54,9 @@ namespace PatternSearch
 						{
 							bool dir = string.IsNullOrEmpty(o.Directory);
 							bool fil = string.IsNullOrEmpty(o.File);
-							if (dir == false && fil == false)
+							if (dir == true && fil == true)
 							{
-								Console.Error.WriteLine("You must provide either a directory of file to process");
+								Console.Error.WriteLine("You must provide either a directory or file to process");
 								Environment.Exit(-1);
 							}
 							// Make sure it is a valid directory before we do anything
@@ -103,7 +103,7 @@ namespace PatternSearch
 				if (files == null || files.Length == 0)
 					files = new string[] { cmdline.Value.File };
 				else
-					files.Append(cmdline.Value.File);
+					files = files.Append(cmdline.Value.File).ToArray();
 			}
 			if (files.Length == 0)
 			{
