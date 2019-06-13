@@ -23,8 +23,11 @@ namespace PatternSearch
 		/// </summary>
 		internal class Options
 		{
-			[Option('d', "directory", Required = true, HelpText = "Input directory to be processed.")]
+			[Option('d', "directory", Required = false, HelpText = "Input directory to be processed.")]
 			public string Directory { get; set; }
+
+			[Option('f', "file", Required = false, HelpText = "Input file to be processed.")]
+			public string File { get; set; }
 
 			[Option('r', "recursive", Required = false, HelpText = "Recursively process directory.")]
 			public bool Recursive { get; set; }
@@ -49,10 +52,22 @@ namespace PatternSearch
 			var cmdline = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args)
 						.WithParsed<Options>(o =>
 						{
+							bool dir = string.IsNullOrEmpty(o.Directory);
+							bool fil = string.IsNullOrEmpty(o.File);
+							if (dir == false && fil == false)
+							{
+								Console.Error.WriteLine("You must provide either a directory of file to process");
+								Environment.Exit(-1);
+							}
 							// Make sure it is a valid directory before we do anything
-							if (Directory.Exists(o.Directory) == false)
+							if (dir == false && Directory.Exists(o.Directory) == false)
 							{
 								Console.Error.WriteLine($"Invalid directory: '{o.Directory}'");
+								Environment.Exit(-1);
+							}
+							if (fil == false && File.Exists(o.File) == false)
+							{
+								Console.Error.WriteLine($"Invalid file: '{o.File}'");
 								Environment.Exit(-1);
 							}
 						})
@@ -79,8 +94,17 @@ namespace PatternSearch
 			}
 
 			// Load the files to be processed
+			string[] files = null;
 			var so = cmdline.Value.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-			var files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
+			if ( string.IsNullOrEmpty(cmdline.Value.Directory) == false)
+				files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
+			if (string.IsNullOrEmpty(cmdline.Value.File) == false)
+			{
+				if (files == null || files.Length == 0)
+					files = new string[] { cmdline.Value.File };
+				else
+					files.Append(cmdline.Value.File);
+			}
 			if (files.Length == 0)
 			{
 				Console.Error.WriteLine("No files found");
