@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0C4E55A5884C81BA68A1603013A7E4F6"
-        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0E9E7EE11BAB482FBF4385A1FF5EAA79"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -52,13 +46,13 @@
         "Entry"
         {
         "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
+        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
+        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,13 +64,13 @@
         "Entry"
         {
         "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
+        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
+        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,25 +82,13 @@
         "Entry"
         {
         "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
+        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "OwnerKey" = "8:_607999134C3945F58EEAC5AFD6AAD513"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "OwnerKey" = "8:_61878753A279408E9ABFF50B53D4AA5E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
+        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -118,13 +100,25 @@
         "Entry"
         {
         "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
+        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
+        "OwnerKey" = "8:_61878753A279408E9ABFF50B53D4AA5E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
+        "OwnerKey" = "8:_607999134C3945F58EEAC5AFD6AAD513"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
+        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -226,55 +220,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC2FC9332B3B1221A2B47C7D30B337CC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0C4E55A5884C81BA68A1603013A7E4F6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_61878753A279408E9ABFF50B53D4AA5E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F817FB01542E90AB680BEB970759553A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_ACC7A487E609428EBFABBE06B56D9A3B"
+        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -286,31 +232,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_86A2D15645ECF72FDFB1DF4AFAD3790A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_74B285214F195875EF2302BD741EC1AE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AE0D2C74A07B227FBA65AAA9838ACB61"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
+        "OwnerKey" = "8:_87786FD6EEBC096349645F74EC37D51B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -322,7 +244,73 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_87786FD6EEBC096349645F74EC37D51B"
+        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AE0D2C74A07B227FBA65AAA9838ACB61"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_74B285214F195875EF2302BD741EC1AE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_86A2D15645ECF72FDFB1DF4AFAD3790A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_ACC7A487E609428EBFABBE06B56D9A3B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F817FB01542E90AB680BEB970759553A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_61878753A279408E9ABFF50B53D4AA5E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CC2FC9332B3B1221A2B47C7D30B337CC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_54DF2A3C4BEE263AD889735442792631"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -420,32 +408,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0C4E55A5884C81BA68A1603013A7E4F6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FolderBrowserDialogEx, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:FolderBrowserDialogEx.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0E9E7EE11BAB482FBF4385A1FF5EAA79"
             {
             "SourcePath" = "8:..\\PatternSearch\\Pattern Search Application.pdf"
@@ -473,6 +435,11 @@
             "AssemblyAsmDisplayName" = "8:CommandLine, Version=2.5.0.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_304665A0D4226AD27ABD068AE4EA04EE"
+                    {
+                    "Name" = "8:CommandLine.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:CommandLine.dll"
             "TargetName" = "8:"
@@ -496,9 +463,14 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:IFileMgt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:IFileMgt, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_53B0DFE8FF1478AD15BF71C940ED2402"
+                    {
+                    "Name" = "8:IFileMgt.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:IFileMgt.dll"
             "TargetName" = "8:"
@@ -525,6 +497,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_54DF2A3C4BEE263AD889735442792631"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -551,6 +528,11 @@
             "AssemblyAsmDisplayName" = "8:ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_74B285214F195875EF2302BD741EC1AE"
+                    {
+                    "Name" = "8:ExcelDataReader.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ExcelDataReader.dll"
             "TargetName" = "8:"
@@ -577,6 +559,11 @@
             "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
                 "ScatterAssemblies"
                 {
+                    "_86A2D15645ECF72FDFB1DF4AFAD3790A"
+                    {
+                    "Name" = "8:System.IO.Compression.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.IO.Compression.dll"
             "TargetName" = "8:"
@@ -600,9 +587,14 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Scanner, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Scanner, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_87786FD6EEBC096349645F74EC37D51B"
+                    {
+                    "Name" = "8:Scanner.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Scanner.dll"
             "TargetName" = "8:"
@@ -629,6 +621,11 @@
             "AssemblyAsmDisplayName" = "8:ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_AE0D2C74A07B227FBA65AAA9838ACB61"
+                    {
+                    "Name" = "8:ExcelDataReader.DataSet.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ExcelDataReader.DataSet.dll"
             "TargetName" = "8:"
@@ -655,6 +652,11 @@
             "AssemblyAsmDisplayName" = "8:Xceed.Words.NET, Version=1.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_CC2FC9332B3B1221A2B47C7D30B337CC"
+                    {
+                    "Name" = "8:Xceed.Words.NET.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Xceed.Words.NET.dll"
             "TargetName" = "8:"
@@ -681,6 +683,11 @@
             "AssemblyAsmDisplayName" = "8:itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_F817FB01542E90AB680BEB970759553A"
+                    {
+                    "Name" = "8:itextsharp.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:itextsharp.dll"
             "TargetName" = "8:"
@@ -757,7 +764,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pattern Search"
         "ProductCode" = "8:{231D9EA3-F086-4217-AE72-9F093010C820}"
-        "PackageCode" = "8:{185336D6-702D-4CF9-8039-D763028F7D7B}"
+        "PackageCode" = "8:{6FA1DF5E-B39C-4426-B6AA-DE27C8B79AC5}"
         "UpgradeCode" = "8:{6DAADAC7-5289-4C05-9D28-F3E61A198353}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -770,7 +777,7 @@
         "ARPHELPLINK" = "8:"
         "Title" = "8:Pattern Search"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:CPSC"
+        "ARPCONTACT" = "8:EXIT"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Search for patterns in files"
         "ARPURLINFOABOUT" = "8:"
@@ -807,6 +814,532 @@
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                }
+                                "Values"
+                                {
+                                }
+                            }
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_8268293B9BCF47C3A16468207F706AA0"
+                            {
+                            "Name" = "8:Classes"
+                            "Condition" = "8:"
+                            "AlwaysCreate" = "11:FALSE"
+                            "DeleteAtUninstall" = "11:FALSE"
+                            "Transitive" = "11:FALSE"
+                                "Keys"
+                                {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_10736497306548F086F67AFA51BCB243"
+                                    {
+                                    "Name" = "8:Word.Document.12"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_5A78FE8AA44745F49FDA2A5AD40242A4"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_941BE8F2EE41472F86A3E1060C60C4DF"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitive Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:TRUE"
+                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_65D16824AAD24AC9B8E027126420FE4C"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:TRUE"
+                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_FAA1A55BCACF48B9A0C276A25BEBEFFE"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -f \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_32BE4D2EB3CD444AAF90A0B0E9707248"
+                                    {
+                                    "Name" = "8:txtfile"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_795E198696AA4C5F83EEAF006196675A"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_F2CDC33746164709A7DB532A0EE855FB"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitive Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:TRUE"
+                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_DBB21D3ACF754E70B10803CC258E6673"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:TRUE"
+                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_1CBAB764C3AD438FB92D857453B47BF4"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -f \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_7E077FE0AD684890A8A7C26A420E10AE"
+                                    {
+                                    "Name" = "8:Excel.CSV"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_7B392EE5E51D4151AAED056E705C8FF6"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_6E8C5FF575294C51A3F0F0A022D584ED"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitive Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:TRUE"
+                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_2C78F8C04F2D423BA4732C3CD767C312"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:TRUE"
+                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_3365283E17094476BE8DD4BD85BCFEA4"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -f \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_9843CE3BD77D4370A4A1E6198517CCC5"
+                                    {
+                                    "Name" = "8:Acrobat.Document.11"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_51DFBEE249CE4E9C99CB3C6CF4CB498D"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_3A47487E40F94E84BDFB9E9473878746"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitive Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:TRUE"
+                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_4B3A4C9B933542818EFBBB52ED782F55"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:TRUE"
+                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_894D46492DCA47D2A0DA8081D1D76BD3"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -f \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_9B5E8B39A71C45D7BA34E859D4827DFC"
+                                    {
+                                    "Name" = "8:Word.Document.8"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_45B51FC6FA414A9F864A92AC14CBBE6A"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_02AB37D42F56426AA204FCEC72404351"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitive Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:TRUE"
+                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_38AA9FD3091D49518E15A3E353FF8002"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:TRUE"
+                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_9924CD4C26E4429C82E61496E88D6BE0"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -f \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_B0E0502861AA4552829B0D117C623EDC"
+                                    {
+                                    "Name" = "8:Directory"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_9DB730373AF9428CB209F64F197DD0D4"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_F90A1298F48F4189AD32717F42FD7EE8"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitive Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:TRUE"
+                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_BC6506CCDD364061BB8BE387AF866113"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:TRUE"
+                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_BB9126BD2E964330AD814A8C04A3AB7E"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -d \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_D18BCEC337064E25A5980BF8584C97A7"
+                                    {
+                                    "Name" = "8:Excel.Sheet.8"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_2B76C2408D69410B98E4D56C4AFA2162"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_5103F14EDA8C461D8F330B9C4470DB67"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitve Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:TRUE"
+                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_9735C864C50F4E96A76CA92ADA027843"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:TRUE"
+                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B422B550BE4941AD85910F6F6A98A6E8"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -f \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_DE5C27702E8E430780C45B7B6CB2861F"
+                                    {
+                                    "Name" = "8:Excel.Sheet.12"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_3C24DEB7F68B436CAACD01B1585911CB"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_54C5F86C4C2B4A16B4773FF4CF318838"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitve Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:TRUE"
+                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_D3D2D65183144DD0845AD7A962AC4368"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:TRUE"
+                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B29AEAD5EC764ECFA038C9C667AD9426"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -f \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
@@ -1292,7 +1825,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_15E148A3CC5849B0A108308433C6AC53"
             {
-            "SourcePath" = "8:..\\docxreader\\obj\\Debug\\docxreader.dll"
+            "SourcePath" = "8:..\\docxreader\\obj\\Release\\docxreader.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1320,7 +1853,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4166BFB2FC664353B0716B0FAD3A5039"
             {
-            "SourcePath" = "8:..\\PatternSearchUI\\obj\\Debug\\PatternSearchUI.exe"
+            "SourcePath" = "8:..\\PatternSearchUI\\obj\\Release\\PatternSearchUI.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1348,7 +1881,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_607999134C3945F58EEAC5AFD6AAD513"
             {
-            "SourcePath" = "8:..\\Scanner\\obj\\Debug\\Scanner.dll"
+            "SourcePath" = "8:..\\Scanner\\obj\\Release\\Scanner.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1376,7 +1909,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_61878753A279408E9ABFF50B53D4AA5E"
             {
-            "SourcePath" = "8:..\\IFileMgt\\obj\\Debug\\IFileMgt.dll"
+            "SourcePath" = "8:..\\IFileMgt\\obj\\Release\\IFileMgt.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1404,7 +1937,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_777458831A2B49978BEA9E36C33F2BD8"
             {
-            "SourcePath" = "8:..\\PdfReader\\obj\\Debug\\PdfReader.dll"
+            "SourcePath" = "8:..\\PdfReader\\obj\\Release\\PdfReader.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1432,7 +1965,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ACC7A487E609428EBFABBE06B56D9A3B"
             {
-            "SourcePath" = "8:..\\TextReader\\obj\\Debug\\TextReader.dll"
+            "SourcePath" = "8:..\\TextReader\\obj\\Release\\TextReader.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1460,7 +1993,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E05C390D0C0643BE8F188F3ABA7EAEA8"
             {
-            "SourcePath" = "8:..\\PatternSearch\\obj\\Debug\\PatternSearch.exe"
+            "SourcePath" = "8:..\\PatternSearch\\obj\\Release\\PatternSearch.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1488,7 +2021,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F5B2B5446DB145569C9F3BD270E995DE"
             {
-            "SourcePath" = "8:..\\XlsxReader\\obj\\Debug\\XlsxReader.dll"
+            "SourcePath" = "8:..\\XlsxReader\\obj\\Release\\XlsxReader.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
