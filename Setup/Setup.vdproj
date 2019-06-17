@@ -764,7 +764,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pattern Search"
         "ProductCode" = "8:{231D9EA3-F086-4217-AE72-9F093010C820}"
-        "PackageCode" = "8:{6FA1DF5E-B39C-4426-B6AA-DE27C8B79AC5}"
+        "PackageCode" = "8:{6C1042C9-D59E-446A-8053-77BA18BFEB9E}"
         "UpgradeCode" = "8:{6DAADAC7-5289-4C05-9D28-F3E61A198353}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -869,7 +869,7 @@
                                                                 {
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_FAA1A55BCACF48B9A0C276A25BEBEFFE"
                                                                     {
-                                                                    "Name" = "8:(Default)"
+                                                                    "Name" = "8:"
                                                                     "Condition" = "8:"
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
@@ -933,7 +933,7 @@
                                                                 {
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_1CBAB764C3AD438FB92D857453B47BF4"
                                                                     {
-                                                                    "Name" = "8:(Default)"
+                                                                    "Name" = "8:"
                                                                     "Condition" = "8:"
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
@@ -997,7 +997,7 @@
                                                                 {
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_3365283E17094476BE8DD4BD85BCFEA4"
                                                                     {
-                                                                    "Name" = "8:(Default)"
+                                                                    "Name" = "8:"
                                                                     "Condition" = "8:"
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
@@ -1061,7 +1061,7 @@
                                                                 {
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_894D46492DCA47D2A0DA8081D1D76BD3"
                                                                     {
-                                                                    "Name" = "8:(Default)"
+                                                                    "Name" = "8:"
                                                                     "Condition" = "8:"
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
@@ -1125,7 +1125,7 @@
                                                                 {
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_9924CD4C26E4429C82E61496E88D6BE0"
                                                                     {
-                                                                    "Name" = "8:(Default)"
+                                                                    "Name" = "8:"
                                                                     "Condition" = "8:"
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
@@ -1189,7 +1189,7 @@
                                                                 {
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_BB9126BD2E964330AD814A8C04A3AB7E"
                                                                     {
-                                                                    "Name" = "8:(Default)"
+                                                                    "Name" = "8:"
                                                                     "Condition" = "8:"
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
@@ -1253,7 +1253,7 @@
                                                                 {
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B422B550BE4941AD85910F6F6A98A6E8"
                                                                     {
-                                                                    "Name" = "8:(Default)"
+                                                                    "Name" = "8:"
                                                                     "Condition" = "8:"
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
@@ -1317,7 +1317,7 @@
                                                                 {
                                                                     "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_B29AEAD5EC764ECFA038C9C667AD9426"
                                                                     {
-                                                                    "Name" = "8:(Default)"
+                                                                    "Name" = "8:"
                                                                     "Condition" = "8:"
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
