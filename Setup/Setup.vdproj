@@ -33,48 +33,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3B3E526496F0A479CD8F47D92CB814DA"
+        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3B3E526496F0A479CD8F47D92CB814DA"
+        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_ACC7A487E609428EBFABBE06B56D9A3B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
-        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
         "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
         "MsmSig" = "8:_UNDEFINED"
@@ -82,13 +58,13 @@
         "Entry"
         {
         "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
+        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_54DF2A3C4BEE263AD889735442792631"
-        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
+        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -135,6 +111,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6A174E721BF3F27AE86FBF17441ECC35"
+        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_74B285214F195875EF2302BD741EC1AE"
         "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
         "MsmSig" = "8:_UNDEFINED"
@@ -165,14 +147,38 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_87786FD6EEBC096349645F74EC37D51B"
-        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
+        "MsmKey" = "8:_970152E5E27D06F61118386432CCCA67"
+        "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_87786FD6EEBC096349645F74EC37D51B"
+        "MsmKey" = "8:_970152E5E27D06F61118386432CCCA67"
+        "OwnerKey" = "8:_F5B2B5446DB145569C9F3BD270E995DE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_970152E5E27D06F61118386432CCCA67"
         "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_970152E5E27D06F61118386432CCCA67"
+        "OwnerKey" = "8:_ACC7A487E609428EBFABBE06B56D9A3B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_970152E5E27D06F61118386432CCCA67"
+        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_970152E5E27D06F61118386432CCCA67"
+        "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -207,38 +213,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F817FB01542E90AB680BEB970759553A"
-        "OwnerKey" = "8:_777458831A2B49978BEA9E36C33F2BD8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_607999134C3945F58EEAC5AFD6AAD513"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_304665A0D4226AD27ABD068AE4EA04EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_87786FD6EEBC096349645F74EC37D51B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_53B0DFE8FF1478AD15BF71C940ED2402"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -268,6 +244,18 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_304665A0D4226AD27ABD068AE4EA04EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_ACC7A487E609428EBFABBE06B56D9A3B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -280,7 +268,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F817FB01542E90AB680BEB970759553A"
+        "OwnerKey" = "8:_6A174E721BF3F27AE86FBF17441ECC35"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -298,6 +286,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3B3E526496F0A479CD8F47D92CB814DA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -305,6 +299,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_CC2FC9332B3B1221A2B47C7D30B337CC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_970152E5E27D06F61118386432CCCA67"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -459,20 +459,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_53B0DFE8FF1478AD15BF71C940ED2402"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3B3E526496F0A479CD8F47D92CB814DA"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:IFileMgt, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Scanner, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_53B0DFE8FF1478AD15BF71C940ED2402"
+                    "_3B3E526496F0A479CD8F47D92CB814DA"
                     {
-                    "Name" = "8:IFileMgt.dll"
+                    "Name" = "8:Scanner.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:IFileMgt.dll"
+            "SourcePath" = "8:Scanner.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -504,6 +504,37 @@
                     }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6A174E721BF3F27AE86FBF17441ECC35"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_6A174E721BF3F27AE86FBF17441ECC35"
+                    {
+                    "Name" = "8:itextsharp.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:itextsharp.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -583,20 +614,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_87786FD6EEBC096349645F74EC37D51B"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_970152E5E27D06F61118386432CCCA67"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Scanner, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:IFileMgt, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_87786FD6EEBC096349645F74EC37D51B"
+                    "_970152E5E27D06F61118386432CCCA67"
                     {
-                    "Name" = "8:Scanner.dll"
+                    "Name" = "8:IFileMgt.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Scanner.dll"
+            "SourcePath" = "8:IFileMgt.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -659,37 +690,6 @@
                     }
                 }
             "SourcePath" = "8:Xceed.Words.NET.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F817FB01542E90AB680BEB970759553A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F817FB01542E90AB680BEB970759553A"
-                    {
-                    "Name" = "8:itextsharp.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:itextsharp.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -850,8 +850,8 @@
                                                     {
                                                     "Name" = "8:Scan for Sensitive Info"
                                                     "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:TRUE"
-                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
@@ -859,8 +859,8 @@
                                                             {
                                                             "Name" = "8:command"
                                                             "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:TRUE"
-                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
                                                                 "Keys"
                                                                 {
@@ -914,8 +914,8 @@
                                                     {
                                                     "Name" = "8:Scan for Sensitive Info"
                                                     "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:TRUE"
-                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
@@ -923,8 +923,8 @@
                                                             {
                                                             "Name" = "8:command"
                                                             "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:TRUE"
-                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
                                                                 "Keys"
                                                                 {
@@ -978,8 +978,8 @@
                                                     {
                                                     "Name" = "8:Scan for Sensitive Info"
                                                     "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:TRUE"
-                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
@@ -987,8 +987,8 @@
                                                             {
                                                             "Name" = "8:command"
                                                             "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:TRUE"
-                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
                                                                 "Keys"
                                                                 {
@@ -1042,8 +1042,8 @@
                                                     {
                                                     "Name" = "8:Scan for Sensitive Info"
                                                     "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:TRUE"
-                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
@@ -1051,8 +1051,8 @@
                                                             {
                                                             "Name" = "8:command"
                                                             "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:TRUE"
-                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
                                                                 "Keys"
                                                                 {
@@ -1106,8 +1106,8 @@
                                                     {
                                                     "Name" = "8:Scan for Sensitive Info"
                                                     "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:TRUE"
-                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
@@ -1115,8 +1115,8 @@
                                                             {
                                                             "Name" = "8:command"
                                                             "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:TRUE"
-                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
                                                                 "Keys"
                                                                 {
@@ -1170,8 +1170,8 @@
                                                     {
                                                     "Name" = "8:Scan for Sensitive Info"
                                                     "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:TRUE"
-                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
@@ -1179,8 +1179,8 @@
                                                             {
                                                             "Name" = "8:command"
                                                             "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:TRUE"
-                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
                                                                 "Keys"
                                                                 {
@@ -1234,8 +1234,8 @@
                                                     {
                                                     "Name" = "8:Scan for Sensitve Info"
                                                     "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:TRUE"
-                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
@@ -1243,8 +1243,8 @@
                                                             {
                                                             "Name" = "8:command"
                                                             "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:TRUE"
-                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
                                                                 "Keys"
                                                                 {
@@ -1298,8 +1298,8 @@
                                                     {
                                                     "Name" = "8:Scan for Sensitve Info"
                                                     "Condition" = "8:"
-                                                    "AlwaysCreate" = "11:TRUE"
-                                                    "DeleteAtUninstall" = "11:TRUE"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
                                                     "Transitive" = "11:FALSE"
                                                         "Keys"
                                                         {
@@ -1307,8 +1307,8 @@
                                                             {
                                                             "Name" = "8:command"
                                                             "Condition" = "8:"
-                                                            "AlwaysCreate" = "11:TRUE"
-                                                            "DeleteAtUninstall" = "11:TRUE"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
                                                             "Transitive" = "11:FALSE"
                                                                 "Keys"
                                                                 {
@@ -1825,7 +1825,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_15E148A3CC5849B0A108308433C6AC53"
             {
-            "SourcePath" = "8:..\\docxreader\\obj\\Release\\docxreader.dll"
+            "SourcePath" = "8:..\\docxreader\\obj\\Debug\\docxreader.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1853,7 +1853,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4166BFB2FC664353B0716B0FAD3A5039"
             {
-            "SourcePath" = "8:..\\PatternSearchUI\\obj\\Release\\PatternSearchUI.exe"
+            "SourcePath" = "8:..\\PatternSearchUI\\obj\\Debug\\PatternSearchUI.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1881,7 +1881,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_607999134C3945F58EEAC5AFD6AAD513"
             {
-            "SourcePath" = "8:..\\Scanner\\obj\\Release\\Scanner.dll"
+            "SourcePath" = "8:..\\Scanner\\obj\\Debug\\Scanner.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1909,7 +1909,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_61878753A279408E9ABFF50B53D4AA5E"
             {
-            "SourcePath" = "8:..\\IFileMgt\\obj\\Release\\IFileMgt.dll"
+            "SourcePath" = "8:..\\IFileMgt\\obj\\Debug\\IFileMgt.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1937,7 +1937,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_777458831A2B49978BEA9E36C33F2BD8"
             {
-            "SourcePath" = "8:..\\PdfReader\\obj\\Release\\PdfReader.dll"
+            "SourcePath" = "8:..\\PdfReader\\obj\\Debug\\PdfReader.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1965,7 +1965,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ACC7A487E609428EBFABBE06B56D9A3B"
             {
-            "SourcePath" = "8:..\\TextReader\\obj\\Release\\TextReader.dll"
+            "SourcePath" = "8:..\\TextReader\\obj\\Debug\\TextReader.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -1993,7 +1993,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E05C390D0C0643BE8F188F3ABA7EAEA8"
             {
-            "SourcePath" = "8:..\\PatternSearch\\obj\\Release\\PatternSearch.exe"
+            "SourcePath" = "8:..\\PatternSearch\\obj\\Debug\\PatternSearch.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
@@ -2021,7 +2021,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F5B2B5446DB145569C9F3BD270E995DE"
             {
-            "SourcePath" = "8:..\\XlsxReader\\obj\\Release\\XlsxReader.dll"
+            "SourcePath" = "8:..\\XlsxReader\\obj\\Debug\\XlsxReader.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
