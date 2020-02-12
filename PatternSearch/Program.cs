@@ -235,9 +235,9 @@ namespace PatternSearch
 
 		private static void PrintProcessingStart(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
 		{
-			string fileprefix = ConfigurationManager.AppSettings["FilePrefix"] ?? "";
 			if (cmdline.Value.Verbosity == OutputLevel.V)
 			{
+				string fileprefix = ConfigurationManager.AppSettings["FilePrefix"] ?? "";
 				if (cmdline.Value.CSVOuput == false)
 					File.AppendAllText(cmdline.Value.OutFile, $"**********Processing file {file} ...**********\n");
 				else if (cmdline.Value.ImageScan == true)

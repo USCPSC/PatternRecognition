@@ -27,7 +27,14 @@ namespace PatternSearchUI
 		{
 			for (int i = 0; i < chklbPatterns.Items.Count; i++)
 				((Pattern)chklbPatterns.Items[i]).enabled = chklbPatterns.GetItemChecked(i);
-			se.SavePatterns();
+			try
+			{
+				se.SavePatterns();
+			}
+			catch (Exception er)
+			{
+				MessageBox.Show(string.Format($"Unable to save changes. {er.Message}"), "Error Saving Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 			this.Close();
 		}
 	}

@@ -103,7 +103,7 @@ namespace Scanner
 		{
 			if (patterns == null)
 			{
-				PatternSection sec = (PatternSection)ConfigurationManager.GetSection("PatternGroup");
+				var sec = (PatternSection)ConfigurationManager.GetSection("PatternGroup");
 				patterns = sec.Patterns;
 			}
 			return patterns.Count;
@@ -111,7 +111,7 @@ namespace Scanner
 		public void SavePatterns()
 		{
 			var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-			PatternSection sec = (PatternSection)config.GetSection("PatternGroup");
+			var sec = (PatternSection)config.GetSection("PatternGroup");
 			sec.Patterns = patterns;
 			config.Save(ConfigurationSaveMode.Modified);
 		}

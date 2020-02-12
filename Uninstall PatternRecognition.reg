@@ -1,0 +1,19 @@
+Windows Registry Editor Version 5.00
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Acrobat.Document.11\shell\Scan for Sensitive Info]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Acrobat.Document.2017\shell\Scan for Sensitive Info]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Excel.CSV\shell\Scan for Sensitive Info]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Excel.Sheet.12\shell\Scan for Sensitive Info]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Excel.Sheet.8\shell\Scan for Sensitive Info]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\txtfile\shell\Scan for Sensitive Info]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Word.Document.12\shell\Scan for Sensitive Info]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Word.Document.8\shell\Scan for Sensitive Info]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shell\Scan for Sensitive Info]

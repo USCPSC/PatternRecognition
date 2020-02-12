@@ -53,6 +53,7 @@ namespace PatternSearch
 		{
 			//An aggregate catalog that combines multiple catalogs
 			var catalog = new AggregateCatalog();
+
 			//Adds all the parts found in all assemblies in 
 			//the same directory as the executing program
 			catalog.Catalogs.Add(new DirectoryCatalog(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)));

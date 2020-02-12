@@ -27,12 +27,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_304665A0D4226AD27ABD068AE4EA04EE"
-        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3B3E526496F0A479CD8F47D92CB814DA"
         "OwnerKey" = "8:_4166BFB2FC664353B0716B0FAD3A5039"
         "MsmSig" = "8:_UNDEFINED"
@@ -147,6 +141,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_93F74AC5CC222673BFA0D31E3B3E99FC"
+        "OwnerKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_970152E5E27D06F61118386432CCCA67"
         "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
         "MsmSig" = "8:_UNDEFINED"
@@ -195,14 +195,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CC2FC9332B3B1221A2B47C7D30B337CC"
+        "MsmKey" = "8:_C63FD4055E664A32FAFC8ED769B886DB"
         "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C63FD4055E664A32FAFC8ED769B886DB"
+        "OwnerKey" = "8:_E51EE3A9E79ACC94FD66D9D962DB7625"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_E05C390D0C0643BE8F188F3ABA7EAEA8"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E51EE3A9E79ACC94FD66D9D962DB7625"
+        "OwnerKey" = "8:_15E148A3CC5849B0A108308433C6AC53"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -250,7 +262,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_304665A0D4226AD27ABD068AE4EA04EE"
+        "OwnerKey" = "8:_93F74AC5CC222673BFA0D31E3B3E99FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -298,7 +310,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC2FC9332B3B1221A2B47C7D30B337CC"
+        "OwnerKey" = "8:_E51EE3A9E79ACC94FD66D9D962DB7625"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C63FD4055E664A32FAFC8ED769B886DB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -322,7 +340,7 @@
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
         "OutputFilename" = "8:Debug\\Setup.msi"
-        "PackageFilesAs" = "3:2"
+        "PackageFilesAs" = "3:1"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
         "Compression" = "3:2"
@@ -400,7 +418,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.6.1"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.7.1"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=671728"
                 }
@@ -426,37 +444,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_304665A0D4226AD27ABD068AE4EA04EE"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CommandLine, Version=2.5.0.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_304665A0D4226AD27ABD068AE4EA04EE"
-                    {
-                    "Name" = "8:CommandLine.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CommandLine.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3B3E526496F0A479CD8F47D92CB814DA"
@@ -614,6 +601,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_93F74AC5CC222673BFA0D31E3B3E99FC"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CommandLine, Version=2.7.82.0, Culture=neutral, PublicKeyToken=5a870481e358d379, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_93F74AC5CC222673BFA0D31E3B3E99FC"
+                    {
+                    "Name" = "8:CommandLine.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CommandLine.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_970152E5E27D06F61118386432CCCA67"
             {
             "AssemblyRegister" = "3:1"
@@ -676,14 +694,45 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CC2FC9332B3B1221A2B47C7D30B337CC"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C63FD4055E664A32FAFC8ED769B886DB"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Xceed.Words.NET, Version=1.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Xceed.Document.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CC2FC9332B3B1221A2B47C7D30B337CC"
+                    "_C63FD4055E664A32FAFC8ED769B886DB"
+                    {
+                    "Name" = "8:Xceed.Document.NET.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Xceed.Document.NET.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A0B085DFE4C94E2DB362FA8A20093403"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E51EE3A9E79ACC94FD66D9D962DB7625"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Xceed.Words.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_E51EE3A9E79ACC94FD66D9D962DB7625"
                     {
                     "Name" = "8:Xceed.Words.NET.dll"
                     "Attributes" = "3:512"
@@ -764,11 +813,11 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Pattern Search"
         "ProductCode" = "8:{231D9EA3-F086-4217-AE72-9F093010C820}"
-        "PackageCode" = "8:{6C1042C9-D59E-446A-8053-77BA18BFEB9E}"
+        "PackageCode" = "8:{9E3C4CF2-053C-4A7E-8B36-EAEEFCFC801F}"
         "UpgradeCode" = "8:{6DAADAC7-5289-4C05-9D28-F3E61A198353}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.3.0"
@@ -1194,6 +1243,70 @@
                                                                     "Transitive" = "11:FALSE"
                                                                     "ValueTypes" = "3:1"
                                                                     "Value" = "8:[TARGETDIR]patternsearch.exe -d \"%1\" -vV -c  -o \"%1.csv\""
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_BEE99D5EC5D949CDB7578DE16380624E"
+                                    {
+                                    "Name" = "8:Acrobat.Document.2017"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_9FF613C63BA146D1BCB697E5A0E312D0"
+                                            {
+                                            "Name" = "8:shell"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_4D9E6C1BB6364D0FB1C13AC5BE32D514"
+                                                    {
+                                                    "Name" = "8:Scan for Sensitive Info"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_6C727C4B6214499DB48ACBC27510D1BA"
+                                                            {
+                                                            "Name" = "8:command"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_1148210DCB1E4F7BAB4454C5233B674F"
+                                                                    {
+                                                                    "Name" = "8:(Default)"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:[TARGETDIR]patternsearch.exe -f \"%1\" -vV -c  -o \"%1.csv\""
                                                                     }
                                                                 }
                                                             }
