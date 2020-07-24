@@ -64,22 +64,30 @@ namespace PatternSearch
 							if (dir == true && fil == true)
 							{
 								Console.Error.WriteLine("You must provide either a directory or file to process");
+								Console.WriteLine("Press any key to continue...");
+								Console.ReadKey();
 								Environment.Exit(-1);
 							}
 							// Make sure it is a valid directory before we do anything
 							if (dir == false && Directory.Exists(o.Directory) == false)
 							{
 								Console.Error.WriteLine($"Invalid directory: '{o.Directory}'");
+								Console.WriteLine("Press any key to continue...");
+								Console.ReadKey();
 								Environment.Exit(-1);
 							}
 							if (fil == false && File.Exists(o.File) == false)
 							{
 								Console.Error.WriteLine($"Invalid file: '{o.File}'");
+								Console.WriteLine("Press any key to continue...");
+								Console.ReadKey();
 								Environment.Exit(-1);
 							}
 						})
 						 .WithNotParsed<Options>(e =>
 						 {
+							 Console.WriteLine("Press any key to continue...");
+							 Console.ReadKey();
 							 Environment.Exit(-2);
 						 });
 
@@ -92,6 +100,17 @@ namespace PatternSearch
 			catch (Exception)
 			{
 				outFile = Path.ChangeExtension(outFile, DateTime.Now.Ticks + ".csv");
+			}
+			try
+			{
+				using (var fs = File.Create(outFile, 1, FileOptions.DeleteOnClose)) { }
+			}
+			catch(Exception e)
+			{
+				Console.Error.WriteLine($"Unable to create file {outFile}: '{e.Message}'");
+				Console.WriteLine("Press any key to continue...");
+				Console.ReadKey();
+				Environment.Exit(-2);
 			}
 			cmdline.Value.OutFile = outFile;
 
@@ -107,6 +126,17 @@ namespace PatternSearch
 			catch (Exception)
 			{
 				errFile = Path.ChangeExtension(cmdline.Value.ErrFile, DateTime.Now.Ticks + ".err");
+			}
+			try
+			{
+				using (var fs = File.Create(errFile, 1, FileOptions.DeleteOnClose)) { }
+			}
+			catch (Exception e)
+			{
+				Console.Error.WriteLine($"Unable to create file {errFile}: '{e.Message}'");
+				Console.WriteLine("Press any key to continue...");
+				Console.ReadKey();
+				Environment.Exit(-3);
 			}
 			cmdline.Value.ErrFile = errFile;
 
@@ -148,6 +178,7 @@ namespace PatternSearch
 			if (files.Length == 0)
 			{
 				File.AppendAllText(cmdline.Value.ErrFile, "No files found");
+				Console.ReadKey();
 				Environment.Exit(-5);
 			}
 
@@ -282,11 +313,11 @@ namespace PatternSearch
 					break;
 				case OutputLevel.M:
 					if (cmdline.Value.CSVOuput == false)
-						File.AppendAllText(cmdline.Value.OutFile, $"Found {s.GetPatternsFound()} in {file}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"Found {s.PatternsFoundAsString} in {file}\n");
 					else if (cmdline.Value.ImageScan == true)
-						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count},{fc.HasImages}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFoundAsString},{s.PatternsFound.Count},{fc.HasImages}\n");
 					else
-						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFoundAsString},{s.PatternsFound.Count}\n");
 					break;
 				case OutputLevel.V:
 					if (cmdline.Value.CSVOuput == false)

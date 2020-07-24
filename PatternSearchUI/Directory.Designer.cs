@@ -63,6 +63,7 @@
             this.imageScan,
             this.status});
 			this.lstBatch.FullRowSelect = true;
+			this.lstBatch.HideSelection = false;
 			this.lstBatch.Location = new System.Drawing.Point(13, 41);
 			this.lstBatch.MultiSelect = false;
 			this.lstBatch.Name = "lstBatch";
