@@ -36,13 +36,8 @@ namespace Scanner
 	/// </summary>
 	public class ScanEngine
 	{
-		private PatternCollection patterns;
+		public PatternCollection Patterns;
 		private NameValueCollection filters;
-
-		/// <summary>
-		/// Patterns found
-		/// </summary>
-		public List<PatternFound> PatternsFound { get; private set; }
 
 		/// <summary>
 		/// Contructor
@@ -53,23 +48,26 @@ namespace Scanner
 		}
 
 		/// <summary>
+		/// Patterns found
+		/// </summary>
+		public List<PatternFound> PatternsFound { get; private set; }
+
+		/// <summary>
 		/// Get a comma separated string of matches 
 		/// </summary>
 		/// <returns>comma separated string</returns>
-		public string GetPatternsFound()
+		public string PatternsFoundAsString
 		{
-			var sb = new StringBuilder();
-			if (PatternsFound != null)
+			get
 			{
-				foreach(var f in PatternsFound.Select(x => x.Name).Distinct())
+				var sb = new StringBuilder();
+				if (PatternsFound != null)
 				{
-					if (sb.Length == 0)
-						sb.Append(f);
-					else
-						sb.AppendFormat($" & {f}");
+					foreach (var f in PatternsFound.Select(x => x.Name).Distinct())
+						sb = (sb.Length == 0) ? sb.Append(f) : sb.AppendFormat($" & {f}");
 				}
+				return sb.ToString();
 			}
-			return sb.ToString();
 		}
 
 		/// <summary>
@@ -79,17 +77,12 @@ namespace Scanner
 		public string GetPatternNames()
 		{
 			var sb = new StringBuilder();
-			if (patterns != null)
+			if (Patterns != null)
 			{
-				foreach (Pattern p in patterns)
+				foreach (Pattern p in Patterns)
 				{
 					if (p.enabled == true)
-					{
-						if (sb.Length == 0)
-							sb.Append(p.name);
-						else
-							sb.AppendFormat($"; {p.name}");
-					}
+						sb = (sb.Length == 0)? sb.Append(p.name): sb.AppendFormat($"; {p.name}");
 				}
 			}
 			return sb.ToString();
@@ -101,18 +94,18 @@ namespace Scanner
 		/// <returns>Number of patterns</returns>
 		public int LoadPatterns()
 		{
-			if (patterns == null)
+			if (Patterns == null)
 			{
 				var sec = (PatternSection)ConfigurationManager.GetSection("PatternGroup");
-				patterns = sec.Patterns;
+				Patterns = sec.Patterns;
 			}
-			return patterns.Count;
+			return Patterns.Count;
 		}
 		public void SavePatterns()
 		{
 			var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 			var sec = (PatternSection)config.GetSection("PatternGroup");
-			sec.Patterns = patterns;
+			sec.Patterns = Patterns;
 			config.Save(ConfigurationSaveMode.Modified);
 		}
 
@@ -133,7 +126,7 @@ namespace Scanner
 		/// <returns>name of pattern</returns>
 		private string GetPatternName(string data)
 		{
-			foreach ( Pattern p in patterns)
+			foreach ( Pattern p in Patterns)
 			{ 
 				if (p.enabled == true && Regex.IsMatch(data, p.pattern))
 					return p.name;
@@ -143,25 +136,20 @@ namespace Scanner
 		}
 
 		/// <summary>
-		/// All patterns 
-		/// </summary>
-		public PatternCollection Patterns => patterns;
-
-		/// <summary>
 		/// Scan memory for matches to the patterns provided
 		/// </summary>
 		/// <param name="data">memory to scan</param>
 		/// <returns>True = Found Match; False = No Matches</returns>
 		public bool Scan(string data)
 		{
-			if (patterns == null || patterns.Count == 0)
+			if (Patterns == null || Patterns.Count == 0)
 				throw new ApplicationException("No patterns defined");
 
 			if (PatternsFound == null)
 				PatternsFound = new List<PatternFound>();
-
-			PatternsFound.Clear();
-			foreach (Pattern p in patterns)
+			else
+				PatternsFound.Clear();
+			foreach (Pattern p in Patterns)
 			{
 				if (p.enabled == true)
 				{

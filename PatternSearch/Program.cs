@@ -49,6 +49,10 @@ namespace PatternSearch
 			public bool ImageScan { get; set; }
 		}
 
+		static public Parsed<Options> cmdline;
+		static public SearchManager smgr = new SearchManager();
+		static public Scanner.ScanEngine scanner = new Scanner.ScanEngine();
+
 		/// <summary>
 		/// Main processor
 		/// </summary>
@@ -56,7 +60,7 @@ namespace PatternSearch
 		static void Main(string[] args)
 		{
 			// Parse command line
-			var cmdline = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args)
+			cmdline = (Parsed<Options>)Parser.Default.ParseArguments<Options>(args)
 						.WithParsed<Options>(o =>
 						{
 							bool dir = string.IsNullOrEmpty(o.Directory);
@@ -64,22 +68,30 @@ namespace PatternSearch
 							if (dir == true && fil == true)
 							{
 								Console.Error.WriteLine("You must provide either a directory or file to process");
+								Console.WriteLine("Press any key to continue...");
+								Console.ReadKey();
 								Environment.Exit(-1);
 							}
 							// Make sure it is a valid directory before we do anything
 							if (dir == false && Directory.Exists(o.Directory) == false)
 							{
 								Console.Error.WriteLine($"Invalid directory: '{o.Directory}'");
+								Console.WriteLine("Press any key to continue...");
+								Console.ReadKey();
 								Environment.Exit(-1);
 							}
 							if (fil == false && File.Exists(o.File) == false)
 							{
 								Console.Error.WriteLine($"Invalid file: '{o.File}'");
+								Console.WriteLine("Press any key to continue...");
+								Console.ReadKey();
 								Environment.Exit(-1);
 							}
 						})
 						 .WithNotParsed<Options>(e =>
 						 {
+							 Console.WriteLine("Press any key to continue...");
+							 Console.ReadKey();
 							 Environment.Exit(-2);
 						 });
 
@@ -92,6 +104,17 @@ namespace PatternSearch
 			catch (Exception)
 			{
 				outFile = Path.ChangeExtension(outFile, DateTime.Now.Ticks + ".csv");
+			}
+			try
+			{
+				using (var fs = File.Create(outFile, 1, FileOptions.DeleteOnClose)) { }
+			}
+			catch(Exception e)
+			{
+				Console.Error.WriteLine($"Unable to create file {outFile}: '{e.Message}'");
+				Console.WriteLine("Press any key to continue...");
+				Console.ReadKey();
+				Environment.Exit(-2);
 			}
 			cmdline.Value.OutFile = outFile;
 
@@ -108,10 +131,20 @@ namespace PatternSearch
 			{
 				errFile = Path.ChangeExtension(cmdline.Value.ErrFile, DateTime.Now.Ticks + ".err");
 			}
+			try
+			{
+				using (var fs = File.Create(errFile, 1, FileOptions.DeleteOnClose)) { }
+			}
+			catch (Exception e)
+			{
+				Console.Error.WriteLine($"Unable to create file {errFile}: '{e.Message}'");
+				Console.WriteLine("Press any key to continue...");
+				Console.ReadKey();
+				Environment.Exit(-3);
+			}
 			cmdline.Value.ErrFile = errFile;
 
 			// Load the FileManagers
-			var smgr = new SearchManager();
 			smgr.ImportFileReaders();
 			if (smgr.FileReaders.Count() == 0)
 			{
@@ -120,8 +153,7 @@ namespace PatternSearch
 			}
 
 			// Load the Scan engine and the patterns
-			var s = new Scanner.ScanEngine();
-			if (s.LoadPatterns() == 0)
+			if (scanner.LoadPatterns() == 0)
 			{
 				File.AppendAllText(cmdline.Value.ErrFile, "No patterns found");
 				Environment.Exit(-4);
@@ -148,13 +180,14 @@ namespace PatternSearch
 			if (files.Length == 0)
 			{
 				File.AppendAllText(cmdline.Value.ErrFile, "No files found");
+				Console.ReadKey();
 				Environment.Exit(-5);
 			}
 
 			var starttime = DateTime.Now;
 
 			// Print header
-			PrintHeader(cmdline, smgr, starttime);
+			PrintHeader(starttime);
 
 			// Process files
 			var processedfiles = 0;
@@ -172,20 +205,20 @@ namespace PatternSearch
 						var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
 
 						// Scan the text for patterns
-						s.Scan(fc.Text);
+						scanner.Scan(fc.Text);
 
 						// Output start
-						PrintProcessingStart(cmdline, s, file, fc);
+						PrintProcessingStart(file, fc);
 
 						// If verbose enabled, print more details for each match
 						if (cmdline.Value.Verbosity == OutputLevel.V)
 						{
-							foreach (var match in s.PatternsFound.OrderBy(i => i.Index))
-								PrintMatch(cmdline, match);
+							foreach (var match in scanner.PatternsFound.OrderBy(i => i.Index))
+								PrintMatch(match);
 						}
 
 						// Output Results
-						PrintProcessingResults(cmdline, s, file, fc);
+						PrintProcessingResults(file, fc);
 					}
 				}
 				catch (Exception e)
@@ -194,17 +227,74 @@ namespace PatternSearch
 				}
 			}
 			if (processedfiles > 0)
-				PrintFooter(cmdline, starttime, processedfiles, s.GetPatternNames());
+				PrintFooter(starttime, processedfiles, scanner.GetPatternNames());
 		}
+		private static int ProcessDir(string dir, bool recurse = true)
+		{
+			string[] files = Directory.GetFiles(dir);
 
-		private static void PrintHeader(Parsed<Options> cmdline, SearchManager fmgr, DateTime starttime)
+			int fileProcessed = 0;
+
+			fileProcessed += ProcessFiles(files);
+
+			if (recurse)
+			{
+				// Recurse into subdirectories of this directory.
+				string[] subdirectoryEntries = Directory.GetDirectories(dir);
+				foreach (string subdirectory in subdirectoryEntries)
+					fileProcessed += ProcessDir(subdirectory);
+			}
+			return fileProcessed;
+		}
+		private static int ProcessFiles(string[] files)
+		{
+			// Process files
+			var processedfiles = 0;
+			foreach (var file in files)
+			{
+				try
+				{
+					// If there is a file processor for a give file extension, process the file..
+					foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
+					{
+						// Only count if we have a file processor
+						++processedfiles;
+
+						// Read the text
+						var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
+
+						// Scan the text for patterns
+						scanner.Scan(fc.Text);
+
+						// Output start
+						PrintProcessingStart(file, fc);
+
+						// If verbose enabled, print more details for each match
+						if (cmdline.Value.Verbosity == OutputLevel.V)
+						{
+							foreach (var match in scanner.PatternsFound.OrderBy(i => i.Index))
+								PrintMatch(match);
+						}
+
+						// Output Results
+						PrintProcessingResults(file, fc);
+					}
+				}
+				catch (Exception e)
+				{
+					File.AppendAllText(cmdline.Value.ErrFile, $"An error occured while processing: {file} => {e.Message}");
+				}
+			}
+			return processedfiles;
+		}
+		private static void PrintHeader(DateTime starttime)
 		{
 			if (cmdline.Value.CSVOuput == false)
 			{
 				File.AppendAllText(cmdline.Value.OutFile, "*************************************************************************");
 				File.AppendAllText(cmdline.Value.OutFile, $"({starttime}) Processing files with the following parameters:");
 				File.AppendAllText(cmdline.Value.OutFile, $"Recursive='{cmdline.Value.Recursive}' Directory='{cmdline.Value.Directory}' Verbosity='{cmdline.Value.Verbosity}'");
-				File.AppendAllText(cmdline.Value.OutFile, $"In the following file types: '{fmgr.GetFileExtentions()}'");
+				File.AppendAllText(cmdline.Value.OutFile, $"In the following file types: '{smgr.GetFileExtentions()}'");
 				File.AppendAllText(cmdline.Value.OutFile, "*************************************************************************\n");
 			}
 			else
@@ -233,7 +323,7 @@ namespace PatternSearch
 			}
 		}
 
-		private static void PrintProcessingStart(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
+		private static void PrintProcessingStart(string file, global::FileManager.FileContents fc)
 		{
 			if (cmdline.Value.Verbosity == OutputLevel.V)
 			{
@@ -241,13 +331,13 @@ namespace PatternSearch
 				if (cmdline.Value.CSVOuput == false)
 					File.AppendAllText(cmdline.Value.OutFile, $"**********Processing file {file} ...**********\n");
 				else if (cmdline.Value.ImageScan == true)
-					File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{fc.HasImages},{s.PatternsFound.Count}\n");
+					File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{fc.HasImages},{scanner.PatternsFound.Count}\n");
 				else
-					File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFound.Count}\n");
+					File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{scanner.PatternsFound.Count}\n");
 			}
 		}
 
-		private static void PrintMatch(Parsed<Options> cmdline, Scanner.PatternFound match)
+		private static void PrintMatch(Scanner.PatternFound match)
 		{
 			// Comma offset variable to align output in CSV output
 			var commaOffset = cmdline.Value.ImageScan ? ",,,," : ",,,";
@@ -267,35 +357,35 @@ namespace PatternSearch
 			}
 		}
 
-		private static void PrintProcessingResults(Parsed<Options> cmdline, Scanner.ScanEngine s, string file, global::FileManager.FileContents fc)
+		private static void PrintProcessingResults(string file, global::FileManager.FileContents fc)
 		{
 			string fileprefix = ConfigurationManager.AppSettings["FilePrefix"] ?? "";
 			switch (cmdline.Value.Verbosity)
 			{
 				case OutputLevel.B:
 					if (cmdline.Value.CSVOuput == false)
-						File.AppendAllText(cmdline.Value.OutFile, $"Number of possible patterns found: {s.PatternsFound.Count} in {file}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"Number of possible patterns found: {scanner.PatternsFound.Count} in {file}\n");
 					else if (cmdline.Value.ImageScan == true)
-						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFound.Count},{fc.HasImages}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{scanner.PatternsFound.Count},{fc.HasImages}\n");
 					else
-						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.PatternsFound.Count}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{scanner.PatternsFound.Count}\n");
 					break;
 				case OutputLevel.M:
 					if (cmdline.Value.CSVOuput == false)
-						File.AppendAllText(cmdline.Value.OutFile, $"Found {s.GetPatternsFound()} in {file}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"Found {scanner.PatternsFoundAsString} in {file}\n");
 					else if (cmdline.Value.ImageScan == true)
-						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count},{fc.HasImages}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{scanner.PatternsFoundAsString},{scanner.PatternsFound.Count},{fc.HasImages}\n");
 					else
-						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{s.GetPatternsFound()},{s.PatternsFound.Count}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"{fileprefix}{file},{fc.Text?.Length},{scanner.PatternsFoundAsString},{scanner.PatternsFound.Count}\n");
 					break;
 				case OutputLevel.V:
 					if (cmdline.Value.CSVOuput == false)
-						File.AppendAllText(cmdline.Value.OutFile, $"Number of possible patterns found: {s.PatternsFound.Count}\n");
+						File.AppendAllText(cmdline.Value.OutFile, $"Number of possible patterns found: {scanner.PatternsFound.Count}\n");
 					break;
 			}
 		}
 
-		private static void PrintFooter(Parsed<Options> cmdline, DateTime starttime, int processedfiles, string patterns)
+		private static void PrintFooter(DateTime starttime, int processedfiles, string patterns)
 		{
 			var procduration = DateTime.Now - starttime;
 			var proctime = (procduration.TotalSeconds > 60) ? procduration.TotalMinutes: procduration.TotalSeconds;

@@ -29,10 +29,7 @@ namespace PatternSearchUI
 				{
 					for (int i = 0; i < fm.FileExtention.Length; i++)
 					{
-						if (i == 0 && sb.Length == 0)
-							sb.Append(fm.FileExtention[i]);
-						else
-							sb.AppendFormat($", {fm.FileExtention[i]}");
+						sb = (i == 0 && sb.Length == 0)? sb.Append(fm.FileExtention[i]): sb.AppendFormat($", {fm.FileExtention[i]}");
 					}
 				}
 			}
