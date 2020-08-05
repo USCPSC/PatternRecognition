@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CommandLine;
+using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using CommandLine;
-
+using System.Threading.Tasks;
 
 namespace PatternSearch
 {
@@ -52,6 +52,7 @@ namespace PatternSearch
 		static public Parsed<Options> cmdline;
 		static public SearchManager smgr = new SearchManager();
 		static public Scanner.ScanEngine scanner = new Scanner.ScanEngine();
+		static public int timeoutValue;
 
 		/// <summary>
 		/// Main processor
@@ -148,84 +149,34 @@ namespace PatternSearch
 			smgr.ImportFileReaders();
 			if (smgr.FileReaders.Count() == 0)
 			{
-				File.AppendAllText(cmdline.Value.ErrFile, "No file readers found");
+				File.AppendAllText(cmdline.Value.ErrFile, "No file readers found\n");
 				Environment.Exit(-3);
 			}
 
 			// Load the Scan engine and the patterns
 			if (scanner.LoadPatterns() == 0)
 			{
-				File.AppendAllText(cmdline.Value.ErrFile, "No patterns found");
+				File.AppendAllText(cmdline.Value.ErrFile, "No patterns found\n");
 				Environment.Exit(-4);
 			}
-
-			// Load the files to be processed
-			string[] files = null;
-			var so = cmdline.Value.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-			if (string.IsNullOrEmpty(cmdline.Value.Directory) == false)
-			{
-				files = Directory.GetFiles(cmdline.Value.Directory, "*.*", so);
-				Console.WriteLine($"Scanning {cmdline.Value.Directory} for files that contain sensitive information. Results will be stored in {cmdline.Value.OutFile}...");
-			}
-			if (string.IsNullOrEmpty(cmdline.Value.File) == false)
-			{
-				if (files == null || files.Length == 0)
-				{
-					files = new string[] { cmdline.Value.File };
-					Console.WriteLine($"Scanning {cmdline.Value.File} for sensitive information. Results will be stored in {cmdline.Value.OutFile}...");
-				}
-				else
-					files = files.Append(cmdline.Value.File).ToArray();
-			}
-			if (files.Length == 0)
-			{
-				File.AppendAllText(cmdline.Value.ErrFile, "No files found");
-				Console.ReadKey();
-				Environment.Exit(-5);
-			}
-
+			timeoutValue = int.Parse(ConfigurationManager.AppSettings["Timeout"] ?? "60");
 			var starttime = DateTime.Now;
+			var processedfiles = 0;
 
 			// Print header
 			PrintHeader(starttime);
 
-			// Process files
-			var processedfiles = 0;
-			foreach (var file in files)
+			//Process
+			if (string.IsNullOrEmpty(cmdline.Value.Directory) == false)
 			{
-				try
-				{
-					// If there is a file processor for a give file extension, process the file..
-					foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
-					{
-						// Only count if we have a file processor
-						++processedfiles;
-
-						// Read the text
-						var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
-
-						// Scan the text for patterns
-						scanner.Scan(fc.Text);
-
-						// Output start
-						PrintProcessingStart(file, fc);
-
-						// If verbose enabled, print more details for each match
-						if (cmdline.Value.Verbosity == OutputLevel.V)
-						{
-							foreach (var match in scanner.PatternsFound.OrderBy(i => i.Index))
-								PrintMatch(match);
-						}
-
-						// Output Results
-						PrintProcessingResults(file, fc);
-					}
-				}
-				catch (Exception e)
-				{
-					File.AppendAllText(cmdline.Value.ErrFile, $"An error occured while processing: {file} => {e.Message}");
-				}
+				Console.WriteLine($"Scanning {cmdline.Value.Directory} for files that contain sensitive information. Results will be stored in {cmdline.Value.OutFile}...");
+				processedfiles = ProcessDir(cmdline.Value.Directory, cmdline.Value.Recursive);
 			}
+			if (string.IsNullOrEmpty(cmdline.Value.File) == false)
+			{
+				processedfiles += ProcessFiles(new string[] { cmdline.Value.File });
+			}
+
 			if (processedfiles > 0)
 				PrintFooter(starttime, processedfiles, scanner.GetPatternNames());
 		}
@@ -233,18 +184,16 @@ namespace PatternSearch
 		{
 			string[] files = Directory.GetFiles(dir);
 
-			int fileProcessed = 0;
-
-			fileProcessed += ProcessFiles(files);
+			int filesProcessed = ProcessFiles(files);
 
 			if (recurse)
 			{
 				// Recurse into subdirectories of this directory.
 				string[] subdirectoryEntries = Directory.GetDirectories(dir);
 				foreach (string subdirectory in subdirectoryEntries)
-					fileProcessed += ProcessDir(subdirectory);
+					filesProcessed += ProcessDir(subdirectory);
 			}
-			return fileProcessed;
+			return filesProcessed;
 		}
 		private static int ProcessFiles(string[] files)
 		{
@@ -257,32 +206,41 @@ namespace PatternSearch
 					// If there is a file processor for a give file extension, process the file..
 					foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
 					{
-						// Only count if we have a file processor
-						++processedfiles;
-
 						// Read the text
-						var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
+						var task = Task.Run(() => 
+						{ 
+							var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
+							
+							// Scan the text for patterns
+							scanner.Scan(fc.Text);
 
-						// Scan the text for patterns
-						scanner.Scan(fc.Text);
+							// Output start
+							PrintProcessingStart(file, fc);
 
-						// Output start
-						PrintProcessingStart(file, fc);
+							// If verbose enabled, print more details for each match
+							if (cmdline.Value.Verbosity == OutputLevel.V)
+							{
+								foreach (var match in scanner.PatternsFound.OrderBy(i => i.Index))
+									PrintMatch(match);
+							}
 
-						// If verbose enabled, print more details for each match
-						if (cmdline.Value.Verbosity == OutputLevel.V)
+							// Output Results
+							PrintProcessingResults(file, fc);
+
+							// Only count if we have a file processor
+							++processedfiles;
+
+						});
+
+						if (task.Wait(TimeSpan.FromSeconds(timeoutValue)) == false)
 						{
-							foreach (var match in scanner.PatternsFound.OrderBy(i => i.Index))
-								PrintMatch(match);
+							File.AppendAllText(cmdline.Value.ErrFile, $"Unable to process file: {file} in alotted time {timeoutValue}.\n");
 						}
-
-						// Output Results
-						PrintProcessingResults(file, fc);
 					}
 				}
 				catch (Exception e)
 				{
-					File.AppendAllText(cmdline.Value.ErrFile, $"An error occured while processing: {file} => {e.Message}");
+					File.AppendAllText(cmdline.Value.ErrFile, $"An error occured while processing: {file} => {e.Message}\n");
 				}
 			}
 			return processedfiles;
