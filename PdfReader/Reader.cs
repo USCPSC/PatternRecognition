@@ -18,7 +18,6 @@ namespace PdfFileReader
 		public FileContents ReadAllText(string filename, bool imageScan)
 		{
 			var docimages =  new Dictionary<string, int>();
-			var pageimages = new Dictionary<string, int>();
 			var text = new StringBuilder();
 			using (var reader = new PdfReader(filename))
 			{
@@ -32,7 +31,7 @@ namespace PdfFileReader
 
 					if (imageScan)
 					{
-						pageimages = PdfUtils.PdfImageChecker.PageContainsImages(reader, page);
+						var pageimages = PdfUtils.PdfImageChecker.PageContainsImages(reader, page);
 						foreach (var k in pageimages.Keys)
 						{
 							if (docimages.ContainsKey(k))

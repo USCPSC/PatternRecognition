@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PatternSearch
@@ -206,11 +207,11 @@ namespace PatternSearch
 					// If there is a file processor for a give file extension, process the file..
 					foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
 					{
-						// Read the text
-						var task = Task.Run(() => 
-						{ 
+						Thread t = new Thread(() =>
+						{
+							// Read the text
 							var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
-							
+
 							// Scan the text for patterns
 							scanner.Scan(fc.Text);
 
@@ -229,13 +230,14 @@ namespace PatternSearch
 
 							// Only count if we have a file processor
 							++processedfiles;
-
 						});
-
-						if (task.Wait(TimeSpan.FromSeconds(timeoutValue)) == false)
+						t.Start();
+						if ( !t.Join(TimeSpan.FromSeconds(timeoutValue)))
 						{
-							File.AppendAllText(cmdline.Value.ErrFile, $"Unable to process file: {file} in alotted time {timeoutValue}.\n");
+							t.Abort();
+							File.AppendAllText(cmdline.Value.ErrFile, $"Unable to finish processing: {file} in the time allotted {timeoutValue}\n");
 						}
+
 					}
 				}
 				catch (Exception e)
