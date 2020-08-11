@@ -202,47 +202,47 @@ namespace PatternSearch
 			var processedfiles = 0;
 			foreach (var file in files)
 			{
-				try
+				// If there is a file processor for a give file extension, process the file..
+				foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
 				{
-					// If there is a file processor for a give file extension, process the file..
-					foreach (var fm in from fm in smgr.FileReaders where smgr.SupportFileExtension(fm, Path.GetExtension(file)) select fm)
+					Thread t = new Thread(() =>
 					{
-						Thread t = new Thread(() =>
+						try
 						{
-							// Read the text
-							var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
+								// Read the text
+								var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
 
-							// Scan the text for patterns
-							scanner.Scan(fc.Text);
+								// Scan the text for patterns
+								scanner.Scan(fc.Text);
 
-							// Output start
-							PrintProcessingStart(file, fc);
+								// Output start
+								PrintProcessingStart(file, fc);
 
-							// If verbose enabled, print more details for each match
-							if (cmdline.Value.Verbosity == OutputLevel.V)
+								// If verbose enabled, print more details for each match
+								if (cmdline.Value.Verbosity == OutputLevel.V)
 							{
 								foreach (var match in scanner.PatternsFound.OrderBy(i => i.Index))
 									PrintMatch(match);
 							}
 
-							// Output Results
-							PrintProcessingResults(file, fc);
+								// Output Results
+								PrintProcessingResults(file, fc);
 
-							// Only count if we have a file processor
-							++processedfiles;
-						});
-						t.Start();
-						if ( !t.Join(TimeSpan.FromSeconds(timeoutValue)))
-						{
-							t.Abort();
-							File.AppendAllText(cmdline.Value.ErrFile, $"Unable to finish processing: {file} in the time allotted {timeoutValue}\n");
+								// Only count if we have a file processor
+								++processedfiles;
 						}
-
+						catch (Exception e)
+						{
+							File.AppendAllText(cmdline.Value.ErrFile, $"An error occured while processing: {file} => {e.Message}\n");
+						}
+					});
+					t.Start();
+					if (!t.Join(TimeSpan.FromSeconds(timeoutValue)))
+					{
+						t.Abort();
+						File.AppendAllText(cmdline.Value.ErrFile, $"Unable to finish processing: {file} in the time allotted {timeoutValue}\n");
 					}
-				}
-				catch (Exception e)
-				{
-					File.AppendAllText(cmdline.Value.ErrFile, $"An error occured while processing: {file} => {e.Message}\n");
+
 				}
 			}
 			return processedfiles;
