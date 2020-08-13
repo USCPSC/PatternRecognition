@@ -111,7 +111,7 @@ namespace PatternSearch
 			{
 				using (var fs = File.Create(outFile, 1, FileOptions.DeleteOnClose)) { }
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				Console.Error.WriteLine($"Unable to create file {outFile}: '{e.Message}'");
 				Console.WriteLine("Press any key to continue...");
@@ -209,27 +209,27 @@ namespace PatternSearch
 					{
 						try
 						{
-								// Read the text
-								var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
+							// Read the text
+							var fc = fm.ReadAllText(file, cmdline.Value.ImageScan);
 
-								// Scan the text for patterns
-								scanner.Scan(fc.Text);
+							// Scan the text for patterns
+							scanner.Scan(fc.Text);
 
-								// Output start
-								PrintProcessingStart(file, fc);
+							// Output start
+							PrintProcessingStart(file, fc);
 
-								// If verbose enabled, print more details for each match
-								if (cmdline.Value.Verbosity == OutputLevel.V)
+							// If verbose enabled, print more details for each match
+							if (cmdline.Value.Verbosity == OutputLevel.V)
 							{
 								foreach (var match in scanner.PatternsFound.OrderBy(i => i.Index))
 									PrintMatch(match);
 							}
 
-								// Output Results
-								PrintProcessingResults(file, fc);
+							// Output Results
+							PrintProcessingResults(file, fc);
 
-								// Only count if we have a file processor
-								++processedfiles;
+							// Only count if we have a file processor
+							++processedfiles;
 						}
 						catch (Exception e)
 						{
@@ -348,7 +348,7 @@ namespace PatternSearch
 		private static void PrintFooter(DateTime starttime, int processedfiles, string patterns)
 		{
 			var procduration = DateTime.Now - starttime;
-			var proctime = (procduration.TotalSeconds > 60) ? procduration.TotalMinutes: procduration.TotalSeconds;
+			var proctime = (procduration.TotalSeconds > 60) ? procduration.TotalMinutes : procduration.TotalSeconds;
 			string increment = (procduration.TotalSeconds > 60) ? "minutes" : "seconds";
 
 			if (cmdline.Value.CSVOuput == false)

@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Text;
 using FileManager;
+//using iText.License;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 
@@ -19,6 +20,7 @@ namespace PdfFileReader
 		{
 			var docimages =  new Dictionary<string, int>();
 			var text = new StringBuilder();
+//			LicenseKey.LoadLicenseFile("itext.licensekey.xml");
 			using (var reader = new PdfReader(filename))
 			{
 				for (int page = 1; page <= reader.NumberOfPages; page++)
