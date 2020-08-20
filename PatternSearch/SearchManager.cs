@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using FileManager;
@@ -35,7 +37,25 @@ namespace PatternSearch
 			}
 			return sb.ToString();
 		}
-
+		public string[] SupportedFiles(string[] files)
+		{
+			string[] results = null;
+			if (files.Length > 0)
+			{
+				StringCollection supportedFiles = new StringCollection();
+				foreach (var fm in FileReaders)
+					for (int i = 0; i < fm.FileExtention.Length; i++)
+						for (int f = 0; f < files.Length; f++)
+							if (string.Compare(fm.FileExtention[i], Path.GetExtension(files[f]), true) == 0)
+								supportedFiles.Add(files[f]);
+				if ( supportedFiles.Count > 0)
+				{
+					results = new string[supportedFiles.Count];
+					supportedFiles.CopyTo(results, 0);
+				}
+			}
+			return results;
+		}
 		public bool SupportFileExtension(IFileReader fm, string extension)
 		{
 			for (int i = 0; i < fm.FileExtention.Length; i++)

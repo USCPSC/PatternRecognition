@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading;
 
@@ -214,15 +215,14 @@ namespace PatternSearch
 			// Check to see if directory was already processed
 			if (File.Exists(outFile) == false || HasFooter(outFile) == false)
 			{
-
 				string[] files = Directory.GetFiles(dir);
-
-				if (files.Length > 0)
+				var supportedFiles = smgr.SupportedFiles(files);
+				if (supportedFiles != null)
 				{
-					// Print header
+					// Must have a reader for the files in directory or we don't process
 					PrintHeader(DateTime.Now, outFile);
 
-					int filesProcessed = ProcessFiles(files);
+					int filesProcessed = ProcessFiles(supportedFiles);
 
 					PrintFooter(DateTime.Now, outFile, filesProcessed, scanner.GetPatternNames());
 				}
