@@ -3,8 +3,8 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PatternSearch
 {
@@ -19,6 +19,8 @@ namespace PatternSearch
 			M, // Moderate
 			V  // Verbose
 		}
+
+		internal static string EOL = "EOF";
 
 		/// <summary>
 		/// Command line options
@@ -210,7 +212,7 @@ namespace PatternSearch
 			string outFile = GetFileName(true, dir);
 
 			// Check to see if directory was already processed
-			if (File.Exists(outFile) == false)
+			if (File.Exists(outFile) == false || HasFooter(outFile) == false)
 			{
 
 				string[] files = Directory.GetFiles(dir);
@@ -302,6 +304,9 @@ namespace PatternSearch
 		}
 		private static void PrintHeader(DateTime starttime, string fileName)
 		{
+			if (File.Exists(fileName))
+				File.Delete(fileName);
+
 			if (cmdline.Value.CSVOuput == false)
 			{
 				File.AppendAllText(fileName, "*************************************************************************");
@@ -398,6 +403,21 @@ namespace PatternSearch
 			}
 		}
 
+		private static bool HasFooter(string fileName)
+		{
+			using (var stream = new FileStream(fileName, FileMode.Open))
+			{
+				if (stream.Length > 3)
+				{
+					stream.Seek(-3, SeekOrigin.End);
+					var buffer = new byte[3];
+					stream.Read(buffer, 0, 3);
+					return (Encoding.ASCII.GetString(buffer) == EOL);
+				}
+				else
+					return false;
+			}
+		}
 		private static void PrintFooter(DateTime starttime, string fileName, int processedfiles, string patterns)
 		{
 			var procduration = DateTime.Now - starttime;
@@ -418,6 +438,7 @@ namespace PatternSearch
 				File.AppendAllText(fileName, $"Files Processed='{processedfiles}', Processing Time ({increment}) ='{proctime}'\n");
 				File.AppendAllText(fileName, $"Patterns searched: {patterns}\n");
 			}
+			File.AppendAllText(fileName, EOL);
 		}
 	}
 }
