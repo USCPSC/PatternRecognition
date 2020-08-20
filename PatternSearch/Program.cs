@@ -231,7 +231,7 @@ namespace PatternSearch
 			}
 			catch(Exception e)
 			{
-				File.AppendAllText(GetFileName(false, cmdline.Value.Directory ?? cmdline.Value.File), $"Unable to process directory {e.Message}\n");
+				File.AppendAllText(GetFileName(false, dir), $"Unable to process directory {e.Message}\n");
 			}
 			if (recurse)
 			{
