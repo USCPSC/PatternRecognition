@@ -211,21 +211,27 @@ namespace PatternSearch
 		private static void ProcessDir(string dir, bool recurse = true)
 		{
 			string outFile = GetFileName(true, dir);
-
-			// Check to see if directory was already processed
-			if (File.Exists(outFile) == false || HasFooter(outFile) == false)
+			try
 			{
-				string[] files = Directory.GetFiles(dir);
-				var supportedFiles = smgr.SupportedFiles(files);
-				if (supportedFiles != null)
+				// Check to see if directory was already processed
+				if (File.Exists(outFile) == false || HasFooter(outFile) == false)
 				{
-					// Must have a reader for the files in directory or we don't process
-					PrintHeader(DateTime.Now, outFile);
+					string[] files = Directory.GetFiles(dir);
+					var supportedFiles = smgr.SupportedFiles(files);
+					if (supportedFiles != null)
+					{
+						// Must have a reader for the files in directory or we don't process
+						PrintHeader(DateTime.Now, outFile);
 
-					int filesProcessed = ProcessFiles(supportedFiles);
+						int filesProcessed = ProcessFiles(supportedFiles);
 
-					PrintFooter(DateTime.Now, outFile, filesProcessed, scanner.GetPatternNames());
+						PrintFooter(DateTime.Now, outFile, filesProcessed, scanner.GetPatternNames());
+					}
 				}
+			}
+			catch(Exception e)
+			{
+				File.AppendAllText(GetFileName(false, cmdline.Value.Directory ?? cmdline.Value.File), $"Unable to process directory {e.Message}\n");
 			}
 			if (recurse)
 			{
