@@ -73,13 +73,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\itextsharp-develop\src\core\itextsharp.csproj">
-      <Project>{84c4fdd9-3ed7-453b-b9da-b3ed52cb071c}</Project>
-      <Name>itextsharp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IFileMgt\IFileManager.csproj">
       <Project>{2391cedd-6c06-478c-8d3e-c4d5e3df268c}</Project>
       <Name>IFileManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iTextSharp\itextsharp.csproj">
+      <Project>{84c4fdd9-3ed7-453b-b9da-b3ed52cb071c}</Project>
+      <Name>itextsharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
